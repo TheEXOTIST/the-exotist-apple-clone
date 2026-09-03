@@ -102,4 +102,33 @@
   addEventListener('scroll', updateDesignVideo, { passive: true });
   addEventListener('resize', updateDesignVideo);
   updateDesignVideo();
+
+  const compareModal = document.querySelector('#design-compare-modal');
+  const compareTrigger = document.querySelector('#sc-03 .design-compare');
+  const compareClose = document.querySelector('#sc-03 .design-compare-close');
+  const compareCards = document.querySelector('#sc-03 .design-compare-cards');
+  const compareTabs = [...document.querySelectorAll('#sc-03 [data-compare-tab]')];
+  let compareIndex = 0;
+  const compareTabData = {
+    design: [['design-pro.jpg','iPhone 17 Pro','Innovative design with breakthrough pro performance.','FORGED ALUMINUM UNIBODY'],['design-air.jpg','iPhone Air','Super thin. Strikingly light. Shockingly strong.','POLISHED TITANIUM FRAME'],['design-17.jpg','iPhone 17','Even more delightful. Even more durable.','DURABLE ALUMINUM FRAME']],
+    camera: [['camera-pro.jpg','iPhone 17 Pro','Ultimate pro camera system.','48MP FUSION MAIN · 48MP FUSION ULTRA WIDE · 48MP FUSION TELEPHOTO'],['camera-air.jpg','iPhone Air','Two advanced cameras in one.','48MP FUSION MAIN'],['camera-17.jpg','iPhone 17','Superstunning shots up close or far away.','48MP FUSION MAIN · 48MP FUSION ULTRA WIDE']],
+    chip: [['chip-pro.jpg','iPhone 17 Pro','Exceptional pro performance.','6-CORE CPU · 6-CORE GPU WITH NEURAL ACCELERATORS'],['chip-pro.jpg','iPhone Air','Hyperspeed. Hyperefficient.','6-CORE CPU · 5-CORE GPU WITH NEURAL ACCELERATORS'],['chip-air.jpg','iPhone 17','Power player. Energy expert.','6-CORE CPU · 5-CORE GPU WITH NEURAL ACCELERATORS']],
+    battery: [[null,'iPhone 17 Pro','Up to 39 hours of video playback.','UP TO 50% CHARGE IN 20 MINUTES'],[null,'iPhone Air','Up to 27 hours of video playback.','UP TO 50% CHARGE IN 30 MINUTES'],[null,'iPhone 17','Up to 30 hours of video playback.','UP TO 50% CHARGE IN 20 MINUTES']],
+    price: [[null,'iPhone 17 Pro','256GB model from $1099.','OR $45.79/MO. FOR 24 MO.'],[null,'iPhone Air','256GB model from $999.','OR $41.62/MO. FOR 24 MO.'],[null,'iPhone 17','256GB model from $799.','OR $33.29/MO. FOR 24 MO.']]
+  };
+  const renderCompareCards = tab => {
+    if (!compareCards) return;
+    compareIndex = 0;
+    compareCards.innerHTML = compareTabData[tab].map((item,index) => `<article class="design-compare-card" data-compare-card="${index}">${item[0] ? `<img src="assets/sc-03/compare/${item[0]}" alt="${item[1]} ${tab}">` : '<div class="compare-no-media" aria-hidden="true"></div>'}<h4>${item[1]}</h4>${index===0?'<span class="compare-current">Currently Viewing</span>':''}<p>${item[2]}</p><strong>${item[3]}</strong></article>`).join('');
+    compareCards.scrollLeft = 0;
+  };
+  const openCompare = () => { if (!compareModal) return; compareModal.hidden = false; document.body.style.overflow = 'hidden'; compareClose?.focus(); };
+  const closeCompare = () => { if (!compareModal) return; compareModal.hidden = true; document.body.style.overflow = ''; compareTrigger?.focus(); };
+  compareTrigger?.addEventListener('click', openCompare);
+  compareClose?.addEventListener('click', closeCompare);
+  compareModal?.addEventListener('click', event => { if (event.target === compareModal) closeCompare(); });
+  compareModal?.addEventListener('keydown', event => { if (event.key === 'Escape') closeCompare(); });
+  compareTabs.forEach(tab => tab.addEventListener('click', () => { compareTabs.forEach(item => item.setAttribute('aria-selected','false')); tab.setAttribute('aria-selected','true'); renderCompareCards(tab.dataset.compareTab); }));
+  document.querySelector('#sc-03 .design-compare-prev')?.addEventListener('click', () => { compareIndex = Math.max(0, compareIndex - 1); compareCards?.children[compareIndex]?.scrollIntoView({behavior:'smooth',inline:'start'}); });
+  document.querySelector('#sc-03 .design-compare-next')?.addEventListener('click', () => { compareIndex = Math.min((compareCards?.children.length || 1) - 1, compareIndex + 1); compareCards?.children[compareIndex]?.scrollIntoView({behavior:'smooth',inline:'start'}); });
 })();
