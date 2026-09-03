@@ -7,3 +7,5 @@ runtime/*.jpeg
 runtime/*.webp
 runtime/*.md
 .DS_Store
+.vercel
+.env*
