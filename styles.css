@@ -11,14 +11,14 @@
 @media(max-width:700px){.scene-opening{margin-top:54px;height:calc(100svh - 102px);min-height:650px}.hero-product{height:100%;min-height:0;object-fit:cover;object-position:50% 0}.opening-purchase{bottom:34px}.opening-purchase p{font-size:15px}}
 
 /* SC-02 Highlights reconstruction: scoped to the highlights scene. */
-#sc-02 .highlight-stage{display:block;margin-top:70px;padding-bottom:212px}
+#sc-02 .highlight-stage{display:block;margin-top:70px;padding-bottom:402px}
 #sc-02 .section-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;column-gap:24px;padding-top:104px}
 #sc-02 .section-heading .eyebrow{grid-column:1/-1}
 #sc-02 .section-heading h2{max-width:none;font-size:56px;line-height:60px}
 #sc-02 .highlights-film-trigger{align-self:center;margin-top:0}
 #sc-02 .highlights-gallery{position:relative;width:min(1400px,calc(100vw - 96px));margin:0 auto;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none}
 #sc-02 .highlights-gallery::-webkit-scrollbar{display:none}
-#sc-02 .highlights-track{display:flex;gap:24px;width:max-content}
+#sc-02 .highlights-track{display:flex;gap:24px;width:max-content;padding-right:calc((100vw - 96px) - min(1105px,calc(100vw - 160px)))}
 #sc-02 .highlight-card{position:relative;flex:0 0 min(1105px,calc(100vw - 160px));aspect-ratio:1105/680;overflow:hidden;border-radius:28px;background:#000;scroll-snap-align:start}
 #sc-02 .highlight-card img{display:block;width:100%;height:100%;object-fit:cover}
 #sc-02 .highlight-card-caption{position:absolute;z-index:1;max-width:72%;margin:0;color:#f5f5f7;font-size:clamp(21px,2vw,32px);line-height:1.08;letter-spacing:-.025em;text-align:center;text-shadow:0 2px 18px rgba(0,0,0,.5)}
@@ -31,10 +31,10 @@
 #sc-02 .highlight-dot{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#777;cursor:pointer;transition:transform .35s var(--ease),background .35s var(--ease)}
 #sc-02 .highlight-dot.is-active{background:var(--ink);transform:scale(1.45)}
 #sc-02 .highlight-play-toggle{display:grid;place-items:center;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--ink);font:inherit;font-size:16px;line-height:1;cursor:pointer}
-#sc-02 .highlights-film{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;background:#000}
-#sc-02 .highlights-film-inner{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#000}
+#sc-02 .highlights-film{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;background:#1d1d1f}
+#sc-02 .highlights-film-inner{position:relative;width:min(960px,calc(100vw - 64px));height:min(540px,calc(100vh - 180px));display:flex;align-items:center;justify-content:center;background:#000}
 #sc-02 .highlights-film[hidden]{display:none}
 #sc-02 .highlights-film-close{position:absolute;z-index:2;top:28px;right:32px;width:42px;height:42px;border:0;border-radius:50%;background:#303033;color:var(--ink);font-size:28px;cursor:pointer}
 #sc-02 .highlights-film-video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
 #sc-02.scene-highlights{min-height:0}
-@media(max-width:700px){#sc-02 .section-heading{display:block;padding-top:78px}#sc-02 .section-heading h2{max-width:310px;font-size:46px;line-height:.96}#sc-02 .highlights-film-trigger{margin-top:30px}#sc-02 .highlight-stage{margin-top:42px;padding-bottom:72px}#sc-02 .highlights-gallery{width:calc(100vw - 44px);margin-left:22px}#sc-02 .highlights-track{gap:14px}#sc-02 .highlight-card{flex-basis:calc(100vw - 44px);aspect-ratio:3/4;border-radius:22px}#sc-02 .highlight-card-caption{max-width:78%;font-size:20px}#sc-02 .highlight-card-design .highlight-card-caption,#sc-02 .highlight-card-center-stage .highlight-card-caption,#sc-02 .highlight-card-ios .highlight-card-caption{top:28px}#sc-02 .highlight-card-chip .highlight-card-caption{bottom:28px}#sc-02 .highlight-card-camera .highlight-card-caption,#sc-02 .highlight-card-intelligence .highlight-card-caption{left:28px}#sc-02 .highlight-gallery-controls{bottom:14px}#sc-02 .highlights-film-close{top:18px;right:18px}}
+@media(max-width:700px){#sc-02 .section-heading{display:block;padding-top:78px}#sc-02 .section-heading h2{max-width:310px;font-size:46px;line-height:.96}#sc-02 .highlights-film-trigger{margin-top:30px}#sc-02 .highlight-stage{margin-top:42px;padding-bottom:72px}#sc-02 .highlights-gallery{width:calc(100vw - 44px);margin-left:22px}#sc-02 .highlights-track{gap:14px;padding-right:0}#sc-02 .highlight-card{flex-basis:calc(100vw - 44px);aspect-ratio:3/4;border-radius:22px}#sc-02 .highlight-card-caption{max-width:78%;font-size:20px}#sc-02 .highlight-card-design .highlight-card-caption,#sc-02 .highlight-card-center-stage .highlight-card-caption,#sc-02 .highlight-card-ios .highlight-card-caption{top:28px}#sc-02 .highlight-card-chip .highlight-card-caption{bottom:28px}#sc-02 .highlight-card-camera .highlight-card-caption,#sc-02 .highlight-card-intelligence .highlight-card-caption{left:28px}#sc-02 .highlight-gallery-controls{bottom:14px}#sc-02 .highlights-film-close{top:18px;right:18px}}
