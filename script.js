@@ -6,29 +6,31 @@
     control.classList.add('is-active'); control.setAttribute('aria-selected', 'true');
   }));
 
-  const highlightCopy = {
-    design: 'Heat-forged enclosure, shaped around performance.',
-    chip: 'A19 Pro chip, built for sustained power.',
-    camera: 'Pro Fusion camera system, ready for every focal length.',
-    'center-stage': 'Center Stage front camera, keeping the frame in motion.',
-    ios: 'iOS 26, a new surface for everyday work.',
-    intelligence: 'Apple Intelligence, designed around useful moments.'
+  const highlightStates = {
+    design: { image: 'assets/sc-02/highlights-design.jpg', caption: 'Heat-forged aluminum unibody design for exceptional pro capability.' },
+    chip: { image: 'assets/sc-02/highlights-chip.jpg', caption: 'A19 Pro, vapor cooled for lightning-fast performance. Breakthrough battery life.' },
+    camera: { image: 'assets/sc-02/highlights-camera.jpg', caption: 'The ultimate pro camera system. All 48MP Fusion rear cameras. And the longest zoom ever on an iPhone.' },
+    'center-stage': { image: 'assets/sc-02/highlights-center-stage.jpg', caption: 'New Center Stage front camera. Flexible ways to frame your shot. Smarter group selfies. And so much more.' },
+    ios: { image: 'assets/sc-02/highlights-ios.jpg', caption: 'iOS 26. New look. Even more magic.' },
+    intelligence: { image: 'assets/sc-02/highlights-intelligence.jpg', caption: 'Apple Intelligence. Effortlessly helpful features — from image creation to Live Translation.' }
   };
   document.querySelectorAll('#sc-02 .selector[data-highlight]').forEach(control => control.addEventListener('click', () => {
     const state = control.dataset.highlight;
     const media = document.querySelector('#sc-02 .feature-media');
+    const image = media?.querySelector('.feature-image');
     const caption = document.querySelector('#sc-02 .feature-caption');
-    if (!media || !state) return;
-    [...media.classList].filter(name => name.startsWith('feature-state-')).forEach(name => media.classList.remove(name));
-    media.classList.add(`feature-state-${state}`);
-    media.querySelector('.feature-label').textContent = control.textContent.trim().toUpperCase();
-    if (caption) caption.textContent = highlightCopy[state] || '';
+    const next = highlightStates[state];
+    if (!media || !image || !next) return;
+    media.className = `feature-media feature-state-${state}`;
+    image.src = next.image;
+    image.alt = `${control.textContent.trim()} highlight from the Apple iPhone 17 Pro reference`;
+    if (caption) caption.textContent = next.caption;
   }));
 
   const film = document.querySelector('#highlights-film');
   const filmTrigger = document.querySelector('.highlights-film-trigger');
   const filmClose = document.querySelector('.highlights-film-close');
-  const closeFilm = () => { if (film) film.hidden = true; filmTrigger?.focus(); };
+  const closeFilm = () => { if (film) { film.hidden = true; film.querySelector('video')?.pause(); } filmTrigger?.focus(); };
   filmTrigger?.addEventListener('click', () => { if (film) { film.hidden = false; filmClose?.focus(); } });
   filmClose?.addEventListener('click', closeFilm);
   film?.addEventListener('click', event => { if (event.target === film) closeFilm(); });
