@@ -47,7 +47,7 @@
 #sc-03 .design-media{display:block;width:min(920.8px,calc(100vw - 160px));height:auto;aspect-ratio:2.096;margin-top:64px;background:#000;object-fit:contain}
 #sc-03 .design-compare-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:start center;padding-top:40px;background:rgba(0,0,0,.58);backdrop-filter:blur(18px);overflow:auto}
 #sc-03 .design-compare-modal[hidden]{display:none}
-#sc-03 .design-compare-surface{position:relative;width:480px;min-height:810px;max-height:810px;overflow:auto;border-radius:26px;background:#fff;color:#1d1d1f;padding:48px 24px 0;box-shadow:0 18px 60px rgba(0,0,0,.3)}
+#sc-03 .design-compare-surface{position:relative;width:480px;height:810px;min-height:810px;max-height:810px;overflow:auto;border-radius:26px;background:#fff;color:#1d1d1f;padding:48px 24px 100px;box-shadow:0 18px 60px rgba(0,0,0,.3)}
 #sc-03 .design-compare-close{position:absolute;top:20px;right:20px;width:44px;height:44px;border:0;border-radius:50%;background:#e8e8ed;color:#1d1d1f;font-size:28px;line-height:1;cursor:pointer}
 #sc-03 .design-compare-surface h3{margin:0 28px 28px;font-size:28px;line-height:1.08;letter-spacing:-.04em}
 #sc-03 .design-compare-gallery{display:flex;align-items:center;gap:8px}
