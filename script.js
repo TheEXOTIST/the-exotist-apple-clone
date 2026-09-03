@@ -6,32 +6,38 @@
     control.classList.add('is-active'); control.setAttribute('aria-selected', 'true');
   }));
 
-  const highlightStates = {
-    design: { image: 'assets/sc-02/highlights-design.jpg', caption: 'Heat-forged aluminum unibody design for exceptional pro capability.' },
-    chip: { image: 'assets/sc-02/highlights-chip.jpg', caption: 'A19 Pro, vapor cooled for lightning-fast performance. Breakthrough battery life.' },
-    camera: { image: 'assets/sc-02/highlights-camera.jpg', caption: 'The ultimate pro camera system. All 48MP Fusion rear cameras. And the longest zoom ever on an iPhone.' },
-    'center-stage': { image: 'assets/sc-02/highlights-center-stage.jpg', caption: 'New Center Stage front camera. Flexible ways to frame your shot. Smarter group selfies. And so much more.' },
-    ios: { image: 'assets/sc-02/highlights-ios.jpg', caption: 'iOS 26. New look. Even more magic.' },
-    intelligence: { image: 'assets/sc-02/highlights-intelligence.jpg', caption: 'Apple Intelligence. Effortlessly helpful features — from image creation to Live Translation.' }
+  const gallery = document.querySelector('#sc-02 .highlights-gallery');
+  const track = document.querySelector('#sc-02 .highlights-track');
+  const cards = [...document.querySelectorAll('#sc-02 .highlight-card')];
+  const dots = [...document.querySelectorAll('#sc-02 .highlight-dot')];
+  const playToggle = document.querySelector('#sc-02 .highlight-play-toggle');
+  let galleryIndex = 0;
+  let galleryTimer;
+  const renderGallery = state => {
+    const nextIndex = cards.findIndex(card => card.dataset.galleryCard === state);
+    if (!track || nextIndex < 0) return;
+    galleryIndex = nextIndex;
+    const cardWidth = cards[0]?.getBoundingClientRect().width || 0;
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    track.style.transform = `translate3d(${-galleryIndex * (cardWidth + gap)}px,0,0)`;
+    cards.forEach((card, index) => card.classList.toggle('is-active', index === galleryIndex));
+    dots.forEach((dot, index) => { dot.classList.toggle('is-active', index === galleryIndex); dot.setAttribute('aria-selected', String(index === galleryIndex)); });
   };
-  document.querySelectorAll('#sc-02 .selector[data-highlight]').forEach(control => control.addEventListener('click', () => {
-    const state = control.dataset.highlight;
-    const media = document.querySelector('#sc-02 .feature-media');
-    const image = media?.querySelector('.feature-image');
-    const caption = document.querySelector('#sc-02 .feature-caption');
-    const next = highlightStates[state];
-    if (!media || !image || !next) return;
-    media.className = `feature-media feature-state-${state}`;
-    image.src = next.image;
-    image.alt = `${control.textContent.trim()} highlight from the Apple iPhone 17 Pro reference`;
-    if (caption) caption.textContent = next.caption;
-  }));
+  dots.forEach(control => control.addEventListener('click', () => renderGallery(control.dataset.highlight)));
+  const stopGallery = () => { clearInterval(galleryTimer); galleryTimer = undefined; if (playToggle) { playToggle.textContent = 'Play'; playToggle.setAttribute('aria-pressed', 'false'); playToggle.setAttribute('aria-label', 'Play highlights'); } };
+  playToggle?.addEventListener('click', () => {
+    if (galleryTimer) { stopGallery(); return; }
+    playToggle.textContent = 'Pause'; playToggle.setAttribute('aria-pressed', 'true'); playToggle.setAttribute('aria-label', 'Pause highlights');
+    galleryTimer = setInterval(() => renderGallery(cards[(galleryIndex + 1) % cards.length]?.dataset.galleryCard), 2800);
+  });
+  addEventListener('resize', () => renderGallery(cards[galleryIndex]?.dataset.galleryCard || 'design'));
+  renderGallery('design');
 
   const film = document.querySelector('#highlights-film');
   const filmTrigger = document.querySelector('.highlights-film-trigger');
   const filmClose = document.querySelector('.highlights-film-close');
-  const closeFilm = () => { if (film) { film.hidden = true; film.querySelector('video')?.pause(); } filmTrigger?.focus(); };
-  filmTrigger?.addEventListener('click', () => { if (film) { film.hidden = false; filmClose?.focus(); } });
+  const closeFilm = () => { if (film) { film.hidden = true; film.querySelector('video')?.pause(); document.body.style.overflow = ''; } filmTrigger?.focus(); };
+  filmTrigger?.addEventListener('click', () => { if (film) { film.hidden = false; document.body.style.overflow = 'hidden'; filmClose?.focus(); film.querySelector('video')?.play().catch(() => {}); } });
   filmClose?.addEventListener('click', closeFilm);
   film?.addEventListener('click', event => { if (event.target === film) closeFilm(); });
   addEventListener('keydown', event => { if (event.key === 'Escape' && film && !film.hidden) closeFilm(); });
