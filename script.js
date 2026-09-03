@@ -11,9 +11,13 @@
   const cards = [...document.querySelectorAll('#sc-02 .highlight-card')];
   const dots = [...document.querySelectorAll('#sc-02 .highlight-dot')];
   const playToggle = document.querySelector('#sc-02 .highlight-play-toggle');
+  const galleryControls = document.querySelector('#sc-02 .highlight-gallery-controls');
   let galleryIndex = 0;
   let galleryTimer;
   let galleryScrollSync = false;
+  const syncGalleryControls = () => {
+    if (galleryControls && gallery) galleryControls.style.transform = `translateX(calc(-50% + ${gallery.scrollLeft}px))`;
+  };
   const renderGallery = state => {
     const nextIndex = cards.findIndex(card => card.dataset.galleryCard === state);
     if (!track || nextIndex < 0) return;
@@ -22,9 +26,11 @@
     gallery?.scrollTo({ left: cards[galleryIndex]?.offsetLeft || 0, behavior: 'smooth' });
     cards.forEach((card, index) => card.classList.toggle('is-active', index === galleryIndex));
     dots.forEach((dot, index) => { dot.classList.toggle('is-active', index === galleryIndex); dot.setAttribute('aria-selected', String(index === galleryIndex)); });
+    requestAnimationFrame(syncGalleryControls);
     setTimeout(() => { galleryScrollSync = false; }, 700);
   };
   gallery?.addEventListener('scroll', () => {
+    syncGalleryControls();
     if (galleryScrollSync || !cards.length) return;
     const gap = parseFloat(getComputedStyle(track).gap) || 0;
     const width = cards[0].getBoundingClientRect().width + gap;
