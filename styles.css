@@ -50,7 +50,7 @@
 #sc-03 .design-compare-surface{position:relative;width:480px;height:810px;min-height:810px;max-height:810px;overflow:auto;border-radius:26px;background:#fff;color:#1d1d1f;padding:48px 24px 100px;box-shadow:0 18px 60px rgba(0,0,0,.3)}
 #sc-03 .design-compare-close{position:absolute;top:20px;right:20px;width:44px;height:44px;border:0;border-radius:50%;background:#e8e8ed;color:#1d1d1f;font-size:28px;line-height:1;cursor:pointer}
 #sc-03 .design-compare-surface h3{margin:0 28px 28px;font-size:28px;line-height:1.08;letter-spacing:-.04em}
-#sc-03 .design-compare-gallery{display:flex;align-items:center;gap:8px}
+#sc-03 .design-compare-gallery{display:flex;align-items:center;gap:8px;min-height:720px}
 #sc-03 .design-compare-cards{display:flex;gap:14px;overflow:hidden;scroll-behavior:smooth;flex:1;padding:4px 0 22px}
 #sc-03 .design-compare-card{min-width:164px;padding:14px;border-radius:18px;background:#f5f5f7;text-align:left}
 #sc-03 .design-compare-card img{display:block;width:100%;height:140px;object-fit:contain;margin-bottom:12px}
