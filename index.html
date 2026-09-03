@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Structural Clone — Apple Cinematic Core</title>
+  <link rel="stylesheet" href="styles.css">
+  <style id="h02r-structural-corrections">
+    /* H-02R: desktop structural corrections; placeholder content remains unchanged. */
+    .scene-design .split-layout,.scene-video .split-layout{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:60px;text-align:center}
+    .scene-design .copy-block,.scene-video .copy-block{width:100%;max-width:900px}
+    .scene-design .copy-block h2,.scene-video .copy-block h2,.scene-design .supporting-copy,.scene-video .supporting-copy{max-width:900px;margin-left:auto;margin-right:auto}
+    .scene-design .tall-media,.scene-video .tall-media{width:min(1100px,100%);height:650px;flex:0 0 auto}
+    .scene-design .copy-block{order:0}.scene-design .tall-media{order:1;margin-top:10px}
+    .scene-video .tall-media{order:0;height:760px}.scene-video .copy-block{order:1}
+    .viewer-layout{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px}
+    .viewer-media{width:min(1000px,100%);height:620px;flex:0 0 auto}
+    .control-stack{width:min(900px,100%);flex-direction:row;flex-wrap:wrap;justify-content:center}
+    .scene-cameras .section-heading{text-align:center;max-width:900px;margin-left:auto;margin-right:auto}
+    .scene-cameras .section-heading h2,.scene-cameras .section-heading .supporting-copy{max-width:900px;margin-left:auto;margin-right:auto}
+    .lens-stage{justify-content:flex-start;min-height:4200px;padding-top:90px}
+    .lens-media{width:min(1000px,100%);height:620px;flex:0 0 auto}
+    .lens-controls{width:min(800px,100%);margin:24px auto 0}
+    @media(max-width:700px){
+      .global-nav{height:48px;padding:0 22px}.global-nav nav{display:none}.menu-control{display:block}
+      .local-nav{height:54px;top:48px;padding:0 22px}.local-links{gap:10px}.local-links a:first-child{display:none}
+      .scene-inner{width:calc(100% - 44px)}.scene h1{font-size:56px;line-height:.94}.scene h2{font-size:46px;line-height:.96}
+      .scene-opening{min-height:760px}.opening-inner{padding-top:92px}.hero-placeholder{height:330px;margin:42px auto 26px;width:100%}
+      .scene-highlights{min-height:1180px}.scene-highlights .section-heading{padding-top:78px}.scene-highlights .section-heading h2{max-width:310px}
+      .highlight-stage{min-height:760px;margin-top:42px}.feature-media{height:340px;width:100%}
+      .selector-row,.lens-controls{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;width:calc(100vw - 44px);margin-left:calc((44px - 100vw)/2);padding:0 22px 8px;scrollbar-width:none}
+      .selector-row::-webkit-scrollbar,.lens-controls::-webkit-scrollbar{display:none}.selector,.lens-control{flex:0 0 auto}
+      .scene-design{min-height:1180px}.scene-design .split-layout,.scene-video .split-layout{min-height:0;gap:34px;padding-top:78px;padding-bottom:100px}
+      .scene-design .tall-media{height:430px;margin-top:12px}.scene-design .copy-block h2,.scene-video .copy-block h2{max-width:340px}
+      .scene-closer{min-height:1080px}.scene-closer .section-heading{padding-top:78px}.viewer-layout{min-height:0;gap:22px;padding:38px 0 100px}
+      .viewer-media{height:420px;width:100%}.control-stack{width:calc(100vw - 44px);margin-left:calc((44px - 100vw)/2);padding:0 22px 8px;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}.control-stack::-webkit-scrollbar{display:none}.viewer-control{flex:0 0 auto}
+      .scene-cameras{min-height:2500px}.camera-inner{padding-top:78px}.scene-cameras .section-heading h2{max-width:340px}.lens-stage{min-height:1900px;padding-top:48px}.lens-media{position:relative;top:auto;height:400px;width:100%}.zoom-readout{font-size:76px}
+      .scene-video{min-height:1460px}.scene-video .split-layout{padding-top:48px}.scene-video .tall-media{height:430px;width:100%}
+      .scene-performance{min-height:1450px}.performance-inner{padding-top:78px}.performance-media{height:380px;width:100%;margin:64px auto 34px}
+    }
+  </style>
+</head>
+<body>
+  <header class="global-nav">
+    <a class="apple-mark" href="#sc-01" aria-label="Structural clone home">●</a>
+    <nav aria-label="Global navigation"><a href="#sc-01">Store</a><a href="#sc-02">Product</a><a href="#sc-03">Design</a><a href="#sc-05">Cameras</a><a href="#sc-06">Video</a></nav>
+    <button class="menu-control" type="button" aria-expanded="false">Menu</button>
+  </header>
+
+  <aside class="local-nav" aria-label="Local navigation">
+    <a href="#sc-01" class="local-title">iPhone Pro</a>
+    <div class="local-links"><a href="#sc-01">Explore</a><a class="primary-cta" href="#sc-07">Buy</a></div>
+  </aside>
+
+  <main>
+    <section id="sc-01" class="scene scene-opening" data-scene="SC-01">
+      <div class="scene-inner opening-inner">
+        <p class="eyebrow">SC-01 · Product Opening</p>
+        <h1>Pro<br>in a new dimension.</h1>
+        <div class="hero-placeholder media-surface" aria-label="Neutral placeholder product media"><span>PRODUCT MEDIA</span></div>
+        <a class="primary-cta" href="#sc-02">Explore highlights</a>
+      </div>
+    </section>
+
+    <section id="sc-02" class="scene scene-highlights" data-scene="SC-02">
+      <div class="scene-inner">
+        <div class="section-heading"><p class="eyebrow">SC-02 · Highlights</p><h2>Get the highlights.</h2><button class="text-cta" type="button">Watch the film</button></div>
+        <div class="highlight-stage pinned-stage">
+          <div class="media-surface feature-media" data-scrub><span class="feature-label">HIGHLIGHT MEDIA</span></div>
+          <div class="selector-row" role="tablist" aria-label="Highlight systems">
+            <button class="selector is-active" role="tab" aria-selected="true">Design</button><button class="selector" role="tab" aria-selected="false">Chip</button><button class="selector" role="tab" aria-selected="false">Camera</button><button class="selector" role="tab" aria-selected="false">Display</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sc-03" class="scene scene-design" data-scene="SC-03">
+      <div class="scene-inner split-layout">
+        <div class="copy-block"><p class="eyebrow">SC-03 · Design</p><h2>Unibody enclosure.<br>Built from the inside out.</h2><p class="supporting-copy">A neutral structural text block establishes the measured relationship between headline, supporting copy and media.</p><button class="secondary-cta" type="button">Compare design</button></div>
+        <div class="media-surface tall-media" data-scrub><span>DESIGN MEDIA</span></div>
+      </div>
+    </section>
+
+    <section id="sc-04" class="scene scene-closer" data-scene="SC-04">
+      <div class="scene-inner">
+        <div class="section-heading"><p class="eyebrow">SC-04 · Take a Closer Look</p><h2>Take a closer look.</h2></div>
+        <div class="viewer-layout">
+          <div class="media-surface viewer-media" data-scrub><span>PRODUCT VIEWER</span></div>
+          <div class="control-stack" role="tablist" aria-label="Product viewer controls"><button class="viewer-control is-active" role="tab" aria-selected="true">Finish</button><button class="viewer-control" role="tab" aria-selected="false">Structure</button><button class="viewer-control" role="tab" aria-selected="false">Shield</button><button class="viewer-control" role="tab" aria-selected="false">Display</button><button class="viewer-control" role="tab" aria-selected="false">Camera</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sc-05" class="scene scene-cameras" data-scene="SC-05">
+      <div class="scene-inner camera-inner">
+        <div class="section-heading"><p class="eyebrow">SC-05 · Cameras / Lens Exploration</p><h2>A big zoom forward.</h2><p class="supporting-copy">Neutral camera copy for structural measurement.</p></div>
+        <div class="lens-stage pinned-stage"><div class="media-surface lens-media" data-scrub><span>LENS MEDIA</span><strong class="zoom-readout">8×</strong></div><div class="lens-controls" role="tablist" aria-label="Lens controls"><button class="lens-control is-active" role="tab" aria-selected="true">200 mm</button><button class="lens-control" role="tab" aria-selected="false">100 mm</button><button class="lens-control" role="tab" aria-selected="false">48 mm</button><button class="lens-control" role="tab" aria-selected="false">24 mm</button><button class="lens-control" role="tab" aria-selected="false">Macro</button></div></div>
+      </div>
+    </section>
+
+    <section id="sc-06" class="scene scene-video" data-scene="SC-06">
+      <div class="scene-inner split-layout reverse"><div class="media-surface tall-media" data-scrub><span>PRO VIDEO MEDIA</span></div><div class="copy-block"><p class="eyebrow">SC-06 · Pro Video</p><h2>Any more pro<br>and it would need an agent.</h2><p class="supporting-copy">A neutral structural text block for the cinematic media relationship.</p><button class="secondary-cta" type="button">Compare cameras</button></div></div>
+    </section>
+
+    <section id="sc-07" class="scene scene-performance" data-scene="SC-07">
+      <div class="scene-inner performance-inner"><p class="eyebrow">SC-07 · Performance</p><h2>New dimensions<br>in power.</h2><p class="supporting-copy">Neutral performance copy. The scene closes the Apple cinematic core sequence.</p><div class="media-surface performance-media" data-scrub><span>PERFORMANCE MEDIA</span></div><a class="primary-cta" href="#sc-01">Return to opening</a></div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

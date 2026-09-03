@@ -1,0 +1,9 @@
+runtime/screenshots/
+archive/
+overlay/
+runtime/*.png
+runtime/*.jpg
+runtime/*.jpeg
+runtime/*.webp
+runtime/*.md
+.DS_Store
