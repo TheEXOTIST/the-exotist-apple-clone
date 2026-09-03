@@ -96,27 +96,25 @@
           <h2>Unibody enclosure.<br>Makes a strong case for itself.</h2>
           <p class="supporting-copy">Introducing iPhone 17 Pro and iPhone 17 Pro Max, designed from the inside out to be the most powerful iPhone models ever made. At the core of the new design is a heat-forged aluminum unibody enclosure that maximizes performance, battery capacity, and durability.</p>
         </div>
-        <video id="design-media" class="design-media" muted playsinline preload="none" aria-label="iPhone 17 Pro, back exterior, forged aluminum unibody enclosure" data-design-video></video>
         <button class="secondary-cta design-compare" type="button" aria-haspopup="dialog">Compare iPhone design</button>
+        <video id="design-media" class="design-media" muted playsinline preload="none" aria-label="iPhone 17 Pro, back exterior, forged aluminum unibody enclosure" data-design-video></video>
         <div id="design-compare-modal" class="design-compare-modal" role="dialog" aria-modal="true" aria-labelledby="design-compare-title" hidden>
           <div class="design-compare-surface">
             <button class="design-compare-close" type="button" aria-label="Close compare modal">×</button>
             <h3 id="design-compare-title">Compare latest iPhone models.</h3>
-            <div class="design-compare-gallery" aria-label="Compare gallery">
-              <button class="design-compare-arrow design-compare-prev" type="button" aria-label="Previous item in Compare gallery">‹</button>
-              <div class="design-compare-cards">
-                <article class="design-compare-card" data-compare-card="pro"><img src="assets/sc-03/compare/design-pro.jpg" alt="iPhone 17 Pro design"><h4>iPhone 17 Pro</h4><span class="compare-current">Currently Viewing</span><p>Innovative design with breakthrough pro performance.</p><strong>FORGED ALUMINUM UNIBODY</strong></article>
-                <article class="design-compare-card" data-compare-card="air"><img src="assets/sc-03/compare/design-air.jpg" alt="iPhone Air design"><h4>iPhone Air</h4><p>Super thin. Strikingly light. Shockingly strong.</p><strong>POLISHED TITANIUM FRAME</strong></article>
-                <article class="design-compare-card" data-compare-card="17"><img src="assets/sc-03/compare/design-17.jpg" alt="iPhone 17 design"><h4>iPhone 17</h4><p>Even more delightful. Even more durable.</p><strong>DURABLE ALUMINUM FRAME</strong></article>
-              </div>
-              <button class="design-compare-arrow design-compare-next" type="button" aria-label="Next item in Compare gallery">›</button>
-            </div>
             <div class="design-compare-tabs" role="tablist" aria-label="iPhone lineup features">
-              <button type="button" role="tab" aria-selected="true" data-compare-tab="design">Design</button>
-              <button type="button" role="tab" aria-selected="false" data-compare-tab="camera">Camera</button>
-              <button type="button" role="tab" aria-selected="false" data-compare-tab="chip">Chip</button>
-              <button type="button" role="tab" aria-selected="false" data-compare-tab="battery">Battery</button>
-              <button type="button" role="tab" aria-selected="false" data-compare-tab="price">Price</button>
+              <button class="compare-tab-paddle" type="button" aria-label="Previous feature">‹</button>
+              <button type="button" role="tab" aria-selected="true" data-compare-tab="design"><span class="compare-tab-icon" aria-hidden="true">▣</span><span>Design</span></button>
+              <button type="button" role="tab" aria-selected="false" data-compare-tab="camera"><span class="compare-tab-icon" aria-hidden="true">◉</span><span>Camera</span></button>
+              <button type="button" role="tab" aria-selected="false" data-compare-tab="chip"><span class="compare-tab-icon" aria-hidden="true">▦</span><span>Chip</span></button>
+              <button type="button" role="tab" aria-selected="false" data-compare-tab="battery"><span class="compare-tab-icon" aria-hidden="true">▰</span><span>Battery</span></button>
+              <button type="button" role="tab" aria-selected="false" data-compare-tab="price"><span class="compare-tab-icon" aria-hidden="true">$</span><span>Price</span></button>
+              <button class="compare-tab-paddle" type="button" aria-label="Next feature">›</button>
+            </div>
+            <div class="design-compare-gallery" aria-label="Compare gallery">
+              <button class="design-compare-arrow design-compare-outer-prev" type="button" aria-label="Previous product row">‹</button>
+              <div class="design-compare-cards" aria-live="polite"></div>
+              <button class="design-compare-arrow design-compare-outer-next" type="button" aria-label="Next product row">›</button>
             </div>
           </div>
         </div>

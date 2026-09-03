@@ -37,31 +37,34 @@
 #sc-02 .highlights-film-close{position:absolute;z-index:2;top:28px;right:32px;width:42px;height:42px;border:0;border-radius:50%;background:#303033;color:var(--ink);font-size:28px;cursor:pointer}
 #sc-02 .highlights-film-video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
 #sc-02.scene-highlights{min-height:0}
-#sc-03 .scene-design-inner{display:flex;flex-direction:column;align-items:center;padding:140px 0 160px;text-align:center}
+#sc-03 .scene-design-inner{display:flex;flex-direction:column;align-items:center;padding:120px 0 160px;text-align:center;transform:translateY(-82px)}
 #sc-03 .design-copy{width:min(920.8px,calc(100vw - 160px));max-width:920.8px}
 #sc-03 .design-eyebrow{margin:0 0 28px;color:var(--ink);font-size:24px;line-height:1.1;letter-spacing:-.025em}
 #sc-03 .design-copy h2{max-width:920.8px;margin:0 auto;font-size:80px;line-height:1.05;letter-spacing:-.055em}
 #sc-03 .design-copy .supporting-copy{max-width:736.7px;width:min(736.7px,calc(100vw - 160px));margin:32px auto 0;color:var(--ink);font-size:21px;line-height:1.35}
-#sc-03 .design-compare{position:relative;z-index:2;display:inline-flex;align-items:center;gap:12px;margin-top:-56px;padding:12px 14px 12px 20px;border-radius:999px;background:#242426;color:var(--ink);font-size:17px}
+#sc-03 .design-compare{position:relative;z-index:2;display:inline-flex;align-items:center;gap:12px;margin-top:40px;padding:12px 14px 12px 20px;border-radius:999px;background:#242426;color:var(--ink);font-size:17px}
 #sc-03 .design-compare::after{content:'+';display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-size:24px;line-height:1}
-#sc-03 .design-media{display:block;width:min(920.8px,calc(100vw - 160px));height:auto;aspect-ratio:2.096;margin-top:64px;background:#000;object-fit:contain}
-#sc-03 .design-compare-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:start center;padding-top:40px;background:rgba(0,0,0,.58);backdrop-filter:blur(18px);overflow:auto}
+#sc-03 .design-media{display:block;width:min(920.8px,calc(100vw - 160px));height:auto;aspect-ratio:2.096;margin-top:-28px;background:#000;object-fit:contain}
+#sc-03 .design-compare-modal{position:fixed;inset:0;z-index:100;display:flex;justify-content:center;align-items:flex-start;padding-top:40px;background:rgba(0,0,0,.58);backdrop-filter:blur(18px);overflow:auto}
 #sc-03 .design-compare-modal[hidden]{display:none}
-#sc-03 .design-compare-surface{position:relative;width:480px;height:810px;min-height:810px;max-height:810px;overflow:auto;border-radius:26px;background:#fff;color:#1d1d1f;padding:48px 24px 100px;box-shadow:0 18px 60px rgba(0,0,0,.3)}
+#sc-03 .design-compare-surface{position:relative;width:480px;min-height:890px;border-radius:26px;background:#fff;color:#1d1d1f;padding:48px 16px 24px;box-shadow:0 18px 60px rgba(0,0,0,.3)}
 #sc-03 .design-compare-close{position:absolute;top:20px;right:20px;width:44px;height:44px;border:0;border-radius:50%;background:#e8e8ed;color:#1d1d1f;font-size:28px;line-height:1;cursor:pointer}
 #sc-03 .design-compare-surface h3{margin:0 28px 28px;font-size:28px;line-height:1.08;letter-spacing:-.04em}
-#sc-03 .design-compare-gallery{display:flex;align-items:center;gap:8px;min-height:720px}
-#sc-03 .design-compare-cards{display:flex;gap:14px;overflow:hidden;scroll-behavior:smooth;flex:1;padding:4px 0 22px}
-#sc-03 .design-compare-card{min-width:164px;padding:14px;border-radius:18px;background:#f5f5f7;text-align:left}
-#sc-03 .design-compare-card img{display:block;width:100%;height:140px;object-fit:contain;margin-bottom:12px}
+#sc-03 .design-compare-gallery{display:flex;align-items:center;gap:8px;margin-top:18px}
+#sc-03 .design-compare-cards{display:flex;flex-direction:column;gap:12px;overflow:visible;flex:1;padding:0}
+#sc-03 .design-compare-card{display:grid;grid-template-columns:144px 1fr;column-gap:14px;min-height:140px;padding:0;border-radius:18px;background:#f5f5f7;text-align:left;overflow:hidden}
+#sc-03 .design-compare-card img,.compare-no-media{display:block;width:144px;height:140px;object-fit:contain;background:#f5f5f7;grid-row:1 / span 4}
+#sc-03 .compare-no-media{background:#f5f5f7}
 #sc-03 .design-compare-card h4{margin:0 0 4px;font-size:17px;line-height:1.15}
-#sc-03 .design-compare-card p{min-height:66px;margin:14px 0;font-size:14px;line-height:1.25;color:#424245}
-#sc-03 .design-compare-card strong{display:block;font-size:10px;line-height:1.25;letter-spacing:.04em}
+#sc-03 .design-compare-card p{min-height:0;margin:10px 10px 8px 0;font-size:14px;line-height:1.25;color:#424245}
+#sc-03 .design-compare-card strong{display:block;margin-right:10px;font-size:10px;line-height:1.25;letter-spacing:.04em}
 #sc-03 .compare-current{display:block;font-size:11px;color:#6e6e73}
-#sc-03 .design-compare-arrow{flex:0 0 28px;width:28px;height:56px;border:0;border-radius:14px;background:#e8e8ed;color:#1d1d1f;font-size:32px;line-height:1;cursor:pointer}
-#sc-03 .design-compare-tabs{position:sticky;bottom:0;display:flex;gap:4px;justify-content:center;margin:10px -24px 0;padding:12px 10px 18px;background:rgba(255,255,255,.94);border-top:1px solid #d2d2d7}
-#sc-03 .design-compare-tabs button{border:0;background:transparent;color:#424245;padding:8px 9px;border-radius:999px;font-size:12px;cursor:pointer}
+#sc-03 .design-compare-arrow{flex:0 0 40px;width:40px;height:60px;border:0;border-radius:20px;background:#e8e8ed;color:#1d1d1f;font-size:32px;line-height:1;cursor:pointer}
+#sc-03 .design-compare-tabs{display:flex;gap:0;align-items:stretch;justify-content:center;margin:26px -16px 0;padding:0;background:#fff;border-bottom:1px solid #d2d2d7;order:-1}
+#sc-03 .design-compare-tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:72px;height:60px;border:0;background:transparent;color:#6e6e73;padding:6px 6px;font-size:11px;cursor:pointer}
 #sc-03 .design-compare-tabs button[aria-selected="true"]{background:#1d1d1f;color:#fff}
-#sc-03 .design-compare-surface::after{content:"";display:block;height:120px}
-@media(max-width:700px){#sc-03 .design-copy{width:100%;max-width:none}#sc-03 .design-copy h2{font-size:52px}#sc-03 .design-copy .supporting-copy{width:100%;max-width:100%}#sc-03 .design-media{width:100%}#sc-03 .design-compare{margin-top:-48px}#sc-03 .design-compare-surface{width:calc(100vw - 28px);min-height:calc(100vh - 40px);max-height:calc(100vh - 40px);padding-left:16px;padding-right:16px}#sc-03 .design-compare-tabs{margin-left:-16px;margin-right:-16px;gap:0}#sc-03 .design-compare-tabs button{padding-left:6px;padding-right:6px}}
+#sc-03 .compare-tab-icon{font-size:19px;line-height:1}
+#sc-03 .compare-tab-paddle{min-width:28px!important;width:28px;height:60px!important;font-size:22px!important}
+#sc-03 .design-compare-surface::after{content:none}
+@media(max-width:700px){#sc-03 .scene-design-inner{transform:none}#sc-03 .design-copy{width:100%;max-width:none}#sc-03 .design-copy h2{font-size:52px}#sc-03 .design-copy .supporting-copy{width:100%;max-width:100%}#sc-03 .design-media{width:100%}#sc-03 .design-compare{margin-top:32px}#sc-03 .design-compare-surface{width:calc(100vw - 28px);min-height:890px;padding-left:12px;padding-right:12px}#sc-03 .design-compare-tabs{margin-left:-12px;margin-right:-12px}#sc-03 .design-compare-tabs button{min-width:54px;padding-left:3px;padding-right:3px}}
 @media(max-width:700px){#sc-02 .section-heading{display:block;padding-top:78px}#sc-02 .section-heading h2{max-width:310px;font-size:46px;line-height:.96}#sc-02 .highlights-film-trigger{margin-top:30px}#sc-02 .highlight-stage{margin-top:42px;padding-bottom:72px}#sc-02 .highlights-gallery{width:calc(100vw - 44px);margin-left:22px}#sc-02 .highlights-track{gap:14px;padding-right:0}#sc-02 .highlight-card{flex-basis:calc(100vw - 44px);aspect-ratio:3/4;border-radius:22px}#sc-02 .highlight-card-caption{max-width:78%;font-size:20px}#sc-02 .highlight-card-design .highlight-card-caption,#sc-02 .highlight-card-center-stage .highlight-card-caption,#sc-02 .highlight-card-ios .highlight-card-caption{top:28px}#sc-02 .highlight-card-chip .highlight-card-caption{bottom:28px}#sc-02 .highlight-card-camera .highlight-card-caption,#sc-02 .highlight-card-intelligence .highlight-card-caption{left:28px}#sc-02 .highlight-gallery-controls{bottom:14px}#sc-02 .highlights-film-close{top:18px;right:18px}}

@@ -119,8 +119,8 @@
   const renderCompareCards = tab => {
     if (!compareCards) return;
     compareIndex = 0;
-    compareCards.innerHTML = compareTabData[tab].map((item,index) => `<article class="design-compare-card" data-compare-card="${index}">${item[0] ? `<img src="assets/sc-03/compare/${item[0]}" alt="${item[1]} ${tab}">` : '<div class="compare-no-media" aria-hidden="true"></div>'}<h4>${item[1]}</h4>${index===0?'<span class="compare-current">Currently Viewing</span>':''}<p>${item[2]}</p><strong>${item[3]}</strong></article>`).join('');
-    compareCards.scrollLeft = 0;
+    compareCards.innerHTML = compareTabData[tab].map((item,index) => `<article class="design-compare-card" data-compare-card="${index}">${item[0] ? `<img src="assets/sc-03/compare/${item[0]}" alt="${item[1]} ${tab}">` : '<div class="compare-no-media" aria-hidden="true"></div>'}<div class="compare-card-copy"><h4>${item[1]}</h4>${index===0?'<span class="compare-current">Currently Viewing</span>':''}<p>${item[2]}</p><strong>${item[3]}</strong></div></article>`).join('');
+    compareCards.scrollTop = 0;
   };
   const openCompare = () => { if (!compareModal) return; compareModal.hidden = false; document.body.style.overflow = 'hidden'; compareClose?.focus(); };
   const closeCompare = () => { if (!compareModal) return; compareModal.hidden = true; document.body.style.overflow = ''; compareTrigger?.focus(); };
@@ -129,6 +129,10 @@
   compareModal?.addEventListener('click', event => { if (event.target === compareModal) closeCompare(); });
   compareModal?.addEventListener('keydown', event => { if (event.key === 'Escape') closeCompare(); });
   compareTabs.forEach(tab => tab.addEventListener('click', () => { compareTabs.forEach(item => item.setAttribute('aria-selected','false')); tab.setAttribute('aria-selected','true'); renderCompareCards(tab.dataset.compareTab); }));
-  document.querySelector('#sc-03 .design-compare-prev')?.addEventListener('click', () => { compareIndex = Math.max(0, compareIndex - 1); compareCards?.children[compareIndex]?.scrollIntoView({behavior:'smooth',inline:'start'}); });
-  document.querySelector('#sc-03 .design-compare-next')?.addEventListener('click', () => { compareIndex = Math.min((compareCards?.children.length || 1) - 1, compareIndex + 1); compareCards?.children[compareIndex]?.scrollIntoView({behavior:'smooth',inline:'start'}); });
+  const focusCompareRow = direction => { compareIndex = Math.max(0, Math.min((compareCards?.children.length || 1) - 1, compareIndex + direction)); compareCards?.children[compareIndex]?.scrollIntoView({behavior:'smooth',block:'nearest'}); };
+  document.querySelector('#sc-03 .design-compare-outer-prev')?.addEventListener('click', () => focusCompareRow(-1));
+  document.querySelector('#sc-03 .design-compare-outer-next')?.addEventListener('click', () => focusCompareRow(1));
+  document.querySelector('#sc-03 .compare-tab-paddle[aria-label="Previous feature"]')?.addEventListener('click', () => { const index=Math.max(0,compareTabs.findIndex(item=>item.getAttribute('aria-selected')==='true')-1); compareTabs[index]?.click(); });
+  document.querySelector('#sc-03 .compare-tab-paddle[aria-label="Next feature"]')?.addEventListener('click', () => { const index=Math.min(compareTabs.length-1,compareTabs.findIndex(item=>item.getAttribute('aria-selected')==='true')+1); compareTabs[index]?.click(); });
+  renderCompareCards('design');
 })();
