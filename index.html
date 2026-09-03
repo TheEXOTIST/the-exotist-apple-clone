@@ -66,12 +66,14 @@
 
     <section id="sc-02" class="scene scene-highlights" data-scene="SC-02">
       <div class="scene-inner">
-        <div class="section-heading"><p class="eyebrow">SC-02 · Highlights</p><h2>Get the highlights.</h2><button class="text-cta" type="button">Watch the film</button></div>
+        <div class="section-heading"><p class="eyebrow">SC-02 · Highlights</p><h2>Get the highlights.</h2><button class="text-cta highlights-film-trigger" type="button" aria-haspopup="dialog" aria-controls="highlights-film">Watch the film</button></div>
         <div class="highlight-stage pinned-stage">
-          <div class="media-surface feature-media" data-scrub><span class="feature-label">HIGHLIGHT MEDIA</span></div>
+          <div class="media-surface feature-media feature-state-design" data-scrub><span class="feature-label">DESIGN</span></div>
+          <p class="feature-caption" aria-live="polite">Heat-forged enclosure, shaped around performance.</p>
           <div class="selector-row" role="tablist" aria-label="Highlight systems">
-            <button class="selector is-active" role="tab" aria-selected="true">Design</button><button class="selector" role="tab" aria-selected="false">Chip</button><button class="selector" role="tab" aria-selected="false">Camera</button><button class="selector" role="tab" aria-selected="false">Display</button>
+            <button class="selector is-active" data-highlight="design" role="tab" aria-selected="true">Design</button><button class="selector" data-highlight="chip" role="tab" aria-selected="false">A19 Pro chip</button><button class="selector" data-highlight="camera" role="tab" aria-selected="false">Pro Fusion camera system</button><button class="selector" data-highlight="center-stage" role="tab" aria-selected="false">Center Stage front camera</button><button class="selector" data-highlight="ios" role="tab" aria-selected="false">iOS 26</button><button class="selector" data-highlight="intelligence" role="tab" aria-selected="false">Apple Intelligence</button>
           </div>
+          <div id="highlights-film" class="highlights-film" role="dialog" aria-modal="true" aria-labelledby="highlights-film-title" hidden><div class="highlights-film-inner"><button class="highlights-film-close" type="button" aria-label="Close film">×</button><p class="eyebrow">Highlights film</p><h3 id="highlights-film-title">A short film about the systems inside.</h3><div class="film-frame"><span>HIGHLIGHTS FILM</span></div><p class="supporting-copy">A focused motion state for the highlights sequence.</p></div></div>
         </div>
       </div>
     </section>
