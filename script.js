@@ -13,21 +13,33 @@
   const playToggle = document.querySelector('#sc-02 .highlight-play-toggle');
   let galleryIndex = 0;
   let galleryTimer;
+  let galleryScrollSync = false;
   const renderGallery = state => {
     const nextIndex = cards.findIndex(card => card.dataset.galleryCard === state);
     if (!track || nextIndex < 0) return;
     galleryIndex = nextIndex;
-    const cardWidth = cards[0]?.getBoundingClientRect().width || 0;
-    const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    track.style.transform = `translate3d(${-galleryIndex * (cardWidth + gap)}px,0,0)`;
+    galleryScrollSync = true;
+    gallery?.scrollTo({ left: cards[galleryIndex]?.offsetLeft || 0, behavior: 'smooth' });
     cards.forEach((card, index) => card.classList.toggle('is-active', index === galleryIndex));
     dots.forEach((dot, index) => { dot.classList.toggle('is-active', index === galleryIndex); dot.setAttribute('aria-selected', String(index === galleryIndex)); });
+    setTimeout(() => { galleryScrollSync = false; }, 700);
   };
+  gallery?.addEventListener('scroll', () => {
+    if (galleryScrollSync || !cards.length) return;
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    const width = cards[0].getBoundingClientRect().width + gap;
+    const nearest = Math.max(0, Math.min(cards.length - 1, Math.round(gallery.scrollLeft / width)));
+    if (nearest !== galleryIndex) {
+      galleryIndex = nearest;
+      cards.forEach((card, index) => card.classList.toggle('is-active', index === galleryIndex));
+      dots.forEach((dot, index) => { dot.classList.toggle('is-active', index === galleryIndex); dot.setAttribute('aria-selected', String(index === galleryIndex)); });
+    }
+  }, { passive: true });
   dots.forEach(control => control.addEventListener('click', () => renderGallery(control.dataset.highlight)));
-  const stopGallery = () => { clearInterval(galleryTimer); galleryTimer = undefined; if (playToggle) { playToggle.textContent = 'Play'; playToggle.setAttribute('aria-pressed', 'false'); playToggle.setAttribute('aria-label', 'Play highlights'); } };
+  const stopGallery = () => { clearInterval(galleryTimer); galleryTimer = undefined; if (playToggle) { playToggle.textContent = '▶'; playToggle.setAttribute('aria-pressed', 'false'); playToggle.setAttribute('aria-label', 'Play highlights'); } };
   playToggle?.addEventListener('click', () => {
     if (galleryTimer) { stopGallery(); return; }
-    playToggle.textContent = 'Pause'; playToggle.setAttribute('aria-pressed', 'true'); playToggle.setAttribute('aria-label', 'Pause highlights');
+    playToggle.textContent = '⏸'; playToggle.setAttribute('aria-pressed', 'true'); playToggle.setAttribute('aria-label', 'Pause highlights');
     galleryTimer = setInterval(() => renderGallery(cards[(galleryIndex + 1) % cards.length]?.dataset.galleryCard), 2800);
   });
   addEventListener('resize', () => renderGallery(cards[galleryIndex]?.dataset.galleryCard || 'design'));
