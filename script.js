@@ -60,6 +60,29 @@
   film?.addEventListener('click', event => { if (event.target === film) closeFilm(); });
   addEventListener('keydown', event => { if (event.key === 'Escape' && film && !film.hidden) closeFilm(); });
 
+  const designVideo = document.querySelector('#design-media');
+  const designVideoSource = 'assets/sc-03/design_large_2x.mp4';
+  let designVideoLoaded = false;
+  const updateDesignVideo = () => {
+    if (!designVideo) return;
+    const rect = designVideo.getBoundingClientRect();
+    const inLoadRange = rect.top < innerHeight && rect.bottom > -innerHeight;
+    const inPlayRange = rect.top <= innerHeight * .65 && rect.bottom >= 0;
+    if (inLoadRange && !designVideoLoaded) {
+      designVideo.src = designVideoSource;
+      designVideo.load();
+      designVideoLoaded = true;
+    }
+    if (designVideoLoaded && inPlayRange) designVideo.play().catch(() => {});
+    else if (designVideoLoaded) designVideo.pause();
+    if (!inLoadRange && designVideoLoaded && rect.bottom < 0) {
+      designVideo.pause();
+      designVideo.removeAttribute('src');
+      designVideo.load();
+      designVideoLoaded = false;
+    }
+  };
+
   const scrubItems = [...document.querySelectorAll('[data-scrub]')];
   const updateScrub = () => {
     if (matchMedia('(max-width: 700px)').matches) {
@@ -76,4 +99,7 @@
   addEventListener('scroll', updateScrub, { passive: true });
   addEventListener('resize', updateScrub);
   updateScrub();
+  addEventListener('scroll', updateDesignVideo, { passive: true });
+  addEventListener('resize', updateDesignVideo);
+  updateDesignVideo();
 })();

@@ -37,4 +37,12 @@
 #sc-02 .highlights-film-close{position:absolute;z-index:2;top:28px;right:32px;width:42px;height:42px;border:0;border-radius:50%;background:#303033;color:var(--ink);font-size:28px;cursor:pointer}
 #sc-02 .highlights-film-video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
 #sc-02.scene-highlights{min-height:0}
+#sc-03 .scene-design-inner{display:flex;flex-direction:column;align-items:center;padding:140px 0 160px;text-align:center}
+#sc-03 .design-copy{width:100%;max-width:1048px}
+#sc-03 .design-eyebrow{margin:0 0 28px;color:var(--ink);font-size:24px;line-height:1.1;letter-spacing:-.025em}
+#sc-03 .design-copy h2{max-width:1048px;margin:0 auto;font-size:80px;line-height:1.05;letter-spacing:-.055em}
+#sc-03 .design-copy .supporting-copy{max-width:900px;margin:32px auto 0;color:var(--ink);font-size:21px;line-height:1.35}
+#sc-03 .design-compare{display:inline-flex;align-items:center;gap:12px;margin-top:32px;padding:12px 14px 12px 20px;border-radius:999px;background:#242426;color:var(--ink);font-size:17px}
+#sc-03 .design-compare::after{content:'+';display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-size:24px;line-height:1}
+#sc-03 .design-media{display:block;width:min(1048px,100%);height:auto;aspect-ratio:2.096;margin-top:64px;background:#000;object-fit:contain}
 @media(max-width:700px){#sc-02 .section-heading{display:block;padding-top:78px}#sc-02 .section-heading h2{max-width:310px;font-size:46px;line-height:.96}#sc-02 .highlights-film-trigger{margin-top:30px}#sc-02 .highlight-stage{margin-top:42px;padding-bottom:72px}#sc-02 .highlights-gallery{width:calc(100vw - 44px);margin-left:22px}#sc-02 .highlights-track{gap:14px;padding-right:0}#sc-02 .highlight-card{flex-basis:calc(100vw - 44px);aspect-ratio:3/4;border-radius:22px}#sc-02 .highlight-card-caption{max-width:78%;font-size:20px}#sc-02 .highlight-card-design .highlight-card-caption,#sc-02 .highlight-card-center-stage .highlight-card-caption,#sc-02 .highlight-card-ios .highlight-card-caption{top:28px}#sc-02 .highlight-card-chip .highlight-card-caption{bottom:28px}#sc-02 .highlight-card-camera .highlight-card-caption,#sc-02 .highlight-card-intelligence .highlight-card-caption{left:28px}#sc-02 .highlight-gallery-controls{bottom:14px}#sc-02 .highlights-film-close{top:18px;right:18px}}
