@@ -11,7 +11,7 @@
 @media(max-width:700px){.scene-opening{margin-top:54px;height:calc(100svh - 102px);min-height:650px}.hero-product{height:100%;min-height:0;object-fit:cover;object-position:50% 0}.opening-purchase{bottom:34px}.opening-purchase p{font-size:15px}}
 
 /* SC-02 Highlights reconstruction: scoped to the highlights scene. */
-#sc-02 .highlight-stage{display:block;margin-top:70px;padding-bottom:90px}
+#sc-02 .highlight-stage{display:block;margin-top:70px;padding-bottom:212px}
 #sc-02 .section-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;column-gap:24px;padding-top:104px}
 #sc-02 .section-heading .eyebrow{grid-column:1/-1}
 #sc-02 .section-heading h2{max-width:none;font-size:56px;line-height:60px}
