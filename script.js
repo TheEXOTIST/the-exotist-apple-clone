@@ -117,19 +117,29 @@
     battery: [[null,'iPhone 17 Pro','Up to 39 hours of video playback.','UP TO 50% CHARGE IN 20 MINUTES'],[null,'iPhone Air','Up to 27 hours of video playback.','UP TO 50% CHARGE IN 30 MINUTES'],[null,'iPhone 17','Up to 30 hours of video playback.','UP TO 50% CHARGE IN 20 MINUTES']],
     price: [[null,'iPhone 17 Pro','256GB model from $1099.','OR $45.79/MO. FOR 24 MO.'],[null,'iPhone Air','256GB model from $999.','OR $41.62/MO. FOR 24 MO.'],[null,'iPhone 17','256GB model from $799.','OR $33.29/MO. FOR 24 MO.']]
   };
-  const compareRowIndex = {design:0,camera:0,chip:0,battery:0,price:0};
-  const renderCompareSlide = (slide, tab) => {
-    const items = compareTabData[tab];
-    slide.innerHTML = `<div class="design-compare-cards">${items.map((item,index) => `<article class="design-compare-card${index===0?' is-current':''}" data-compare-card="${index}">${item[0] ? `<img src="assets/sc-03/compare/${item[0]}" alt="${item[1]} ${tab}">` : '<div class="compare-no-media" aria-hidden="true"></div>'}<div class="compare-card-copy"><h4>${item[1]}</h4>${index===0?'<span class="compare-current">Currently Viewing</span>':''}<p>${item[2]}</p><strong>${item[3]}</strong></div></article>`).join('')}</div><div class="design-compare-inner-nav"><button class="design-compare-inner-prev" type="button" aria-label="Previous product in ${tab} feature">‹</button><span class="compare-inner-status">1 / ${items.length}</span><button class="design-compare-inner-next" type="button" aria-label="Next product in ${tab} feature">›</button></div>`;
-    const cards = [...slide.querySelectorAll('.design-compare-card')];
-    const updateRow = () => { cards.forEach((card,index) => card.classList.toggle('is-current', index===compareRowIndex[tab])); cards[compareRowIndex[tab]]?.scrollIntoView({behavior:'smooth',block:'nearest'}); slide.querySelector('.compare-inner-status').textContent = `${compareRowIndex[tab]+1} / ${cards.length}`; };
-    slide.querySelector('.design-compare-inner-prev').addEventListener('click', () => { compareRowIndex[tab]=Math.max(0,compareRowIndex[tab]-1); updateRow(); });
-    slide.querySelector('.design-compare-inner-next').addEventListener('click', () => { compareRowIndex[tab]=Math.min(cards.length-1,compareRowIndex[tab]+1); updateRow(); });
+  const featureGroup = {design:['design-1','design-2'],camera:['camera-1','camera-2','camera-3'],chip:['chip'],battery:['battery'],price:['price']};
+  const featureState = {design:0,camera:0,chip:0,battery:0,price:0};
+  const featureData = {
+    'design-1': compareTabData.design,
+    'design-2': [['design-pro.jpg','iPhone 17 Pro','6.9” / 6.3”','SUPER RETINA XDR DISPLAY · FORGED ALUMINUM UNIBODY'],['design-air.jpg','iPhone Air','6.5”','SUPER RETINA XDR DISPLAY · POLISHED TITANIUM FRAME'],['design-17.jpg','iPhone 17','6.3”','SUPER RETINA XDR DISPLAY · DURABLE ALUMINUM FRAME']],
+    'camera-1': compareTabData.camera,
+    'camera-2': [['camera-pro.jpg','iPhone 17 Pro','48MP Pro Fusion camera system','OPTICAL ZOOM OPTIONS: .5x · 1x · 2x · 4x · 8x'],['camera-air.jpg','iPhone Air','48MP Fusion camera system','OPTICAL ZOOM OPTIONS: 1x · 2x'],['camera-17.jpg','iPhone 17','48MP Dual Fusion camera system','OPTICAL ZOOM OPTIONS: .5x · 1x · 2x']],
+    'camera-3': [['camera-pro.jpg','iPhone 17 Pro','18MP Center Stage front camera','CENTER STAGE FOR PHOTOS · ULTRA-STABILIZED VIDEO · DUAL CAPTURE VIDEO'],['camera-air.jpg','iPhone Air','18MP Center Stage front camera','CENTER STAGE FOR PHOTOS · ULTRA-STABILIZED VIDEO · DUAL CAPTURE VIDEO'],['camera-17.jpg','iPhone 17','18MP Center Stage front camera','CENTER STAGE FOR PHOTOS · ULTRA-STABILIZED VIDEO · DUAL CAPTURE VIDEO']],
+    chip: compareTabData.chip, battery: compareTabData.battery, price: compareTabData.price
   };
+  const renderCompareSlide = (slide, tab) => {
+    const items = featureData[tab]; const group = Object.keys(featureGroup).find(k=>featureGroup[k].includes(tab)) || tab;
+    slide.innerHTML = `<div class="design-compare-cards">${items.map((item,index) => `<div class="compare-product"><h4>${item[1]}</h4><article class="design-compare-card${index===0?' is-current':''}" data-compare-card="${index}">${item[0] ? `<img src="assets/sc-03/compare/${item[0]}" alt="${item[1]} ${group}">` : '<div class="compare-no-media" aria-hidden="true"></div>'}<div class="compare-card-copy">${index===0?'<span class="compare-current">Currently Viewing</span>':''}<p>${item[2]}</p><strong>${item[3]}</strong></div></article></div>`).join('')}</div><div class="design-compare-inner-nav"><button class="design-compare-inner-prev" type="button" aria-label="Previous feature state in ${group}">‹</button><span class="compare-inner-status">1 / ${featureGroup[group]?.length || 1}</span><button class="design-compare-inner-next" type="button" aria-label="Next feature state in ${group}">›</button></div>`;
+    slide.querySelector('.design-compare-inner-prev').addEventListener('click', () => selectFeatureState(group, featureState[group]-1));
+    slide.querySelector('.design-compare-inner-next').addEventListener('click', () => selectFeatureState(group, featureState[group]+1));
+  };
+  const selectFeatureState = (group, index) => { const states=featureGroup[group]||[group]; const next=Math.max(0,Math.min(states.length-1,index)); featureState[group]=next; compareSlides.forEach(slide=>{ if(states.includes(slide.dataset.compareSlide)) slide.hidden=slide.dataset.compareSlide!==states[next]; }); };
   const selectCompareTab = index => {
     const safeIndex = Math.max(0, Math.min(compareTabs.length - 1, index));
     compareTabs.forEach((tab,itemIndex) => tab.setAttribute('aria-selected', String(itemIndex===safeIndex)));
-    const slide = compareSlides[safeIndex];
+    const group = ['design','camera','chip','battery','price'][safeIndex];
+    const state = featureGroup[group][featureState[group]];
+    const slide = compareSlides.find(item=>item.dataset.compareSlide===state);
     compareViewport?.scrollTo({left:slide?.offsetLeft || 0, behavior:'smooth'});
   };
   const openCompare = () => { if (!compareModal) return; compareModal.hidden = false; document.body.style.overflow = 'hidden'; compareClose?.focus(); };
@@ -139,6 +149,7 @@
   compareModal?.addEventListener('click', event => { if (event.target === compareModal) closeCompare(); });
   compareModal?.addEventListener('keydown', event => { if (event.key === 'Escape') closeCompare(); });
   compareSlides.forEach(slide => renderCompareSlide(slide, slide.dataset.compareSlide));
+  selectFeatureState('design', 0);
   compareTabs.forEach((tab,index) => tab.addEventListener('click', () => selectCompareTab(index)));
   const currentCompareIndex = () => compareTabs.findIndex(item=>item.getAttribute('aria-selected')==='true');
   document.querySelector('#sc-03 .design-compare-outer-prev')?.addEventListener('click', () => selectCompareTab(currentCompareIndex()-1));

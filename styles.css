@@ -50,13 +50,15 @@
 #sc-03 .design-compare-surface{position:relative;width:480px;height:810px;min-height:810px;border-radius:26px;background:#fff;color:#1d1d1f;padding:48px 16px 24px;box-shadow:0 18px 60px rgba(0,0,0,.3)}
 #sc-03 .design-compare-close{position:absolute;top:20px;right:20px;width:44px;height:44px;border:0;border-radius:50%;background:#e8e8ed;color:#1d1d1f;font-size:28px;line-height:1;cursor:pointer}
 #sc-03 .design-compare-surface h3{max-width:300px;margin:0 28px 28px;font-size:28px;line-height:1.08;letter-spacing:-.04em}
-#sc-03 .design-compare-gallery{display:flex;align-items:center;gap:8px;margin:18px -16px 0}
-#sc-03 .design-compare-feature-viewport{width:100%;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none}
+#sc-03 .design-compare-gallery{position:relative;display:block;margin:18px -16px 0}
+#sc-03 .design-compare-feature-viewport{width:100%;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 16px}
 #sc-03 .design-compare-feature-viewport::-webkit-scrollbar{display:none}
 #sc-03 .design-compare-feature-track{display:flex;gap:18px;width:max-content}
 #sc-03 .design-compare-feature-slide{flex:0 0 366px;scroll-snap-align:start;margin:0;padding:0}
 #sc-03 .design-compare-cards{display:flex;flex-direction:column;gap:12px;overflow:visible;flex:1;padding:0}
 #sc-03 .design-compare-card{display:grid;grid-template-columns:144px 1fr;column-gap:14px;min-height:140px;padding:0;border-radius:18px;background:#f5f5f7;text-align:left;overflow:hidden}
+#sc-03 .compare-product h4{margin:0 0 5px 0;font-size:17px;line-height:1.15;text-align:left}
+#sc-03 .compare-product{margin-bottom:12px}
 #sc-03 .design-compare-card img,.compare-no-media{display:block;width:144px;height:140px;object-fit:contain;background:#f5f5f7;grid-row:1 / span 4}
 #sc-03 .compare-no-media{background:#f5f5f7}
 #sc-03 .design-compare-card h4{margin:0 0 4px;font-size:17px;line-height:1.15}
@@ -65,8 +67,9 @@
 #sc-03 .compare-current{display:block;font-size:11px;color:#6e6e73}
 #sc-03 .design-compare-inner-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:10px;color:#6e6e73;font-size:12px}
 #sc-03 .design-compare-inner-nav button{width:24px;height:24px;border:0;border-radius:50%;background:#e8e8ed;color:#1d1d1f;font-size:18px;line-height:1;cursor:pointer}
-#sc-03 .design-compare-arrow{flex:0 0 40px;width:40px;height:60px;border:0;border-radius:20px;background:#e8e8ed;color:#1d1d1f;font-size:32px;line-height:1;cursor:pointer}
-#sc-03 .design-compare-tabs{display:flex;gap:0;align-items:stretch;justify-content:center;margin:26px -16px 0;padding:0;background:#fff;border-bottom:1px solid #d2d2d7;order:-1}
+#sc-03 .design-compare-arrow{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:40px;height:60px;border:0;border-radius:20px;background:#e8e8ed;color:#1d1d1f;font-size:32px;line-height:1;cursor:pointer}
+#sc-03 .design-compare-outer-prev{left:0}#sc-03 .design-compare-outer-next{right:0}
+#sc-03 .design-compare-tabs{display:flex;gap:0;align-items:stretch;justify-content:center;position:sticky;bottom:0;z-index:3;margin:26px -16px -24px;padding:0;background:#fff;border-top:1px solid #d2d2d7}
 #sc-03 .design-compare-tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:72px;height:60px;border:0;background:transparent;color:#6e6e73;padding:6px 6px;font-size:11px;cursor:pointer}
 #sc-03 .design-compare-tabs button[aria-selected="true"]{background:#1d1d1f;color:#fff}
 #sc-03 .compare-tab-icon{font-size:19px;line-height:1}
