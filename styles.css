@@ -88,5 +88,28 @@
 #sc-03 .design-compare-arrow{display:none}
 #sc-03 .design-compare-gallery{margin-top:0}
 #sc-03 .design-compare-tabs{margin-top:10px}
+@media(min-width:701px){
+  #sc-03 .design-compare-surface{text-align:left;padding:34px 0 24px;overflow:visible}
+  #sc-03 .design-compare-surface h3{margin:0 0 28px 28px;max-width:300px;font-size:28px;line-height:1.142857;font-weight:600}
+  #sc-03 .compare-gallery-and-controller-wrapper{position:relative}
+  #sc-03 .product-names-overlay{position:absolute;top:0;left:20px;display:grid;grid-template-columns:390px;grid-template-rows:repeat(3,140px);row-gap:45px;width:390px;margin:0;z-index:4;pointer-events:none}
+  #sc-03 .product-names-overlay .product-name{display:flex;align-items:flex-start;gap:6px;height:20px;padding:0 9px;box-sizing:border-box}
+  #sc-03 .product-names-overlay h4{margin:0;font-size:17px;line-height:20px;white-space:nowrap}
+  #sc-03 .product-names-overlay .product-name span{font-size:11px;line-height:20px;color:#a66b45;white-space:nowrap}
+  #sc-03 .design-compare-gallery{margin:0}
+  #sc-03 .design-compare-feature-viewport{box-sizing:border-box;padding:22px 70px 0 20px;overflow-x:auto;overflow-y:hidden}
+  #sc-03 .design-compare-feature-track{gap:10px}
+  #sc-03 .design-compare-feature-slide{flex:0 0 390px;width:390px}
+  #sc-03 .design-compare-cards{gap:45px}
+  #sc-03 .design-compare-card{min-height:140px;border-radius:10px}
+  #sc-03 .design-compare-paddlenav{margin-top:10px}
+  #sc-03 .design-compare-paddlenav button{position:relative;z-index:5}
+  #sc-03 .compare-zoom-card{display:block;min-height:140px}
+  #sc-03 .compare-zoom-card .compare-card-copy{padding:20px 20px 14px}
+  #sc-03 .compare-zoom-card p{margin:0 0 8px;font-size:17px;line-height:1.15;font-weight:600;color:#1d1d1f}
+  #sc-03 .compare-zoom-card .zoom-label{display:block;margin-bottom:6px;font-size:12px;line-height:1.2;text-transform:uppercase;color:#6e6e73}
+  #sc-03 .zoom-levels{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+  #sc-03 .zoom-levels li{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#6e6e73;color:#fff;font-size:12px;font-weight:700}
+}
 @media(max-width:700px){#sc-03 .design-copy{width:100%;max-width:none}#sc-03 .design-copy h2{font-size:52px}#sc-03 .design-copy .supporting-copy{width:100%;max-width:100%}#sc-03 .design-media{width:100%}#sc-03 .design-compare{margin-top:32px}#sc-03 .design-compare-surface{width:calc(100vw - 28px);height:calc(100vh - 40px);min-height:calc(100vh - 40px);padding-left:12px;padding-right:12px}#sc-03 .design-compare-tabs{margin-left:-12px;margin-right:-12px}#sc-03 .design-compare-tabs button{min-width:54px;padding-left:3px;padding-right:3px}#sc-03 .design-compare-feature-slide{flex-basis:100%}}
 @media(max-width:700px){#sc-02 .section-heading{display:block;padding-top:78px}#sc-02 .section-heading h2{max-width:310px;font-size:46px;line-height:.96}#sc-02 .highlights-film-trigger{margin-top:30px}#sc-02 .highlight-stage{margin-top:42px;padding-bottom:72px}#sc-02 .highlights-gallery{width:calc(100vw - 44px);margin-left:22px}#sc-02 .highlights-track{gap:14px;padding-right:0}#sc-02 .highlight-card{flex-basis:calc(100vw - 44px);aspect-ratio:3/4;border-radius:22px}#sc-02 .highlight-card-caption{max-width:78%;font-size:20px}#sc-02 .highlight-card-design .highlight-card-caption,#sc-02 .highlight-card-center-stage .highlight-card-caption,#sc-02 .highlight-card-ios .highlight-card-caption{top:28px}#sc-02 .highlight-card-chip .highlight-card-caption{bottom:28px}#sc-02 .highlight-card-camera .highlight-card-caption,#sc-02 .highlight-card-intelligence .highlight-card-caption{left:28px}#sc-02 .highlight-gallery-controls{bottom:14px}#sc-02 .highlights-film-close{top:18px;right:18px}}

@@ -122,7 +122,16 @@
   };
   const sequence = compareSlides.map(slide => slide.dataset.compareSlide);
   const groups = {design:['design-1','design-2'],camera:['camera-1','camera-2','camera-3'],chip:['chip-1'],battery:['battery-1'],price:['price-1']};
-  const renderCompareSlide = (slide, key) => { const group=Object.keys(groups).find(name=>groups[name].includes(key)); const items=featureData[key]; slide.innerHTML=`<div class="design-compare-cards">${items.map((item,index)=>`<div class="compare-product"><article class="design-compare-card${index===0?' is-current':''}" data-compare-card="${index}">${item[0]?`<img src="assets/sc-03/compare/${item[0]}" alt="${item[1]} ${group}">`:'<div class="compare-no-media" aria-hidden="true"></div>'}<div class="compare-card-copy">${index===0?'<span class="compare-current">Currently Viewing</span>':''}<p>${item[2]}</p><strong>${item[3]}</strong></div></article></div>`).join('')}</div>`; };
+  const renderCompareSlide = (slide, key) => {
+    const group=Object.keys(groups).find(name=>groups[name].includes(key)); const items=featureData[key];
+    slide.innerHTML=`<div class="design-compare-cards">${items.map((item,index)=>{
+      if (key === 'camera-2') {
+        const levels = item[3].split(' · ');
+        return `<div class="compare-product"><article class="design-compare-card compare-zoom-card" data-compare-card="${index}"><div class="compare-card-copy"><p>${item[2]}</p><span class="zoom-label">Optical zoom options:</span><ul class="zoom-levels">${levels.map(level=>`<li>${level}</li>`).join('')}</ul></div></article></div>`;
+      }
+      return `<div class="compare-product"><article class="design-compare-card${index===0?' is-current':''}" data-compare-card="${index}">${item[0]?`<img src="assets/sc-03/compare/${item[0]}" alt="${item[1]} ${group}">`:'<div class="compare-no-media" aria-hidden="true"></div>'}<div class="compare-card-copy"><p>${item[2]}</p><strong>${item[3]}</strong></div></article></div>`;
+    }).join('')}</div>`;
+  };
   const setActiveTab = key => { const group=Object.keys(groups).find(name=>groups[name].includes(key)); compareTabs.forEach(tab=>tab.setAttribute('aria-selected',String(tab.dataset.compareTab===group))); };
   const goToSlide = (index, behavior='smooth') => { const safe=Math.max(0,Math.min(sequence.length-1,index)); compareViewport?.scrollTo({left:compareSlides[safe].offsetLeft,behavior}); setActiveTab(sequence[safe]); const status=document.querySelector('#sc-03 .compare-inner-status'); if(status) status.textContent=`${safe+1} / ${sequence.length}`; };
   compareViewport?.addEventListener('scroll', () => { const left=compareViewport.scrollLeft; let nearest=0; compareSlides.forEach((slide,index)=>{ if(Math.abs(slide.offsetLeft-left)<Math.abs(compareSlides[nearest].offsetLeft-left)) nearest=index; }); setActiveTab(sequence[nearest]); });
