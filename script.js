@@ -110,38 +110,22 @@
   const compareTrack = document.querySelector('#sc-03 .design-compare-feature-track');
   const compareSlides = [...document.querySelectorAll('#sc-03 .design-compare-feature-slide')];
   const compareTabs = [...document.querySelectorAll('#sc-03 [data-compare-tab]')];
-  const compareTabData = {
-    design: [['design-pro.jpg','iPhone 17 Pro','Innovative design with breakthrough pro performance.','FORGED ALUMINUM UNIBODY'],['design-air.jpg','iPhone Air','Super thin. Strikingly light. Shockingly strong.','POLISHED TITANIUM FRAME'],['design-17.jpg','iPhone 17','Even more delightful. Even more durable.','DURABLE ALUMINUM FRAME']],
-    camera: [['camera-pro.jpg','iPhone 17 Pro','Ultimate pro camera system.','48MP FUSION MAIN · 48MP FUSION ULTRA WIDE · 48MP FUSION TELEPHOTO'],['camera-air.jpg','iPhone Air','Two advanced cameras in one.','48MP FUSION MAIN'],['camera-17.jpg','iPhone 17','Superstunning shots up close or far away.','48MP FUSION MAIN · 48MP FUSION ULTRA WIDE']],
-    chip: [['chip-pro.jpg','iPhone 17 Pro','Exceptional pro performance.','6-CORE CPU · 6-CORE GPU WITH NEURAL ACCELERATORS'],['chip-pro.jpg','iPhone Air','Hyperspeed. Hyperefficient.','6-CORE CPU · 5-CORE GPU WITH NEURAL ACCELERATORS'],['chip-air.jpg','iPhone 17','Power player. Energy expert.','6-CORE CPU · 5-CORE GPU WITH NEURAL ACCELERATORS']],
-    battery: [[null,'iPhone 17 Pro','Up to 39 hours of video playback.','UP TO 50% CHARGE IN 20 MINUTES'],[null,'iPhone Air','Up to 27 hours of video playback.','UP TO 50% CHARGE IN 30 MINUTES'],[null,'iPhone 17','Up to 30 hours of video playback.','UP TO 50% CHARGE IN 20 MINUTES']],
-    price: [[null,'iPhone 17 Pro','256GB model from $1099.','OR $45.79/MO. FOR 24 MO.'],[null,'iPhone Air','256GB model from $999.','OR $41.62/MO. FOR 24 MO.'],[null,'iPhone 17','256GB model from $799.','OR $33.29/MO. FOR 24 MO.']]
-  };
-  const featureGroup = {design:['design-1','design-2'],camera:['camera-1','camera-2','camera-3'],chip:['chip'],battery:['battery'],price:['price']};
-  const featureState = {design:0,camera:0,chip:0,battery:0,price:0};
   const featureData = {
-    'design-1': compareTabData.design,
-    'design-2': [['design-pro.jpg','iPhone 17 Pro','6.9” / 6.3”','SUPER RETINA XDR DISPLAY · FORGED ALUMINUM UNIBODY'],['design-air.jpg','iPhone Air','6.5”','SUPER RETINA XDR DISPLAY · POLISHED TITANIUM FRAME'],['design-17.jpg','iPhone 17','6.3”','SUPER RETINA XDR DISPLAY · DURABLE ALUMINUM FRAME']],
-    'camera-1': compareTabData.camera,
-    'camera-2': [['camera-pro.jpg','iPhone 17 Pro','48MP Pro Fusion camera system','OPTICAL ZOOM OPTIONS: .5x · 1x · 2x · 4x · 8x'],['camera-air.jpg','iPhone Air','48MP Fusion camera system','OPTICAL ZOOM OPTIONS: 1x · 2x'],['camera-17.jpg','iPhone 17','48MP Dual Fusion camera system','OPTICAL ZOOM OPTIONS: .5x · 1x · 2x']],
-    'camera-3': [['camera-pro.jpg','iPhone 17 Pro','18MP Center Stage front camera','CENTER STAGE FOR PHOTOS · ULTRA-STABILIZED VIDEO · DUAL CAPTURE VIDEO'],['camera-air.jpg','iPhone Air','18MP Center Stage front camera','CENTER STAGE FOR PHOTOS · ULTRA-STABILIZED VIDEO · DUAL CAPTURE VIDEO'],['camera-17.jpg','iPhone 17','18MP Center Stage front camera','CENTER STAGE FOR PHOTOS · ULTRA-STABILIZED VIDEO · DUAL CAPTURE VIDEO']],
-    chip: compareTabData.chip, battery: compareTabData.battery, price: compareTabData.price
+    'design-1': [['design-detail-pro.jpg','iPhone 17 Pro','Innovative design with breakthrough pro performance.','FORGED ALUMINUM UNIBODY'],['design-detail-air.jpg','iPhone Air','Super thin. Strikingly light. Shockingly strong.','POLISHED TITANIUM FRAME'],['design-detail-17.jpg','iPhone 17','Even more delightful. Even more durable.','DURABLE ALUMINUM FRAME']],
+    'design-2': [['design-unibody-pro.jpg','iPhone 17 Pro','6.9” / 6.3”','SUPER RETINA XDR DISPLAY · FORGED ALUMINUM UNIBODY'],['design-titanium-air.jpg','iPhone Air','6.5”','SUPER RETINA XDR DISPLAY · POLISHED TITANIUM FRAME'],['design-aluminum-17.jpg','iPhone 17','6.3”','SUPER RETINA XDR DISPLAY · DURABLE ALUMINUM FRAME']],
+    'camera-1': [['camera-initial-pro.jpg','iPhone 17 Pro','Ultimate pro camera system.','48MP FUSION MAIN · 48MP FUSION ULTRA WIDE · 48MP FUSION TELEPHOTO'],['camera-initial-air.jpg','iPhone Air','Two advanced cameras in one.','48MP FUSION MAIN'],['camera-initial-17.jpg','iPhone 17','Superstunning shots up close or far away.','48MP FUSION MAIN · 48MP FUSION ULTRA WIDE']],
+    'camera-2': [[null,'iPhone 17 Pro','48MP Pro Fusion camera system','.5x · 1x · 2x · 4x · 8x'],[null,'iPhone Air','48MP Fusion camera system','1x · 2x'],[null,'iPhone 17','48MP Dual Fusion camera system','.5x · 1x · 2x']],
+    'camera-3': [['camera-center-pro.jpg','iPhone 17 Pro','18MP Center Stage front camera','CENTER STAGE FOR PHOTOS · ULTRA-STABILIZED VIDEO · DUAL CAPTURE VIDEO'],['camera-center-air.jpg','iPhone Air','18MP Center Stage front camera','CENTER STAGE FOR PHOTOS · ULTRA-STABILIZED VIDEO · DUAL CAPTURE VIDEO'],['camera-center-17.jpg','iPhone 17','18MP Center Stage front camera','CENTER STAGE FOR PHOTOS · ULTRA-STABILIZED VIDEO · DUAL CAPTURE VIDEO']],
+    'chip-1': [['chip-pro.jpg','iPhone 17 Pro','Exceptional pro performance.','6-CORE CPU · 6-CORE GPU WITH NEURAL ACCELERATORS'],['chip-pro.jpg','iPhone Air','Hyperspeed. Hyperefficient.','6-CORE CPU · 5-CORE GPU WITH NEURAL ACCELERATORS'],['chip-air.jpg','iPhone 17','Power player. Energy expert.','6-CORE CPU · 5-CORE GPU WITH NEURAL ACCELERATORS']],
+    'battery-1': [[null,'iPhone 17 Pro','Up to 39 hours of video playback.','UP TO 50% CHARGE IN 20 MINUTES'],[null,'iPhone Air','Up to 27 hours of video playback.','UP TO 50% CHARGE IN 30 MINUTES'],[null,'iPhone 17','Up to 30 hours of video playback.','UP TO 50% CHARGE IN 20 MINUTES']],
+    'price-1': [[null,'iPhone 17 Pro','256GB model from $1099.','OR $45.79/MO. FOR 24 MO.'],[null,'iPhone Air','256GB model from $999.','OR $41.62/MO. FOR 24 MO.'],[null,'iPhone 17','256GB model from $799.','OR $33.29/MO. FOR 24 MO.']]
   };
-  const renderCompareSlide = (slide, tab) => {
-    const items = featureData[tab]; const group = Object.keys(featureGroup).find(k=>featureGroup[k].includes(tab)) || tab;
-    slide.innerHTML = `<div class="design-compare-cards">${items.map((item,index) => `<div class="compare-product"><h4>${item[1]}</h4><article class="design-compare-card${index===0?' is-current':''}" data-compare-card="${index}">${item[0] ? `<img src="assets/sc-03/compare/${item[0]}" alt="${item[1]} ${group}">` : '<div class="compare-no-media" aria-hidden="true"></div>'}<div class="compare-card-copy">${index===0?'<span class="compare-current">Currently Viewing</span>':''}<p>${item[2]}</p><strong>${item[3]}</strong></div></article></div>`).join('')}</div><div class="design-compare-inner-nav"><button class="design-compare-inner-prev" type="button" aria-label="Previous feature state in ${group}">‹</button><span class="compare-inner-status">1 / ${featureGroup[group]?.length || 1}</span><button class="design-compare-inner-next" type="button" aria-label="Next feature state in ${group}">›</button></div>`;
-    slide.querySelector('.design-compare-inner-prev').addEventListener('click', () => selectFeatureState(group, featureState[group]-1));
-    slide.querySelector('.design-compare-inner-next').addEventListener('click', () => selectFeatureState(group, featureState[group]+1));
-  };
-  const selectFeatureState = (group, index) => { const states=featureGroup[group]||[group]; const next=Math.max(0,Math.min(states.length-1,index)); featureState[group]=next; compareSlides.forEach(slide=>{ if(states.includes(slide.dataset.compareSlide)) slide.hidden=slide.dataset.compareSlide!==states[next]; }); };
-  const selectCompareTab = index => {
-    const safeIndex = Math.max(0, Math.min(compareTabs.length - 1, index));
-    compareTabs.forEach((tab,itemIndex) => tab.setAttribute('aria-selected', String(itemIndex===safeIndex)));
-    const group = ['design','camera','chip','battery','price'][safeIndex];
-    const state = featureGroup[group][featureState[group]];
-    const slide = compareSlides.find(item=>item.dataset.compareSlide===state);
-    compareViewport?.scrollTo({left:slide?.offsetLeft || 0, behavior:'smooth'});
-  };
+  const sequence = compareSlides.map(slide => slide.dataset.compareSlide);
+  const groups = {design:['design-1','design-2'],camera:['camera-1','camera-2','camera-3'],chip:['chip-1'],battery:['battery-1'],price:['price-1']};
+  const renderCompareSlide = (slide, key) => { const group=Object.keys(groups).find(name=>groups[name].includes(key)); const items=featureData[key]; slide.innerHTML=`<div class="design-compare-cards">${items.map((item,index)=>`<div class="compare-product"><article class="design-compare-card${index===0?' is-current':''}" data-compare-card="${index}">${item[0]?`<img src="assets/sc-03/compare/${item[0]}" alt="${item[1]} ${group}">`:'<div class="compare-no-media" aria-hidden="true"></div>'}<div class="compare-card-copy">${index===0?'<span class="compare-current">Currently Viewing</span>':''}<p>${item[2]}</p><strong>${item[3]}</strong></div></article></div>`).join('')}</div>`; };
+  const setActiveTab = key => { const group=Object.keys(groups).find(name=>groups[name].includes(key)); compareTabs.forEach(tab=>tab.setAttribute('aria-selected',String(tab.dataset.compareTab===group))); };
+  const goToSlide = (index, behavior='smooth') => { const safe=Math.max(0,Math.min(sequence.length-1,index)); compareViewport?.scrollTo({left:compareSlides[safe].offsetLeft,behavior}); setActiveTab(sequence[safe]); const status=document.querySelector('#sc-03 .compare-inner-status'); if(status) status.textContent=`${safe+1} / ${sequence.length}`; };
+  compareViewport?.addEventListener('scroll', () => { const left=compareViewport.scrollLeft; let nearest=0; compareSlides.forEach((slide,index)=>{ if(Math.abs(slide.offsetLeft-left)<Math.abs(compareSlides[nearest].offsetLeft-left)) nearest=index; }); setActiveTab(sequence[nearest]); });
   const openCompare = () => { if (!compareModal) return; compareModal.hidden = false; document.body.style.overflow = 'hidden'; compareClose?.focus(); };
   const closeCompare = () => { if (!compareModal) return; compareModal.hidden = true; document.body.style.overflow = ''; compareTrigger?.focus(); };
   compareTrigger?.addEventListener('click', openCompare);
@@ -149,11 +133,9 @@
   compareModal?.addEventListener('click', event => { if (event.target === compareModal) closeCompare(); });
   compareModal?.addEventListener('keydown', event => { if (event.key === 'Escape') closeCompare(); });
   compareSlides.forEach(slide => renderCompareSlide(slide, slide.dataset.compareSlide));
-  selectFeatureState('design', 0);
-  compareTabs.forEach((tab,index) => tab.addEventListener('click', () => selectCompareTab(index)));
-  const currentCompareIndex = () => compareTabs.findIndex(item=>item.getAttribute('aria-selected')==='true');
-  document.querySelector('#sc-03 .design-compare-outer-prev')?.addEventListener('click', () => selectCompareTab(currentCompareIndex()-1));
-  document.querySelector('#sc-03 .design-compare-outer-next')?.addEventListener('click', () => selectCompareTab(currentCompareIndex()+1));
-  document.querySelector('#sc-03 .compare-tab-paddle[aria-label="Previous feature"]')?.addEventListener('click', () => selectCompareTab(currentCompareIndex()-1));
-  document.querySelector('#sc-03 .compare-tab-paddle[aria-label="Next feature"]')?.addEventListener('click', () => selectCompareTab(currentCompareIndex()+1));
+  compareTabs.forEach(tab => tab.addEventListener('click', () => goToSlide(sequence.indexOf(groups[tab.dataset.compareTab][0]))));
+  document.querySelector('#sc-03 .design-compare-gallery-prev')?.addEventListener('click', () => goToSlide(Math.round(compareViewport.scrollLeft / (compareSlides[0].offsetWidth + 18))-1));
+  document.querySelector('#sc-03 .design-compare-gallery-next')?.addEventListener('click', () => goToSlide(Math.round(compareViewport.scrollLeft / (compareSlides[0].offsetWidth + 18))+1));
+  document.querySelector('#sc-03 .compare-tab-paddle[aria-label="Previous feature"]')?.addEventListener('click', () => goToSlide(Math.max(0,sequence.indexOf(compareSlides.find(s=>s.getBoundingClientRect().left>=compareViewport.getBoundingClientRect().left)?.dataset.compareSlide)-1)));
+  document.querySelector('#sc-03 .compare-tab-paddle[aria-label="Next feature"]')?.addEventListener('click', () => goToSlide(Math.min(sequence.length-1,sequence.indexOf(compareSlides.find(s=>s.getBoundingClientRect().left>=compareViewport.getBoundingClientRect().left)?.dataset.compareSlide)+1)));
 })();

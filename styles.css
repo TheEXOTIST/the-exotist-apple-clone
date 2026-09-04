@@ -75,5 +75,18 @@
 #sc-03 .compare-tab-icon{font-size:19px;line-height:1}
 #sc-03 .compare-tab-paddle{min-width:28px!important;width:28px;height:60px!important;font-size:22px!important}
 #sc-03 .design-compare-surface::after{content:none}
+#sc-03 .compare-gallery-and-controller-wrapper{position:relative}
+#sc-03 .product-names-overlay{display:grid;grid-template-columns:366px 366px 366px;gap:18px;margin:0 16px 6px;width:max-content;position:relative;z-index:2;pointer-events:none}
+#sc-03 .product-names-overlay h4{margin:0;font-size:17px;line-height:1.15;text-align:left;white-space:nowrap}
+#sc-03 .product-names-overlay div{display:flex;align-items:baseline;gap:6px}
+#sc-03 .product-names-overlay div span{font-size:11px;color:#a66b45;white-space:nowrap}
+#sc-03 .design-compare-feature-track{gap:18px}
+#sc-03 .design-compare-feature-slide{flex-basis:366px}
+#sc-03 .design-compare-cards{gap:12px}
+#sc-03 .design-compare-paddlenav{display:flex;align-items:center;justify-content:center;gap:16px;height:34px;margin-top:4px;color:#6e6e73;font-size:12px}
+#sc-03 .design-compare-paddlenav button{width:24px;height:24px;border:0;border-radius:50%;background:#e8e8ed;color:#1d1d1f;font-size:18px;line-height:1;cursor:pointer}
+#sc-03 .design-compare-arrow{display:none}
+#sc-03 .design-compare-gallery{margin-top:0}
+#sc-03 .design-compare-tabs{margin-top:10px}
 @media(max-width:700px){#sc-03 .design-copy{width:100%;max-width:none}#sc-03 .design-copy h2{font-size:52px}#sc-03 .design-copy .supporting-copy{width:100%;max-width:100%}#sc-03 .design-media{width:100%}#sc-03 .design-compare{margin-top:32px}#sc-03 .design-compare-surface{width:calc(100vw - 28px);height:calc(100vh - 40px);min-height:calc(100vh - 40px);padding-left:12px;padding-right:12px}#sc-03 .design-compare-tabs{margin-left:-12px;margin-right:-12px}#sc-03 .design-compare-tabs button{min-width:54px;padding-left:3px;padding-right:3px}#sc-03 .design-compare-feature-slide{flex-basis:100%}}
 @media(max-width:700px){#sc-02 .section-heading{display:block;padding-top:78px}#sc-02 .section-heading h2{max-width:310px;font-size:46px;line-height:.96}#sc-02 .highlights-film-trigger{margin-top:30px}#sc-02 .highlight-stage{margin-top:42px;padding-bottom:72px}#sc-02 .highlights-gallery{width:calc(100vw - 44px);margin-left:22px}#sc-02 .highlights-track{gap:14px;padding-right:0}#sc-02 .highlight-card{flex-basis:calc(100vw - 44px);aspect-ratio:3/4;border-radius:22px}#sc-02 .highlight-card-caption{max-width:78%;font-size:20px}#sc-02 .highlight-card-design .highlight-card-caption,#sc-02 .highlight-card-center-stage .highlight-card-caption,#sc-02 .highlight-card-ios .highlight-card-caption{top:28px}#sc-02 .highlight-card-chip .highlight-card-caption{bottom:28px}#sc-02 .highlight-card-camera .highlight-card-caption,#sc-02 .highlight-card-intelligence .highlight-card-caption{left:28px}#sc-02 .highlight-gallery-controls{bottom:14px}#sc-02 .highlights-film-close{top:18px;right:18px}}
