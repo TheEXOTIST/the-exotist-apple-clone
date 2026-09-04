@@ -97,13 +97,13 @@
   #sc-03 .product-names-overlay h4{margin:0;font-size:17px;line-height:20px;white-space:nowrap}
   #sc-03 .product-names-overlay .product-name span{font-size:11px;line-height:20px;color:#a66b45;white-space:nowrap}
   #sc-03 .design-compare-gallery{margin:0}
-  #sc-03 .design-compare-feature-viewport{box-sizing:border-box;padding:22px 70px 0 20px;overflow-x:auto;overflow-y:hidden}
+  #sc-03 .design-compare-feature-viewport{box-sizing:border-box;padding:22px 70px 60px 20px;overflow-x:auto;overflow-y:hidden}
   #sc-03 .design-compare-feature-track{gap:10px}
   #sc-03 .design-compare-feature-slide{flex:0 0 390px;width:390px}
   #sc-03 .design-compare-cards{gap:45px}
   #sc-03 .design-compare-card{min-height:140px;border-radius:10px}
-  #sc-03 .design-compare-paddlenav{margin-top:10px}
-  #sc-03 .design-compare-paddlenav button{position:relative;z-index:5}
+  #sc-03 .design-compare-paddlenav{position:sticky;bottom:92px;z-index:6;display:flex;align-items:center;justify-content:center;gap:18px;height:60px;margin-top:-60px;pointer-events:none}
+  #sc-03 .design-compare-paddlenav button{position:relative;z-index:5;flex:0 0 24px;width:24px;height:24px;padding:0;border:0;border-radius:50%;background:#e8e8ed;color:#1d1d1f;font-size:18px;line-height:1;cursor:pointer;pointer-events:auto}
   #sc-03 .compare-zoom-card{display:block;min-height:140px}
   #sc-03 .compare-zoom-card .compare-card-copy{padding:20px 20px 14px}
   #sc-03 .compare-zoom-card p{margin:0 0 8px;font-size:17px;line-height:1.15;font-weight:600;color:#1d1d1f}

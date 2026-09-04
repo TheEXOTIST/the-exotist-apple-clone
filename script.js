@@ -133,7 +133,7 @@
     }).join('')}</div>`;
   };
   const setActiveTab = key => { const group=Object.keys(groups).find(name=>groups[name].includes(key)); compareTabs.forEach(tab=>tab.setAttribute('aria-selected',String(tab.dataset.compareTab===group))); };
-  const goToSlide = (index, behavior='smooth') => { const safe=Math.max(0,Math.min(sequence.length-1,index)); compareViewport?.scrollTo({left:compareSlides[safe].offsetLeft,behavior}); setActiveTab(sequence[safe]); const status=document.querySelector('#sc-03 .compare-inner-status'); if(status) status.textContent=`${safe+1} / ${sequence.length}`; };
+  const goToSlide = (index, behavior='smooth') => { const safe=Math.max(0,Math.min(sequence.length-1,index)); compareViewport?.scrollTo({left:compareSlides[safe].offsetLeft,behavior}); setActiveTab(sequence[safe]); };
   compareViewport?.addEventListener('scroll', () => { const left=compareViewport.scrollLeft; let nearest=0; compareSlides.forEach((slide,index)=>{ if(Math.abs(slide.offsetLeft-left)<Math.abs(compareSlides[nearest].offsetLeft-left)) nearest=index; }); setActiveTab(sequence[nearest]); });
   const openCompare = () => { if (!compareModal) return; compareModal.hidden = false; document.body.style.overflow = 'hidden'; compareClose?.focus(); };
   const closeCompare = () => { if (!compareModal) return; compareModal.hidden = true; document.body.style.overflow = ''; compareTrigger?.focus(); };
