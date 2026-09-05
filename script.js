@@ -191,6 +191,7 @@
     const mediaLayers = [...viewer.querySelectorAll('[data-feature-media]')];
     const colorName = viewer.querySelector('[data-current-color]');
     const colorCopy = viewer.querySelector('[data-current-color-copy]');
+    const activeColorSwatch = viewer.querySelector('[data-active-color-swatch]');
     const prev = viewer.querySelector('[data-viewer-global-prev]');
     const next = viewer.querySelector('[data-viewer-global-next]');
     let activeIndex = 0;
@@ -230,7 +231,7 @@
     viewer.querySelectorAll('.viewer-local-prev').forEach(button=>button.addEventListener('click',()=>render(activeIndex-1)));
     viewer.querySelectorAll('.viewer-local-next').forEach(button=>button.addEventListener('click',()=>render(activeIndex+1)));
     prev?.addEventListener('click',()=>render(activeIndex-1)); next?.addEventListener('click',()=>render(activeIndex+1));
-    viewer.querySelectorAll('.color-swatch').forEach(button=>button.addEventListener('click',()=>{ const color=button.dataset.color; if(image){image.dataset.color=color; image.src=media.colors[color];} if(colorName) colorName.textContent=colorLabels[color]; if(colorCopy) colorCopy.textContent=colorLabels[color]; viewer.querySelectorAll('.color-swatch').forEach(item=>item.classList.toggle('is-active',item===button)); }));
+    viewer.querySelectorAll('.color-swatch').forEach(button=>button.addEventListener('click',()=>{ const color=button.dataset.color; if(image){image.dataset.color=color; image.src=media.colors[color];} if(colorName) colorName.textContent=colorLabels[color]; if(colorCopy) colorCopy.textContent=colorLabels[color]; if(activeColorSwatch){activeColorSwatch.style.background= getComputedStyle(button).backgroundColor; activeColorSwatch.setAttribute('aria-label',colorLabels[color]);} viewer.querySelectorAll('.color-swatch').forEach(item=>item.classList.toggle('is-active',item===button)); }));
     viewer.querySelector('.product-viewer-close')?.addEventListener('click',setLanding);
     addEventListener('keydown',event=>{if(event.key==='Escape') setLanding();});
     setLanding();
