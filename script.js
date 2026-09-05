@@ -153,17 +153,18 @@
   if (viewer) {
     const featureNames = ['colors','aluminum','vapor','ceramic','display','camera-control','action-button'];
     const media = {
-      colors: { orange:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/colors_orange__cr2oq3n1dwk2_large.jpg', blue:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/colors_blue__li170wg4gkae_large.jpg', silver:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/colors_silver__eb8fu7zfvwmu_large.jpg' },
-      aluminum:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/unibody__beiiszaqty3m_large.jpg',
-      vapor:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/vapor_chamber__ghepoq1a90a6_large.jpg',
-      ceramic:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/ceramic_shield__cv0z40rccqy6_large.jpg',
-      display:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/pro_display__bvu4xbhsdpf6_large.jpg',
-      'camera-control':'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/camera_control__gl7rgu1l9066_large.jpg',
-      'action-button':'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/action_button__efiof6bf182u_large.jpg'
+      colors: { orange:'assets/sc-04/colors_orange__cr2oq3n1dwk2_large.jpg', blue:'assets/sc-04/colors_blue__li170wg4gkae_large.jpg', silver:'assets/sc-04/colors_silver__eb8fu7zfvwmu_large.jpg' },
+      aluminum:'assets/sc-04/unibody__beiiszaqty3m_large.jpg',
+      vapor:'assets/sc-04/vapor_chamber__ghepoq1a90a6_large.jpg',
+      ceramic:'assets/sc-04/ceramic_shield__cv0z40rccqy6_large.jpg',
+      display:'assets/sc-04/pro_display__bvu4xbhsdpf6_large.jpg',
+      'camera-control':'assets/sc-04/camera_control__gl7rgu1l9066_large.jpg',
+      'action-button':'assets/sc-04/action_button__efiof6bf182u_large.jpg'
     };
     const controls = [...viewer.querySelectorAll('.product-viewer-control')];
     const panels = [...viewer.querySelectorAll('[data-feature-content]')];
     const image = viewer.querySelector('[data-color-media]');
+    const mediaLayers = [...viewer.querySelectorAll('[data-feature-media]')];
     const colorName = viewer.querySelector('[data-current-color]');
     const colorCopy = viewer.querySelector('[data-current-color-copy]');
     const prev = viewer.querySelector('[data-viewer-global-prev]');
@@ -176,7 +177,8 @@
       controls.forEach(button => { const on=button.dataset.feature===key; button.classList.toggle('is-active',on); button.setAttribute('aria-expanded',String(on)); button.setAttribute('aria-selected',String(on)); });
       panels.forEach(panel => { const on=panel.dataset.featureContent===key; panel.hidden=!on; panel.classList.toggle('is-active',on); });
       const selected = key === 'colors' ? (image?.dataset.color || 'orange') : null;
-      if (image) image.src = key === 'colors' ? media.colors[selected] : media[key];
+      mediaLayers.forEach(layer => { const on=layer.dataset.featureMedia===key; layer.hidden=!on; layer.classList.toggle('is-active',on); layer.querySelectorAll('video').forEach(video=>{ if(on) video.play().catch(()=>{}); else { video.pause(); video.currentTime=0; } }); });
+      if (image && key === 'colors') image.src = media.colors[selected];
       if (colorName && key === 'colors') colorName.textContent = colorLabels[selected];
       if (prev) prev.disabled = activeIndex === 0;
       if (next) next.disabled = activeIndex === featureNames.length - 1;
