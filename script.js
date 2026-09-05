@@ -245,7 +245,7 @@
       const heroObserver = new IntersectionObserver(entries => entries.forEach(entry => {
         if (entry.isIntersecting) heroVideo.play().catch(() => {});
         else heroVideo.pause();
-      }), { rootMargin: '100vh 0px 0px' });
+      }), { rootMargin: '1000px 0px 0px' });
       heroObserver.observe(heroVideo);
     }
     const gallery = cameraSection.querySelector('[data-zoom-gallery]');
