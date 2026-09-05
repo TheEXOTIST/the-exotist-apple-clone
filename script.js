@@ -161,6 +161,30 @@
       'camera-control':'assets/sc-04/camera_control__gl7rgu1l9066_large.jpg',
       'action-button':'assets/sc-04/action_button__efiof6bf182u_large.jpg'
     };
+    const controlsSource = viewer.querySelector('.controls');
+    const panelsSource = viewer.querySelector('.product-viewer-panels');
+    if (controlsSource && panelsSource) {
+      const sourceButtons = [...controlsSource.querySelectorAll('.product-viewer-control')];
+      const sourcePanels = [...panelsSource.querySelectorAll('[data-feature-content]')];
+      const controlGroup = document.createElement('ul');
+      controlGroup.className = 'control-group';
+      controlGroup.setAttribute('role', 'tablist');
+      controlGroup.setAttribute('aria-label', 'Product viewer controls');
+      sourceButtons.forEach(button => {
+        const item = document.createElement('li');
+        item.className = 'control-item';
+        item.dataset.featureItem = button.dataset.feature;
+        item.append(button);
+        const panel = sourcePanels.find(candidate => candidate.dataset.featureContent === button.dataset.feature);
+        if (panel) item.append(panel);
+        controlGroup.append(item);
+      });
+      controlsSource.replaceWith(controlGroup);
+      panelsSource.remove();
+    }
+    const closeButton = viewer.querySelector('.product-viewer-close');
+    const component = viewer.querySelector('.product-viewer-component');
+    if (closeButton && component) component.append(closeButton);
     const controls = [...viewer.querySelectorAll('.product-viewer-control')];
     const panels = [...viewer.querySelectorAll('[data-feature-content]')];
     const image = viewer.querySelector('[data-color-media]');
@@ -175,9 +199,11 @@
     const setLanding = () => {
       controls.forEach(button => { button.classList.remove('is-active'); button.setAttribute('aria-expanded','false'); button.setAttribute('aria-selected','false'); });
       panels.forEach(panel => { panel.hidden = true; panel.classList.remove('is-active'); });
+      viewer.querySelectorAll('.control-item').forEach(item => item.classList.remove('is-expanded'));
       mediaLayers.forEach(layer => { layer.hidden = true; layer.classList.remove('is-active'); layer.querySelectorAll('video').forEach(video => { video.pause(); video.currentTime = 0; }); });
       if (landing) { landing.hidden = false; landing.classList.add('is-active'); }
       if (colorName) colorName.hidden = true;
+      if (closeButton) closeButton.hidden = true;
       if (prev) prev.disabled = true;
       if (next) next.disabled = true;
       viewer.querySelectorAll('.viewer-local-prev,.viewer-local-next').forEach(button => { button.disabled = true; });
@@ -187,10 +213,12 @@
       const key = featureNames[activeIndex];
       controls.forEach(button => { const on=button.dataset.feature===key; button.classList.toggle('is-active',on); button.setAttribute('aria-expanded',String(on)); button.setAttribute('aria-selected',String(on)); });
       panels.forEach(panel => { const on=panel.dataset.featureContent===key; panel.hidden=!on; panel.classList.toggle('is-active',on); });
+      viewer.querySelectorAll('.control-item').forEach(item => item.classList.toggle('is-expanded',item.dataset.featureItem===key));
       const selected = key === 'colors' ? (image?.dataset.color || 'orange') : null;
       mediaLayers.forEach(layer => { const on=layer.dataset.featureMedia===key; layer.hidden=!on; layer.classList.toggle('is-active',on); layer.querySelectorAll('video').forEach(video=>{ if(on) video.play().catch(()=>{}); else { video.pause(); video.currentTime=0; } }); });
       if (landing) { landing.hidden = true; landing.classList.remove('is-active'); }
       if (colorName) colorName.hidden = key !== 'colors';
+      if (closeButton) closeButton.hidden = false;
       if (image && key === 'colors') image.src = media.colors[selected];
       if (colorName && key === 'colors') colorName.textContent = colorLabels[selected];
       if (prev) prev.disabled = activeIndex === 0;
