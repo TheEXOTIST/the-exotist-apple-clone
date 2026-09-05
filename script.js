@@ -171,6 +171,17 @@
     const next = viewer.querySelector('[data-viewer-global-next]');
     let activeIndex = 0;
     const colorLabels = {orange:'Cosmic Orange',blue:'Deep Blue',silver:'Silver'};
+    const landing = viewer.querySelector('[data-landing-media]');
+    const setLanding = () => {
+      controls.forEach(button => { button.classList.remove('is-active'); button.setAttribute('aria-expanded','false'); button.setAttribute('aria-selected','false'); });
+      panels.forEach(panel => { panel.hidden = true; panel.classList.remove('is-active'); });
+      mediaLayers.forEach(layer => { layer.hidden = true; layer.classList.remove('is-active'); layer.querySelectorAll('video').forEach(video => { video.pause(); video.currentTime = 0; }); });
+      if (landing) { landing.hidden = false; landing.classList.add('is-active'); }
+      if (colorName) colorName.hidden = true;
+      if (prev) prev.disabled = true;
+      if (next) next.disabled = true;
+      viewer.querySelectorAll('.viewer-local-prev,.viewer-local-next').forEach(button => { button.disabled = true; });
+    };
     const render = index => {
       activeIndex = Math.max(0, Math.min(featureNames.length - 1, index));
       const key = featureNames[activeIndex];
@@ -178,6 +189,8 @@
       panels.forEach(panel => { const on=panel.dataset.featureContent===key; panel.hidden=!on; panel.classList.toggle('is-active',on); });
       const selected = key === 'colors' ? (image?.dataset.color || 'orange') : null;
       mediaLayers.forEach(layer => { const on=layer.dataset.featureMedia===key; layer.hidden=!on; layer.classList.toggle('is-active',on); layer.querySelectorAll('video').forEach(video=>{ if(on) video.play().catch(()=>{}); else { video.pause(); video.currentTime=0; } }); });
+      if (landing) { landing.hidden = true; landing.classList.remove('is-active'); }
+      if (colorName) colorName.hidden = key !== 'colors';
       if (image && key === 'colors') image.src = media.colors[selected];
       if (colorName && key === 'colors') colorName.textContent = colorLabels[selected];
       if (prev) prev.disabled = activeIndex === 0;
@@ -190,8 +203,8 @@
     viewer.querySelectorAll('.viewer-local-next').forEach(button=>button.addEventListener('click',()=>render(activeIndex+1)));
     prev?.addEventListener('click',()=>render(activeIndex-1)); next?.addEventListener('click',()=>render(activeIndex+1));
     viewer.querySelectorAll('.color-swatch').forEach(button=>button.addEventListener('click',()=>{ const color=button.dataset.color; if(image){image.dataset.color=color; image.src=media.colors[color];} if(colorName) colorName.textContent=colorLabels[color]; if(colorCopy) colorCopy.textContent=colorLabels[color]; viewer.querySelectorAll('.color-swatch').forEach(item=>item.classList.toggle('is-active',item===button)); }));
-    viewer.querySelector('.product-viewer-close')?.addEventListener('click',()=>render(0));
-    addEventListener('keydown',event=>{if(event.key==='Escape') render(0);});
-    render(0);
+    viewer.querySelector('.product-viewer-close')?.addEventListener('click',setLanding);
+    addEventListener('keydown',event=>{if(event.key==='Escape') setLanding();});
+    setLanding();
   }
 })();
