@@ -147,4 +147,49 @@
   document.querySelector('#sc-03 .design-compare-gallery-next')?.addEventListener('click', () => goToSlide(Math.round(compareViewport.scrollLeft / (compareSlides[0].offsetWidth + 18))+1));
   document.querySelector('#sc-03 .compare-tab-paddle[aria-label="Previous feature"]')?.addEventListener('click', () => goToSlide(Math.max(0,sequence.indexOf(compareSlides.find(s=>s.getBoundingClientRect().left>=compareViewport.getBoundingClientRect().left)?.dataset.compareSlide)-1)));
   document.querySelector('#sc-03 .compare-tab-paddle[aria-label="Next feature"]')?.addEventListener('click', () => goToSlide(Math.min(sequence.length-1,sequence.indexOf(compareSlides.find(s=>s.getBoundingClientRect().left>=compareViewport.getBoundingClientRect().left)?.dataset.compareSlide)+1)));
+
+  // SC-04: one active Apple product-viewer feature, with independent local/global navigation.
+  const viewer = document.querySelector('#sc-04 [data-product-viewer]');
+  if (viewer) {
+    const featureNames = ['colors','aluminum','vapor','ceramic','display','camera-control','action-button'];
+    const media = {
+      colors: { orange:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/colors_orange__cr2oq3n1dwk2_large.jpg', blue:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/colors_blue__li170wg4gkae_large.jpg', silver:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/colors_silver__eb8fu7zfvwmu_large.jpg' },
+      aluminum:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/unibody__beiiszaqty3m_large.jpg',
+      vapor:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/vapor_chamber__ghepoq1a90a6_large.jpg',
+      ceramic:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/ceramic_shield__cv0z40rccqy6_large.jpg',
+      display:'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/pro_display__bvu4xbhsdpf6_large.jpg',
+      'camera-control':'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/camera_control__gl7rgu1l9066_large.jpg',
+      'action-button':'https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/action_button__efiof6bf182u_large.jpg'
+    };
+    const controls = [...viewer.querySelectorAll('.product-viewer-control')];
+    const panels = [...viewer.querySelectorAll('[data-feature-content]')];
+    const image = viewer.querySelector('[data-color-media]');
+    const colorName = viewer.querySelector('[data-current-color]');
+    const colorCopy = viewer.querySelector('[data-current-color-copy]');
+    const prev = viewer.querySelector('[data-viewer-global-prev]');
+    const next = viewer.querySelector('[data-viewer-global-next]');
+    let activeIndex = 0;
+    const colorLabels = {orange:'Cosmic Orange',blue:'Deep Blue',silver:'Silver'};
+    const render = index => {
+      activeIndex = Math.max(0, Math.min(featureNames.length - 1, index));
+      const key = featureNames[activeIndex];
+      controls.forEach(button => { const on=button.dataset.feature===key; button.classList.toggle('is-active',on); button.setAttribute('aria-expanded',String(on)); button.setAttribute('aria-selected',String(on)); });
+      panels.forEach(panel => { const on=panel.dataset.featureContent===key; panel.hidden=!on; panel.classList.toggle('is-active',on); });
+      const selected = key === 'colors' ? (image?.dataset.color || 'orange') : null;
+      if (image) image.src = key === 'colors' ? media.colors[selected] : media[key];
+      if (colorName && key === 'colors') colorName.textContent = colorLabels[selected];
+      if (prev) prev.disabled = activeIndex === 0;
+      if (next) next.disabled = activeIndex === featureNames.length - 1;
+      viewer.querySelectorAll('.viewer-local-prev').forEach(button=>button.disabled=activeIndex===0);
+      viewer.querySelectorAll('.viewer-local-next').forEach(button=>button.disabled=activeIndex===featureNames.length-1);
+    };
+    controls.forEach(button=>button.addEventListener('click',()=>render(featureNames.indexOf(button.dataset.feature))));
+    viewer.querySelectorAll('.viewer-local-prev').forEach(button=>button.addEventListener('click',()=>render(activeIndex-1)));
+    viewer.querySelectorAll('.viewer-local-next').forEach(button=>button.addEventListener('click',()=>render(activeIndex+1)));
+    prev?.addEventListener('click',()=>render(activeIndex-1)); next?.addEventListener('click',()=>render(activeIndex+1));
+    viewer.querySelectorAll('.color-swatch').forEach(button=>button.addEventListener('click',()=>{ const color=button.dataset.color; if(image){image.dataset.color=color; image.src=media.colors[color];} if(colorName) colorName.textContent=colorLabels[color]; if(colorCopy) colorCopy.textContent=colorLabels[color]; viewer.querySelectorAll('.color-swatch').forEach(item=>item.classList.toggle('is-active',item===button)); }));
+    viewer.querySelector('.product-viewer-close')?.addEventListener('click',()=>render(0));
+    addEventListener('keydown',event=>{if(event.key==='Escape') render(0);});
+    render(0);
+  }
 })();

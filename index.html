@@ -134,12 +134,36 @@
       </div>
     </section>
 
-    <section id="sc-04" class="scene scene-closer" data-scene="SC-04">
-      <div class="scene-inner">
-        <div class="section-heading"><p class="eyebrow">SC-04 · Take a Closer Look</p><h2>Take a closer look.</h2></div>
-        <div class="viewer-layout">
-          <div class="media-surface viewer-media" data-scrub><span>PRODUCT VIEWER</span></div>
-          <div class="control-stack" role="tablist" aria-label="Product viewer controls"><button class="viewer-control is-active" role="tab" aria-selected="true">Finish</button><button class="viewer-control" role="tab" aria-selected="false">Structure</button><button class="viewer-control" role="tab" aria-selected="false">Shield</button><button class="viewer-control" role="tab" aria-selected="false">Display</button><button class="viewer-control" role="tab" aria-selected="false">Camera</button></div>
+    <section id="sc-04" class="scene scene-product-viewer" data-scene="SC-04">
+      <div class="product-viewer-shell" data-product-viewer>
+        <header class="product-viewer-header"><h2>Take a closer look.</h2></header>
+        <div class="product-viewer-component">
+          <div class="product-viewer-stage" aria-live="polite">
+            <div class="product-viewer-media" data-feature-media="colors"><img data-color-media src="https://www.apple.com/v/iphone-17-pro/h/images/overview/product-viewer/colors_orange__cr2oq3n1dwk2_large.jpg" alt="iPhone 17 Pro in Cosmic Orange"></div>
+            <p class="product-viewer-state" data-current-color>Cosmic Orange</p>
+          </div>
+          <div class="all-access-pass--product-viewer">
+            <div class="controls" role="tablist" aria-label="Product viewer controls">
+              <button class="product-viewer-control is-active" type="button" role="tab" aria-expanded="true" aria-selected="true" data-feature="colors"><span class="viewer-control-icon">●</span><span>Colors</span></button>
+              <button class="product-viewer-control" type="button" role="tab" aria-expanded="false" aria-selected="false" data-feature="aluminum"><span class="viewer-control-icon">◒</span><span>Aluminum unibody</span></button>
+              <button class="product-viewer-control" type="button" role="tab" aria-expanded="false" aria-selected="false" data-feature="vapor"><span class="viewer-control-icon">◌</span><span>Vapor chamber</span></button>
+              <button class="product-viewer-control" type="button" role="tab" aria-expanded="false" aria-selected="false" data-feature="ceramic"><span class="viewer-control-icon">◇</span><span>Ceramic Shield</span></button>
+              <button class="product-viewer-control" type="button" role="tab" aria-expanded="false" aria-selected="false" data-feature="display"><span class="viewer-control-icon">▣</span><span>Immersive pro display</span></button>
+              <button class="product-viewer-control" type="button" role="tab" aria-expanded="false" aria-selected="false" data-feature="camera-control"><span class="viewer-control-icon">◎</span><span>Camera Control</span></button>
+              <button class="product-viewer-control" type="button" role="tab" aria-expanded="false" aria-selected="false" data-feature="action-button"><span class="viewer-control-icon">●</span><span>Action button</span></button>
+            </div>
+            <div class="product-viewer-panels">
+              <article class="control-item-content is-active" data-feature-content="colors"><h3>Colors</h3><p>Colors. Choose from three bold finishes. iPhone 17 Pro shown in <strong data-current-color-copy>Cosmic Orange</strong>.</p><div class="color-swatches" role="group" aria-label="Choose a finish"><button type="button" class="color-swatch is-active" data-color="orange" aria-label="Cosmic Orange"></button><button type="button" class="color-swatch blue" data-color="blue" aria-label="Deep Blue"></button><button type="button" class="color-swatch silver" data-color="silver" aria-label="Silver"></button></div><div class="viewer-local-nav"><button type="button" class="viewer-local-prev" aria-label="Previous feature item in product viewer" disabled>‹</button><button type="button" class="viewer-local-next" aria-label="Next feature item in product viewer">›</button></div></article>
+              <article class="control-item-content" data-feature-content="aluminum" hidden><h3>Aluminum unibody</h3><p>Aluminum unibody. Optimized for performance and battery. Aluminum alloy is remarkably light and has exceptional thermal conductivity.</p><div class="viewer-local-nav"><button type="button" class="viewer-local-prev" aria-label="Previous feature item in product viewer">‹</button><button type="button" class="viewer-local-next" aria-label="Next feature item in product viewer">›</button></div></article>
+              <article class="control-item-content" data-feature-content="vapor" hidden><h3>Vapor chamber</h3><p>Vapor chamber. Deionized water sealed inside moves heat away from the A19 Pro chip, allowing for even higher sustained performance.</p><div class="viewer-local-nav"><button type="button" class="viewer-local-prev" aria-label="Previous feature item in product viewer">‹</button><button type="button" class="viewer-local-next" aria-label="Next feature item in product viewer">›</button></div></article>
+              <article class="control-item-content" data-feature-content="ceramic" hidden><h3>Ceramic Shield</h3><p>Ceramic Shield. Protects the back of iPhone 17 Pro, making it 4x more resistant to cracks. New Ceramic Shield 2 on the front has 3x better scratch resistance.</p><div class="viewer-local-nav"><button type="button" class="viewer-local-prev" aria-label="Previous feature item in product viewer">‹</button><button type="button" class="viewer-local-next" aria-label="Next feature item in product viewer">›</button></div></article>
+              <article class="control-item-content" data-feature-content="display" hidden><h3>Immersive pro display</h3><p>Immersive pro display. Our best-ever 6.3-inch and 6.9-inch Super Retina XDR displays. Brighter. Better anti-reflection. ProMotion up to 120Hz.</p><div class="viewer-local-nav"><button type="button" class="viewer-local-prev" aria-label="Previous feature item in product viewer">‹</button><button type="button" class="viewer-local-next" aria-label="Next feature item in product viewer">›</button></div></article>
+              <article class="control-item-content" data-feature-content="camera-control" hidden><h3>Camera Control</h3><p>Camera Control. Instantly take a photo, record video, adjust settings, and more. So you never miss a moment.</p><div class="viewer-local-nav"><button type="button" class="viewer-local-prev" aria-label="Previous feature item in product viewer">‹</button><button type="button" class="viewer-local-next" aria-label="Next feature item in product viewer">›</button></div></article>
+              <article class="control-item-content" data-feature-content="action-button" hidden><h3>Action button</h3><p>Action button. A customizable fast track to your favorite feature. Long press to launch the action you want — Silent mode, Translation, Shortcuts, and more.</p><div class="viewer-local-nav"><button type="button" class="viewer-local-prev" aria-label="Previous feature item in product viewer">‹</button><button type="button" class="viewer-local-next" aria-label="Next feature item in product viewer" disabled>›</button></div></article>
+            </div>
+            <div class="paddlenav-container"><button type="button" data-viewer-global-prev aria-label="Previous feature item in product viewer" disabled>⌃</button><button type="button" data-viewer-global-next aria-label="Next feature item in product viewer">⌄</button></div>
+            <button type="button" class="product-viewer-close" aria-label="Close">×</button>
+          </div>
         </div>
       </div>
     </section>
