@@ -155,3 +155,31 @@
 }
 @media(max-width:700px){#sc-03 .design-copy{width:100%;max-width:none}#sc-03 .design-copy h2{font-size:52px}#sc-03 .design-copy .supporting-copy{width:100%;max-width:100%}#sc-03 .design-media{width:100%}#sc-03 .design-compare{margin-top:32px}#sc-03 .design-compare-surface{width:calc(100vw - 28px);height:calc(100vh - 40px);min-height:calc(100vh - 40px);padding-left:12px;padding-right:12px}#sc-03 .design-compare-tabs{margin-left:-12px;margin-right:-12px}#sc-03 .design-compare-tabs button{min-width:54px;padding-left:3px;padding-right:3px}#sc-03 .design-compare-feature-slide{flex-basis:100%}}
 @media(max-width:700px){#sc-02 .section-heading{display:block;padding-top:78px}#sc-02 .section-heading h2{max-width:310px;font-size:46px;line-height:.96}#sc-02 .highlights-film-trigger{margin-top:30px}#sc-02 .highlight-stage{margin-top:42px;padding-bottom:72px}#sc-02 .highlights-gallery{width:calc(100vw - 44px);margin-left:22px}#sc-02 .highlights-track{gap:14px;padding-right:0}#sc-02 .highlight-card{flex-basis:calc(100vw - 44px);aspect-ratio:3/4;border-radius:22px}#sc-02 .highlight-card-caption{max-width:78%;font-size:20px}#sc-02 .highlight-card-design .highlight-card-caption,#sc-02 .highlight-card-center-stage .highlight-card-caption,#sc-02 .highlight-card-ios .highlight-card-caption{top:28px}#sc-02 .highlight-card-chip .highlight-card-caption{bottom:28px}#sc-02 .highlight-card-camera .highlight-card-caption,#sc-02 .highlight-card-intelligence .highlight-card-caption{left:28px}#sc-02 .highlight-gallery-controls{bottom:14px}#sc-02 .highlights-film-close{top:18px;right:18px}}
+
+/* SC-05-R1: Apple camera intro and finite fade gallery. */
+#sc-05{min-height:0;background:#f5f5f7;color:#1d1d1f;padding-bottom:160px}
+#sc-05 .camera-inner{width:min(1200px,calc(100% - 10vw));padding-top:150px}
+#sc-05 .section-heading{text-align:left}
+#sc-05 .section-heading .eyebrow{color:#6e6e73;text-transform:none;font-size:24px;letter-spacing:-.02em;margin-bottom:20px}
+#sc-05 .section-heading h2{font-size:clamp(64px,8vw,112px);color:#1d1d1f;max-width:780px}
+#sc-05 .camera-hero{width:100%;max-width:1240px;aspect-ratio:1240/600;margin:72px auto 0;overflow:hidden;background:#f5f5f7}
+#sc-05 .camera-hero-video{display:block;width:100%;height:100%;object-fit:cover}
+#sc-05 .camera-stats{display:flex;justify-content:space-between;gap:48px;max-width:960px;margin:54px auto 0;font-size:24px;line-height:1.12;letter-spacing:-.03em}
+#sc-05 .camera-stats strong{max-width:300px}
+#sc-05 .camera-intro-copy{max-width:760px;margin:64px auto 0;font-size:21px;line-height:1.28;letter-spacing:-.02em}
+#sc-05 .zoom-gallery{max-width:960px;margin:128px auto 0}
+#sc-05 .zoom-gallery-header{position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:32px}
+#sc-05 .zoom-controls{display:flex;gap:8px;padding:5px;border-radius:999px;background:#e8e8ed;overflow:auto;scrollbar-width:none}
+#sc-05 .zoom-controls::-webkit-scrollbar{display:none}
+#sc-05 .zoom-control{border:0;background:transparent;color:#1d1d1f;border-radius:999px;padding:12px 15px;font:600 15px/1 Arial,Helvetica,sans-serif;cursor:pointer;white-space:nowrap}
+#sc-05 .zoom-control[aria-selected=true]{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+#sc-05 .zoom-prev,#sc-05 .zoom-next{position:absolute;top:50%;width:32px;height:32px;border:0;border-radius:50%;background:#e8e8ed;color:#1d1d1f;font-size:25px;line-height:1;cursor:pointer}
+#sc-05 .zoom-prev{left:-54px}.zoom-next{right:-54px}
+#sc-05 .zoom-media-viewport{position:relative;aspect-ratio:1.3350253807;overflow:hidden;border-radius:24px;background:#111}
+#sc-05 .zoom-media-stack{position:absolute;inset:0}
+#sc-05 .zoom-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease;pointer-events:none}
+#sc-05 .zoom-media.is-active{opacity:1}
+#sc-05 .zoom-caption{text-align:center;margin:28px 0 0;font-size:72px;line-height:1;font-weight:600;letter-spacing:-.06em}
+@media(max-width:700px){
+  #sc-05{padding-bottom:100px}#sc-05 .camera-inner{width:calc(100% - 44px);padding-top:92px}#sc-05 .section-heading .eyebrow{font-size:20px}#sc-05 .section-heading h2{font-size:58px;max-width:330px}#sc-05 .camera-hero{width:calc(100vw - 44px);margin-left:calc((44px - 100vw)/2);margin-top:48px;aspect-ratio:1.3350253807}#sc-05 .camera-stats{display:block;margin-top:34px;font-size:21px}.camera-stats strong{display:block;margin-bottom:12px}#sc-05 .camera-intro-copy{margin-top:42px;font-size:18px}#sc-05 .zoom-gallery{margin-top:84px}#sc-05 .zoom-gallery-header{justify-content:flex-start;margin-bottom:20px}#sc-05 .zoom-controls{max-width:100%;overflow-x:auto}#sc-05 .zoom-control{padding:11px 13px;font-size:14px}#sc-05 .zoom-prev,#sc-05 .zoom-next{display:none}#sc-05 .zoom-media-viewport{border-radius:18px}#sc-05 .zoom-caption{font-size:58px;margin-top:20px}
+}

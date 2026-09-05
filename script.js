@@ -236,4 +236,64 @@
     addEventListener('keydown',event=>{if(event.key==='Escape') setLanding();});
     setLanding();
   }
+
+  // SC-05-R1: finite camera intro and eight-state Apple fade gallery.
+  const cameraSection = document.querySelector('#sc-05');
+  if (cameraSection) {
+    const heroVideo = cameraSection.querySelector('.camera-hero-video');
+    if (heroVideo && 'IntersectionObserver' in window) {
+      const heroObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+        if (entry.isIntersecting) heroVideo.play().catch(() => {});
+        else heroVideo.pause();
+      }), { rootMargin: '100vh 0px 0px' });
+      heroObserver.observe(heroVideo);
+    }
+    const gallery = cameraSection.querySelector('[data-zoom-gallery]');
+    const controls = gallery?.querySelector('.zoom-controls');
+    const stack = gallery?.querySelector('.zoom-media-stack');
+    const caption = gallery?.querySelector('[data-zoom-caption]');
+    const previous = gallery?.querySelector('.zoom-prev');
+    const next = gallery?.querySelector('.zoom-next');
+    const zoomStates = [
+      ['200 mm','8x','200mm__b8j6610sgpma_large_2x.jpg'],
+      ['100 mm','4x','100mm__b0gky74liqb6_large_2x.jpg'],
+      ['48 mm','2x','48mm__bcnb2zqpydr6_large_2x.jpg'],
+      ['35 mm','1.5x','35mm__gcr9ng5exueu_large_2x.jpg'],
+      ['28 mm','1.2x','28mm__gg1nbwfultui_large_2x.jpg'],
+      ['24 mm','1x','24mm__eyyrr19ky7ee_large_2x.jpg'],
+      ['13 mm','.5x','13mm__cn8a4mew7a2q_large_2x.jpg'],
+      ['Macro','Macro','macro__ev0r6s4jrbwy_large_2x.jpg']
+    ];
+    if (gallery && controls && stack) {
+      zoomStates.forEach(([label, value, file], index) => {
+        const tab = document.createElement('button');
+        tab.className = 'zoom-control'; tab.type = 'button'; tab.role = 'tab';
+        tab.dataset.zoomIndex = String(index); tab.setAttribute('aria-selected', String(index === 0)); tab.textContent = label;
+        controls.append(tab);
+        const image = document.createElement('img');
+        image.className = `zoom-media${index === 0 ? ' is-active' : ''}`;
+        image.src = `assets/sc-05/${file}`; image.alt = `Camera focal length ${label}`; image.loading = index === 0 ? 'eager' : 'lazy';
+        stack.append(image);
+      });
+      let current = 0;
+      const renderZoom = index => {
+        current = Math.max(0, Math.min(zoomStates.length - 1, index));
+        [...controls.children].forEach((tab, i) => tab.setAttribute('aria-selected', String(i === current)));
+        [...stack.children].forEach((image, i) => image.classList.toggle('is-active', i === current));
+        if (caption) caption.textContent = zoomStates[current][1];
+        if (previous) previous.disabled = current === 0;
+        if (next) next.disabled = current === zoomStates.length - 1;
+      };
+      [...controls.children].forEach((tab, index) => {
+        tab.addEventListener('click', () => renderZoom(index));
+        tab.addEventListener('keydown', event => {
+          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') { event.preventDefault(); renderZoom(Math.min(current + 1, zoomStates.length - 1)); controls.children[current].focus(); }
+          if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') { event.preventDefault(); renderZoom(Math.max(current - 1, 0)); controls.children[current].focus(); }
+        });
+      });
+      previous?.addEventListener('click', () => renderZoom(current - 1));
+      next?.addEventListener('click', () => renderZoom(current + 1));
+      renderZoom(0);
+    }
+  }
 })();
