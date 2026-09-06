@@ -179,8 +179,19 @@
 #sc-05 .zoom-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease;pointer-events:none}
 #sc-05 .zoom-media.is-active{opacity:1}
 #sc-05 .zoom-caption{text-align:center;margin:0;font-size:24px;line-height:1.2;font-weight:600;letter-spacing:-.02em}
+#sc-05 .lenses-subsection{margin-top:240px}
+#sc-05 .lenses-copy{width:50%;max-width:720px;margin:0 auto;text-align:center}
+#sc-05 .lenses-copy h3{margin:0;font-size:48px;line-height:1.08;letter-spacing:-.045em;font-weight:400}
+#sc-05 .lenses-copy strong{font-weight:600}
+#sc-05 .lenses-media{width:min(1200px,100%);margin:120px auto 0;aspect-ratio:3840/1360;overflow:hidden;background:#000}
+#sc-05 .lenses-media-video{display:block;width:100%;height:100%;object-fit:cover}
+#sc-05 .lens-callouts{width:min(1200px,calc(100% - 10vw));margin:120px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+#sc-05 .lens-callout{border-top:1px solid #424245;padding-top:20px}
+#sc-05 .lens-callout h4{margin:0 0 20px;font-size:21px;line-height:1.2;letter-spacing:-.02em;font-weight:600}
+#sc-05 .lens-callout ul{list-style:none;margin:0;padding:0;color:#a1a1a6;font-size:17px;line-height:1.45}
+#sc-05 .lens-callout li+li{margin-top:8px}
 @media(max-width:700px){
-  #sc-05{padding-bottom:100px}#sc-05 .camera-inner{width:calc(100% - 44px);padding-top:92px}#sc-05 .section-heading .eyebrow{font-size:20px}#sc-05 .section-heading h2{font-size:58px;max-width:330px}#sc-05 .camera-hero{width:calc(100vw - 44px);margin-left:calc((44px - 100vw)/2);margin-top:48px;aspect-ratio:1.3350253807}#sc-05 .camera-stats{display:block;margin-top:34px;font-size:21px}.camera-stats strong{display:block;margin-bottom:12px}#sc-05 .camera-intro-copy{margin-top:42px;font-size:18px}#sc-05 .zoom-gallery{margin-top:84px}#sc-05 .zoom-gallery-header{justify-content:flex-start;margin-bottom:20px}#sc-05 .zoom-controls{max-width:100%;overflow-x:auto}#sc-05 .zoom-control{padding:11px 13px;font-size:14px}#sc-05 .zoom-prev,#sc-05 .zoom-next{display:none}#sc-05 .zoom-media-viewport{border-radius:18px}#sc-05 .zoom-caption{font-size:58px;margin-top:20px}
+  #sc-05{padding-bottom:100px}#sc-05 .camera-inner{width:calc(100% - 44px);padding-top:92px}#sc-05 .section-heading .eyebrow{font-size:20px}#sc-05 .section-heading h2{font-size:58px;max-width:330px}#sc-05 .camera-hero{width:calc(100vw - 44px);margin-left:calc((44px - 100vw)/2);margin-top:48px;aspect-ratio:1.3350253807}#sc-05 .camera-stats{display:block;margin-top:34px;font-size:21px}.camera-stats strong{display:block;margin-bottom:12px}#sc-05 .camera-intro-copy{margin-top:42px;font-size:18px}#sc-05 .zoom-gallery{margin-top:84px}#sc-05 .zoom-gallery-header{justify-content:flex-start;margin-bottom:20px}#sc-05 .zoom-controls{max-width:100%;overflow-x:auto}#sc-05 .zoom-control{padding:11px 13px;font-size:14px}#sc-05 .zoom-prev,#sc-05 .zoom-next{display:none}#sc-05 .zoom-media-viewport{border-radius:18px}#sc-05 .zoom-caption{font-size:58px;margin-top:20px}#sc-05 .lenses-subsection{margin-top:144px}#sc-05 .lenses-copy{width:100%;max-width:none}#sc-05 .lenses-copy h3{font-size:36px}#sc-05 .lenses-media{width:100%;margin-top:80px}#sc-05 .lens-callouts{width:100%;margin-top:80px;display:block}.lens-callout{margin-top:48px}
 }
 
 /* SC-05-R1.1: validated dark Cameras intro geometry. */

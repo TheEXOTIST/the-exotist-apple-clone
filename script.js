@@ -295,5 +295,13 @@
       next?.addEventListener('click', () => renderZoom(current + 1));
       renderZoom(0);
     }
+    const lensesVideo = cameraSection.querySelector('.lenses-media-video');
+    if (lensesVideo && 'IntersectionObserver' in window) {
+      const lensesObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+        if (entry.isIntersecting) lensesVideo.play().catch(() => {});
+        else lensesVideo.pause();
+      }), { rootMargin: '240px 0px 0px' });
+      lensesObserver.observe(lensesVideo);
+    }
   }
 })();
