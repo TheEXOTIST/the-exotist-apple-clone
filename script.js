@@ -357,6 +357,9 @@
       ];
       const deepLinks = ['centerstageforphotos', 'dualcapturevideo', 'stabilizedvideo', 'centerstageforvideocalls'];
       let current = 0;
+      const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const canInlinePlay = () => window.innerWidth > 700 && !reducedMotion();
+      const queryLink = () => new URLSearchParams(window.location.search).get('link')?.toLowerCase() || '';
       const renderNewCamera = (index, updateHash = false) => {
         current = (index + states.length) % states.length;
         tabs.forEach((tab, i) => {
@@ -369,18 +372,23 @@
           state.hidden = !active;
           state.classList.toggle('is-active', active);
           const video = state.querySelector('video');
+          const fallback = state.querySelector('.new-camera-feature-fallback');
           if (video) {
-            if (active) {
-              video.currentTime = 0;
-              video.play().catch(() => {});
-            } else {
-              video.pause();
-              video.currentTime = 0;
-            }
-          }
+            video.pause();
+            video.currentTime = 0;
+            const inline = active && canInlinePlay();
+            video.style.display = inline ? 'block' : 'none';
+            if (fallback) fallback.style.display = inline ? 'none' : 'block';
+            if (inline) video.play().catch(() => {});
+          } else if (fallback) fallback.style.display = active ? 'block' : 'none';
+          state.setAttribute('aria-hidden', String(!active));
         });
         if (caption) caption.textContent = captions[current];
-        if (updateHash && deepLinks[current]) history.replaceState(null, '', `#${deepLinks[current]}`);
+        if (updateHash && deepLinks[current]) {
+          const url = new URL(window.location.href);
+          url.searchParams.set('link', deepLinks[current]);
+          history.replaceState(null, '', url);
+        }
       };
       tabs.forEach((tab, index) => {
         tab.addEventListener('click', () => renderNewCamera(index, true));
@@ -390,12 +398,15 @@
           if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = current - 1;
           if (event.key === 'Home') nextIndex = 0;
           if (event.key === 'End') nextIndex = states.length - 1;
-          if (nextIndex !== current) { event.preventDefault(); renderNewCamera(nextIndex, true); tabs[current].focus(); }
+          if (nextIndex !== current || ['ArrowRight','ArrowDown','ArrowLeft','ArrowUp','Home','End'].includes(event.key)) {
+            event.preventDefault(); renderNewCamera(nextIndex, true); tabs[current].focus();
+          }
         });
       });
-      const initialHash = location.hash.slice(1).toLowerCase();
-      const deepIndex = deepLinks.indexOf(initialHash);
+      const deepIndex = deepLinks.indexOf(queryLink());
       renderNewCamera(deepIndex >= 0 ? deepIndex : 0, false);
+      window.addEventListener('resize', () => renderNewCamera(current, false));
+      window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', () => renderNewCamera(current, false));
     }
   }
 })();
