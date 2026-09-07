@@ -203,23 +203,42 @@
 #sc-05 .new-camera-features-gallery{position:relative;margin-top:64px}
 #sc-05 .new-camera-features-stage{position:relative;width:294px;height:638px;margin:0 auto}
 #sc-05 .new-camera-features-media{position:relative;width:294px;height:638px;border-radius:45px;overflow:hidden;background:#111}
-#sc-05 .new-camera-feature-state{position:absolute;inset:0;opacity:0;transition:opacity .28s ease}
-#sc-05 .new-camera-feature-state.is-active{opacity:1}
+#sc-05 .new-camera-feature-state{position:absolute;z-index:0;inset:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .5s cubic-bezier(.33,1,.68,1)}
+#sc-05 .new-camera-feature-state.is-active{z-index:2;opacity:1;visibility:visible;pointer-events:auto;transition-delay:0s}
+#sc-05 .new-camera-feature-state.is-exiting{z-index:1;opacity:0;visibility:visible;transition:opacity .5s cubic-bezier(.33,1,.68,1)}
 #sc-05 .new-camera-feature-state video,#sc-05 .new-camera-feature-state img{display:block;width:100%;height:100%;object-fit:cover;border-radius:45px}
 #sc-05 .new-camera-feature-state .new-camera-feature-fallback{display:none}
 #sc-05 .new-camera-features-hardware{position:absolute;z-index:2;top:-11px;left:50%;width:322px;height:662px;transform:translateX(-50%);pointer-events:none}
-#sc-05 .new-camera-features-controls{display:flex;align-items:stretch;justify-content:center;width:max-content;max-width:calc(100vw - 32px);margin:42px auto 0;padding:0;border-radius:20px;background:#1d1d1f;overflow-x:auto;scrollbar-width:none}
-#sc-05 .new-camera-features-controls::-webkit-scrollbar{display:none}
-#sc-05 .new-camera-features-controls button{display:flex;flex:0 0 auto;align-items:center;justify-content:center;gap:8px;min-height:92px;padding:20px;border:0;border-radius:16px;background:transparent;color:#f5f5f7;font:600 12px/16px Arial,Helvetica,sans-serif;text-align:left;cursor:pointer;transition:background .28s ease,color .28s ease}
-#sc-05 .new-camera-features-controls button[aria-selected=true]{background:#424245}
-#sc-05 .new-camera-feature-icon{display:grid;place-items:center;width:25px;height:25px;flex:0 0 25px}
-#sc-05 .new-camera-feature-icon svg{width:100%;height:100%;fill:currentColor}
-#sc-05 .new-camera-feature-caption{width:min(50%,700px);margin:30px auto 0;color:#f5f5f7;font-size:21px;line-height:1.381;font-weight:600;letter-spacing:.011em}
+#sc-05 .new-camera-features-tabnav-wrapper{display:flex;justify-content:center;width:min(87.5vw,1260px);height:164px;margin:0 auto;padding:42px 0 30px;box-sizing:border-box}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav{position:relative;width:485.9375px;max-width:100%;height:92px;color:#f5f5f7}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-platter{position:relative;width:100%;height:92px;padding:4px;box-sizing:border-box;border-radius:20px;background:#1d1d1f;overflow:hidden}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-mask{position:relative;z-index:2;width:100%;height:84px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;scrollbar-width:none;scroll-behavior:smooth;border-radius:16px}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-mask::-webkit-scrollbar{display:none}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-items{display:flex;width:max-content;height:84px;margin:0;padding:0;list-style:none}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-item{flex:0 0 auto;margin:0;padding:0}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-link{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:84px;padding:20px;border:0;border-radius:16px;background:transparent;color:#f5f5f7;font:600 12px/16px Arial,Helvetica,sans-serif;text-align:center;white-space:nowrap;cursor:pointer;opacity:.8;transition:color .1s linear,opacity .1s linear}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-link[aria-selected=true]{color:#1d1d1f;opacity:1}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-link:focus-visible{outline:2px solid #2997ff;outline-offset:-3px}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-icon{display:grid;place-items:center;height:25px;color:inherit}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-icon svg{display:block;fill:currentColor}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-indicator{position:absolute;z-index:1;top:4px;left:4px;width:115px;height:84px;border-radius:16px;background:#f5f5f7;transition:left .28s ease-out,width .28s ease-out;will-change:left,width}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-paddles{position:absolute;z-index:3;top:4px;left:0;width:100%;height:84px;pointer-events:none}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-paddle{position:absolute;top:0;display:grid;place-items:center;width:40px;height:84px;padding:0;border:0;color:#f5f5f7;background:#1d1d1f;cursor:pointer;pointer-events:auto;opacity:1;visibility:visible;transition:opacity .2s ease,visibility .2s ease}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-paddle-left{left:0;background:linear-gradient(90deg,#1d1d1f 70%,rgba(29,29,31,0))}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-paddle-right{right:0;background:linear-gradient(270deg,#1d1d1f 70%,rgba(29,29,31,0))}
+#sc-05 .new-camera-features-tabnav-wrapper .tabnav-paddle:disabled{opacity:0;visibility:hidden;pointer-events:none}
+#sc-05 .new-camera-feature-caption{display:grid;width:min(43.75vw,630px);margin:0 auto;color:#86868b;font-size:21px;line-height:1.381;font-weight:600;letter-spacing:.011em;text-align:center}
+#sc-05 .new-camera-feature-caption p{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .3s ease}
+#sc-05 .new-camera-feature-caption p.is-active{opacity:1;visibility:visible;transition-delay:0s}
+#sc-05 .new-camera-feature-caption p.is-exiting{opacity:0;visibility:visible;transition:opacity .3s ease}
 @media(max-width:1068px){
   #sc-05 .new-camera-features-header h3{font-size:40px;line-height:1.1;letter-spacing:0}
   #sc-05 .new-camera-features-header p{font-size:19px;line-height:1.421;margin-top:32px}
   #sc-05 .new-camera-features-gallery{margin-top:40px}
   #sc-05 .new-camera-feature-caption{font-size:19px;line-height:1.421}
+}
+@media(min-width:1372px){
+  #sc-05 .new-camera-features-tabnav-wrapper{position:relative;left:50%;transform:translateX(-50%)}
 }
 @media(max-width:700px){
   #sc-05 .new-camera-features-subsection{padding-top:calc(var(--global-section-padding,72px)*1.5)}
@@ -232,12 +251,12 @@
   #sc-05 .new-camera-feature-state video{display:none}
   #sc-05 .new-camera-feature-state .new-camera-feature-fallback{display:block}
   #sc-05 .new-camera-features-hardware{top:-10px;width:225px;height:462px}
-  #sc-05 .new-camera-features-controls{justify-content:flex-start;width:calc(100% - 32px);margin-top:32px}
-  #sc-05 .new-camera-features-controls button{min-height:92px;padding:20px 16px}
-  #sc-05 .new-camera-feature-caption{width:83.3333%;margin-top:24px;font-size:17px;line-height:1.23536;letter-spacing:-.022em}
+  #sc-05 .new-camera-features-tabnav-wrapper{width:87.5vw}
+  #sc-05 .new-camera-feature-caption{width:83.3333vw;margin-top:24px;font-size:17px;line-height:1.23536;letter-spacing:-.022em}
 }
 @media(prefers-reduced-motion:reduce){
-  #sc-05 .new-camera-feature-state,#sc-05 .new-camera-features-controls button{transition:none}
+  #sc-05 .new-camera-feature-state,#sc-05 .new-camera-feature-caption p,#sc-05 .new-camera-features-tabnav-wrapper .tabnav-indicator{transition:none}
+  #sc-05 .new-camera-features-tabnav-wrapper .tabnav-mask{scroll-behavior:auto}
 }
 
 /* SC-05-R1.1: validated dark Cameras intro geometry. */

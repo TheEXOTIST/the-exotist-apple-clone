@@ -348,43 +348,97 @@
     if (newCameraGallery) {
       const tabs = [...newCameraGallery.querySelectorAll('[data-new-camera-tab]')];
       const states = [...newCameraGallery.querySelectorAll('[data-new-camera-state]')];
-      const caption = newCameraGallery.querySelector('[data-new-camera-caption]');
-      const captions = [
-        'An all-new square sensor enables zoom and rotate options, for more flexible ways to frame selfies and videos. And it gets everyone in a group shot — automatically.',
-        'Record yourself and the world around you with simultaneous front and rear video capture.',
-        'Capture stunningly smooth 4K 60 fps video in Dolby Vision, even when you’re in action.',
-        'Artificial intelligence automatically adjusts the frame, so you’re front and center for virtual meetings and FaceTime calls.'
-      ];
+      const captionStates = [...newCameraGallery.querySelectorAll('[data-new-camera-caption-state]')];
+      const tabMask = newCameraGallery.querySelector('[data-new-camera-tab-mask]');
+      const indicator = newCameraGallery.querySelector('.tabnav-indicator');
+      const previousPaddle = newCameraGallery.querySelector('.tabnav-paddle-left');
+      const nextPaddle = newCameraGallery.querySelector('.tabnav-paddle-right');
       const deepLinks = ['centerstageforphotos', 'dualcapturevideo', 'stabilizedvideo', 'centerstageforvideocalls'];
       let current = 0;
+      let mediaTransitionTimer = 0;
+      let captionTransitionTimer = 0;
       const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const canInlinePlay = () => window.innerWidth > 700 && !reducedMotion();
       const queryLink = () => new URLSearchParams(window.location.search).get('link')?.toLowerCase() || '';
-      const renderNewCamera = (index, updateHash = false) => {
-        current = (index + states.length) % states.length;
+
+      const updateTabnavGeometry = () => {
+        if (!tabMask || !indicator || !tabs[current]) return;
+        const tab = tabs[current];
+        indicator.style.left = `${4 + tab.offsetLeft - tabMask.scrollLeft}px`;
+        indicator.style.width = `${tab.offsetWidth}px`;
+        const maxScroll = Math.max(0, tabMask.scrollWidth - tabMask.clientWidth);
+        previousPaddle.disabled = tabMask.scrollLeft <= 1;
+        nextPaddle.disabled = tabMask.scrollLeft >= maxScroll - 1;
+      };
+
+      const revealSelectedTab = (behavior = 'smooth') => {
+        if (!tabMask || !tabs[current]) return;
+        const tab = tabs[current];
+        const maxScroll = Math.max(0, tabMask.scrollWidth - tabMask.clientWidth);
+        const centered = tab.offsetLeft - (tabMask.clientWidth - tab.offsetWidth) / 2;
+        tabMask.scrollTo({ left: Math.max(0, Math.min(centered, maxScroll)), behavior: reducedMotion() ? 'auto' : behavior });
+        requestAnimationFrame(updateTabnavGeometry);
+      };
+
+      const setMediaLifecycle = activeIndex => {
+        states.forEach((state, index) => {
+          const video = state.querySelector('video');
+          const fallback = state.querySelector('.new-camera-feature-fallback');
+          if (!video) return;
+          video.pause();
+          try { video.currentTime = 0; } catch (_) {}
+          const inline = index === activeIndex && canInlinePlay();
+          video.style.display = inline ? 'block' : 'none';
+          if (fallback) fallback.style.display = inline ? 'none' : 'block';
+          if (inline) video.play().catch(() => {
+            video.style.display = 'none';
+            if (fallback) fallback.style.display = 'block';
+          });
+        });
+      };
+
+      const renderNewCamera = (index, updateQuery = false, animate = true) => {
+        const next = (index + states.length) % states.length;
+        const previous = current;
+        const changed = next !== previous;
+        current = next;
+        clearTimeout(mediaTransitionTimer);
+        clearTimeout(captionTransitionTimer);
+
         tabs.forEach((tab, i) => {
           const active = i === current;
           tab.setAttribute('aria-selected', String(active));
           tab.tabIndex = active ? 0 : -1;
         });
+
         states.forEach((state, i) => {
           const active = i === current;
-          state.hidden = !active;
+          const outgoing = changed && i === previous && animate && !reducedMotion();
+          state.classList.remove('is-active', 'is-exiting');
+          if (outgoing) state.classList.add('is-exiting');
           state.classList.toggle('is-active', active);
-          const video = state.querySelector('video');
-          const fallback = state.querySelector('.new-camera-feature-fallback');
-          if (video) {
-            video.pause();
-            video.currentTime = 0;
-            const inline = active && canInlinePlay();
-            video.style.display = inline ? 'block' : 'none';
-            if (fallback) fallback.style.display = inline ? 'none' : 'block';
-            if (inline) video.play().catch(() => {});
-          } else if (fallback) fallback.style.display = active ? 'block' : 'none';
           state.setAttribute('aria-hidden', String(!active));
+          state.inert = !active;
         });
-        if (caption) caption.textContent = captions[current];
-        if (updateHash && deepLinks[current]) {
+
+        captionStates.forEach((captionState, i) => {
+          const active = i === current;
+          const outgoing = changed && i === previous && animate && !reducedMotion();
+          captionState.classList.remove('is-active', 'is-exiting');
+          if (outgoing) captionState.classList.add('is-exiting');
+          captionState.classList.toggle('is-active', active);
+          captionState.setAttribute('aria-hidden', String(!active));
+        });
+
+        if (changed && animate && !reducedMotion()) {
+          mediaTransitionTimer = window.setTimeout(() => states.forEach(state => state.classList.remove('is-exiting')), 520);
+          captionTransitionTimer = window.setTimeout(() => captionStates.forEach(state => state.classList.remove('is-exiting')), 320);
+        }
+
+        setMediaLifecycle(current);
+        revealSelectedTab(changed && animate ? 'smooth' : 'auto');
+
+        if (updateQuery && deepLinks[current]) {
           const url = new URL(window.location.href);
           url.searchParams.set('link', deepLinks[current]);
           history.replaceState(null, '', url);
@@ -403,10 +457,13 @@
           }
         });
       });
+      tabMask?.addEventListener('scroll', updateTabnavGeometry, { passive: true });
+      previousPaddle?.addEventListener('click', () => tabMask.scrollBy({ left: -tabMask.clientWidth * .7, behavior: reducedMotion() ? 'auto' : 'smooth' }));
+      nextPaddle?.addEventListener('click', () => tabMask.scrollBy({ left: tabMask.clientWidth * .7, behavior: reducedMotion() ? 'auto' : 'smooth' }));
       const deepIndex = deepLinks.indexOf(queryLink());
-      renderNewCamera(deepIndex >= 0 ? deepIndex : 0, false);
-      window.addEventListener('resize', () => renderNewCamera(current, false));
-      window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', () => renderNewCamera(current, false));
+      renderNewCamera(deepIndex >= 0 ? deepIndex : 0, false, false);
+      window.addEventListener('resize', () => renderNewCamera(current, false, false));
+      window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', () => renderNewCamera(current, false, false));
     }
   }
 })();
