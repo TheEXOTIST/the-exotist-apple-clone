@@ -342,5 +342,60 @@
       });
       updatePhotoControls();
     }
+
+    // SC-05-R4: Apple new camera-features four-state fade gallery.
+    const newCameraGallery = cameraSection.querySelector('[data-new-camera-gallery]');
+    if (newCameraGallery) {
+      const tabs = [...newCameraGallery.querySelectorAll('[data-new-camera-tab]')];
+      const states = [...newCameraGallery.querySelectorAll('[data-new-camera-state]')];
+      const caption = newCameraGallery.querySelector('[data-new-camera-caption]');
+      const captions = [
+        'An all-new square sensor enables zoom and rotate options, for more flexible ways to frame selfies and videos. And it gets everyone in a group shot — automatically.',
+        'Record yourself and the world around you with simultaneous front and rear video capture.',
+        'Capture stunningly smooth 4K 60 fps video in Dolby Vision, even when you’re in action.',
+        'Artificial intelligence automatically adjusts the frame, so you’re front and center for virtual meetings and FaceTime calls.'
+      ];
+      const deepLinks = ['centerstageforphotos', 'dualcapturevideo', 'stabilizedvideo', 'centerstageforvideocalls'];
+      let current = 0;
+      const renderNewCamera = (index, updateHash = false) => {
+        current = (index + states.length) % states.length;
+        tabs.forEach((tab, i) => {
+          const active = i === current;
+          tab.setAttribute('aria-selected', String(active));
+          tab.tabIndex = active ? 0 : -1;
+        });
+        states.forEach((state, i) => {
+          const active = i === current;
+          state.hidden = !active;
+          state.classList.toggle('is-active', active);
+          const video = state.querySelector('video');
+          if (video) {
+            if (active) {
+              video.currentTime = 0;
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+              video.currentTime = 0;
+            }
+          }
+        });
+        if (caption) caption.textContent = captions[current];
+        if (updateHash && deepLinks[current]) history.replaceState(null, '', `#${deepLinks[current]}`);
+      };
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => renderNewCamera(index, true));
+        tab.addEventListener('keydown', event => {
+          let nextIndex = current;
+          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = current + 1;
+          if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = current - 1;
+          if (event.key === 'Home') nextIndex = 0;
+          if (event.key === 'End') nextIndex = states.length - 1;
+          if (nextIndex !== current) { event.preventDefault(); renderNewCamera(nextIndex, true); tabs[current].focus(); }
+        });
+      });
+      const initialHash = location.hash.slice(1).toLowerCase();
+      const deepIndex = deepLinks.indexOf(initialHash);
+      renderNewCamera(deepIndex >= 0 ? deepIndex : 0, false);
+    }
   }
 })();

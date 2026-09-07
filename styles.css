@@ -194,6 +194,49 @@
   #sc-05{padding-bottom:100px}#sc-05 .camera-inner{width:calc(100% - 44px);padding-top:92px}#sc-05 .section-heading .eyebrow{font-size:20px}#sc-05 .section-heading h2{font-size:58px;max-width:330px}#sc-05 .camera-hero{width:calc(100vw - 44px);margin-left:calc((44px - 100vw)/2);margin-top:48px;aspect-ratio:1.3350253807}#sc-05 .camera-stats{display:block;margin-top:34px;font-size:21px}.camera-stats strong{display:block;margin-bottom:12px}#sc-05 .camera-intro-copy{margin-top:42px;font-size:18px}#sc-05 .zoom-gallery{margin-top:84px}#sc-05 .zoom-gallery-header{justify-content:flex-start;margin-bottom:20px}#sc-05 .zoom-controls{max-width:100%;overflow-x:auto}#sc-05 .zoom-control{padding:11px 13px;font-size:14px}#sc-05 .zoom-prev,#sc-05 .zoom-next{display:none}#sc-05 .zoom-media-viewport{border-radius:18px}#sc-05 .zoom-caption{font-size:58px;margin-top:20px}#sc-05 .lenses-subsection{margin-top:144px}#sc-05 .lenses-copy{width:100%;max-width:none}#sc-05 .lenses-copy h3{font-size:36px}#sc-05 .lenses-media{width:100%;margin-top:80px}#sc-05 .lens-callouts{width:100%;margin-top:80px;display:block}.lens-callout{margin-top:48px}
 }
 
+/* SC-05-R4: Apple new camera-features portrait gallery. */
+#sc-05 .new-camera-features-subsection{padding-top:calc(var(--global-section-padding,96px)*1.5);padding-bottom:var(--global-section-padding,96px);text-align:center}
+#sc-05 .new-camera-features-header{width:min(800px,calc(100% - 40px));margin:0 auto}
+#sc-05 .new-camera-features-header h3{margin:0;font-size:56px;line-height:1.0714285714;font-weight:600;letter-spacing:-.005em;color:#f5f5f7}
+#sc-05 .new-camera-features-header p{width:min(800px,100%);margin:40px auto 0;color:#86868b;font-size:21px;line-height:1.381;font-weight:400;letter-spacing:-.01em}
+#sc-05 .new-camera-features-header p strong{color:#f5f5f7;font-weight:600}
+#sc-05 .new-camera-features-gallery{position:relative;margin-top:64px}
+#sc-05 .new-camera-features-stage{position:relative;width:294px;height:638px;margin:0 auto}
+#sc-05 .new-camera-features-media{position:relative;width:294px;height:638px;border-radius:45px;overflow:hidden;background:#111}
+#sc-05 .new-camera-feature-state{position:absolute;inset:0;opacity:0;transition:opacity .28s ease}
+#sc-05 .new-camera-feature-state.is-active{opacity:1}
+#sc-05 .new-camera-feature-state video,#sc-05 .new-camera-feature-state img{display:block;width:100%;height:100%;object-fit:cover;border-radius:45px}
+#sc-05 .new-camera-features-hardware{position:absolute;z-index:2;top:-11px;left:50%;width:322px;height:662px;transform:translateX(-50%);pointer-events:none}
+#sc-05 .new-camera-features-controls{display:flex;align-items:stretch;justify-content:center;width:max-content;max-width:calc(100vw - 32px);margin:42px auto 0;padding:4px;border-radius:20px;background:#1d1d1f;overflow-x:auto;scrollbar-width:none}
+#sc-05 .new-camera-features-controls::-webkit-scrollbar{display:none}
+#sc-05 .new-camera-features-controls button{display:flex;flex:0 0 auto;align-items:center;justify-content:center;gap:8px;min-height:92px;padding:20px;border:0;border-radius:16px;background:transparent;color:#f5f5f7;font:600 12px/16px Arial,Helvetica,sans-serif;text-align:left;cursor:pointer;transition:background .28s ease,color .28s ease}
+#sc-05 .new-camera-features-controls button[aria-selected=true]{background:#424245}
+#sc-05 .new-camera-feature-icon{display:grid;place-items:center;width:25px;height:25px;flex:0 0 25px}
+#sc-05 .new-camera-feature-icon svg{width:100%;height:100%;fill:currentColor}
+#sc-05 .new-camera-feature-caption{width:min(50%,700px);margin:30px auto 0;color:#f5f5f7;font-size:21px;line-height:1.381;font-weight:600;letter-spacing:.011em}
+@media(max-width:1068px){
+  #sc-05 .new-camera-features-header h3{font-size:40px;line-height:1.1;letter-spacing:0}
+  #sc-05 .new-camera-features-header p{font-size:19px;line-height:1.421;margin-top:32px}
+  #sc-05 .new-camera-features-gallery{margin-top:40px}
+  #sc-05 .new-camera-feature-caption{font-size:19px;line-height:1.421}
+}
+@media(max-width:700px){
+  #sc-05 .new-camera-features-subsection{padding-top:calc(var(--global-section-padding,72px)*1.5)}
+  #sc-05 .new-camera-features-header{width:calc(100% - 44px)}
+  #sc-05 .new-camera-features-header h3{font-size:32px;line-height:1.125;letter-spacing:.004em}
+  #sc-05 .new-camera-features-header p{width:100%;margin-top:32px;font-size:17px;line-height:1.35296;text-align:center}
+  #sc-05 .new-camera-features-gallery{margin-top:32px}
+  #sc-05 .new-camera-features-stage,#sc-05 .new-camera-features-media{width:204px;height:442px;border-radius:30px}
+  #sc-05 .new-camera-feature-state video,#sc-05 .new-camera-feature-state img{border-radius:30px}
+  #sc-05 .new-camera-features-hardware{top:-10px;width:225px;height:462px}
+  #sc-05 .new-camera-features-controls{justify-content:flex-start;width:calc(100% - 32px);margin-top:32px}
+  #sc-05 .new-camera-features-controls button{min-height:92px;padding:20px 16px}
+  #sc-05 .new-camera-feature-caption{width:83.3333%;margin-top:24px;font-size:17px;line-height:1.23536;letter-spacing:-.022em}
+}
+@media(prefers-reduced-motion:reduce){
+  #sc-05 .new-camera-feature-state,#sc-05 .new-camera-features-controls button{transition:none}
+}
+
 /* SC-05-R1.1: validated dark Cameras intro geometry. */
 #sc-05{background:#000;color:#f5f5f7;padding-bottom:180px}
 #sc-05 .camera-inner{width:min(1200px,calc(100% - 10vw));padding-top:150px}
