@@ -196,9 +196,9 @@
 
 /* SC-05-R4: Apple new camera-features portrait gallery. */
 #sc-05 .new-camera-features-subsection{padding-top:calc(var(--global-section-padding,96px)*1.5);padding-bottom:var(--global-section-padding,96px);text-align:center}
-#sc-05 .new-camera-features-header{width:min(800px,calc(100% - 40px));margin:0 auto}
+#sc-05 .new-camera-features-header{width:min(1248px,calc(100% - 40px));margin:0 auto}
 #sc-05 .new-camera-features-header h3{margin:0;font-size:56px;line-height:1.0714285714;font-weight:600;letter-spacing:-.005em;color:#f5f5f7}
-#sc-05 .new-camera-features-header p{width:min(800px,100%);margin:40px auto 0;color:#86868b;font-size:21px;line-height:1.381;font-weight:400;letter-spacing:-.01em}
+#sc-05 .new-camera-features-header p{width:min(830px,100%);margin:40px auto 0;color:#86868b;font-size:21px;line-height:1.381;font-weight:400;letter-spacing:-.01em}
 #sc-05 .new-camera-features-header p strong{color:#f5f5f7;font-weight:600}
 #sc-05 .new-camera-features-gallery{position:relative;margin-top:64px}
 #sc-05 .new-camera-features-stage{position:relative;width:294px;height:638px;margin:0 auto}
@@ -207,7 +207,7 @@
 #sc-05 .new-camera-feature-state.is-active{opacity:1}
 #sc-05 .new-camera-feature-state video,#sc-05 .new-camera-feature-state img{display:block;width:100%;height:100%;object-fit:cover;border-radius:45px}
 #sc-05 .new-camera-features-hardware{position:absolute;z-index:2;top:-11px;left:50%;width:322px;height:662px;transform:translateX(-50%);pointer-events:none}
-#sc-05 .new-camera-features-controls{display:flex;align-items:stretch;justify-content:center;width:max-content;max-width:calc(100vw - 32px);margin:42px auto 0;padding:4px;border-radius:20px;background:#1d1d1f;overflow-x:auto;scrollbar-width:none}
+#sc-05 .new-camera-features-controls{display:flex;align-items:stretch;justify-content:center;width:max-content;max-width:calc(100vw - 32px);margin:42px auto 0;padding:0;border-radius:20px;background:#1d1d1f;overflow-x:auto;scrollbar-width:none}
 #sc-05 .new-camera-features-controls::-webkit-scrollbar{display:none}
 #sc-05 .new-camera-features-controls button{display:flex;flex:0 0 auto;align-items:center;justify-content:center;gap:8px;min-height:92px;padding:20px;border:0;border-radius:16px;background:transparent;color:#f5f5f7;font:600 12px/16px Arial,Helvetica,sans-serif;text-align:left;cursor:pointer;transition:background .28s ease,color .28s ease}
 #sc-05 .new-camera-features-controls button[aria-selected=true]{background:#424245}
