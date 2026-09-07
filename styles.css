@@ -212,3 +212,41 @@
 @media(max-width:700px){
   #sc-05{padding-bottom:110px}#sc-05 .camera-inner{width:calc(100% - 44px);padding-top:92px}#sc-05 .section-heading .eyebrow{font-size:20px}#sc-05 .section-heading h2{font-size:52px;line-height:.98}#sc-05 .camera-details{width:100vw;height:auto;margin:80px 0 0;display:block}.camera-hero{width:calc(100vw - 44px)!important;height:auto!important;aspect-ratio:1.3350253807!important;margin-left:calc((44px - 100vw)/2)!important}.camera-stats{width:100%!important;height:auto!important;margin-top:34px!important;padding:0!important}.camera-stats strong{width:auto!important;margin:0 0 12px!important}.camera-stats strong+strong{margin-top:0!important}.camera-stats em{font-size:40px!important}.camera-intro-copy{margin-top:96px!important;font-size:18px!important;text-align:left!important}.zoom-gallery{margin-top:84px!important}
 }
+
+/* SC-05-R3: Apple Photo Gallery. */
+#sc-05 .photo-gallery-subsection{--photo-gallery-width:min(87.5vw,1680px);--photo-gallery-height:680px;margin-top:230px}
+#sc-05 .photo-gallery-heading{width:var(--photo-gallery-width);margin:0 0 0 calc(50% - min(43.75vw,840px))}
+#sc-05 .photo-gallery-heading h3{margin:0;color:#f5f5f7;font-size:32px;line-height:1.25;font-weight:600;letter-spacing:.004em}
+#sc-05 .photo-gallery-frame{position:relative;width:100vw;margin:32px 0 0 calc(50% - 50vw)}
+#sc-05 .photo-gallery-scroll{overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scroll-padding-inline-start:max(6.25vw,calc((100vw - 1680px)/2));scrollbar-width:none;scroll-behavior:smooth}
+#sc-05 .photo-gallery-scroll::-webkit-scrollbar{display:none}
+#sc-05 .photo-gallery-track{display:grid;grid-auto-flow:column;grid-auto-columns:max-content;gap:20px;width:max-content;margin:0;padding:0 max(6.25vw,calc((100vw - 1680px)/2));list-style:none}
+#sc-05 .photo-gallery-item{display:flex;flex-direction:column-reverse;justify-content:flex-end;min-height:var(--photo-gallery-height);scroll-snap-align:start;scroll-snap-stop:always}
+#sc-05 .photo-gallery-item.photo-width-50{width:calc((var(--photo-gallery-width) - 20px)*.5)}
+#sc-05 .photo-gallery-item.photo-width-66{width:calc((var(--photo-gallery-width) - 20px)*.67)}
+#sc-05 .photo-gallery-card{height:var(--photo-gallery-height);margin:0;overflow:hidden;border-radius:28px;background:#1d1d1f;box-sizing:border-box}
+#sc-05 .photo-gallery-item.has-border .photo-gallery-card{border:2px solid #424245}
+#sc-05 .photo-gallery-media{position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;overflow:hidden}
+#sc-05 .photo-gallery-media img{display:block;width:100%;height:100%;max-width:none;object-fit:cover}
+#sc-05 .photo-gallery-caption{max-width:760px;margin:24px 15px 0;color:#86868b;font-size:17px;line-height:1.2353641176;font-weight:600;letter-spacing:-.022em}
+#sc-05 .photo-gallery-caption h4,#sc-05 .photo-gallery-caption p{display:inline;margin:0;font:inherit}
+#sc-05 .photo-gallery-caption h4{color:#f5f5f7}
+#sc-05 .photo-gallery-paddles{display:flex;justify-content:flex-end;width:var(--photo-gallery-width);height:84px;margin:0 auto;padding-top:48px;box-sizing:border-box;gap:18px}
+#sc-05 .photo-gallery-paddles button{display:grid;place-items:center;width:36px;height:36px;padding:0;border:0;border-radius:50%;background:#333336;color:#f5f5f7;font:400 30px/1 Arial,sans-serif;cursor:pointer;transition:opacity .2s ease,background .2s ease}
+#sc-05 .photo-gallery-paddles button:hover:not(:disabled){background:#4a4a4e}
+#sc-05 .photo-gallery-paddles button:disabled{opacity:.35;cursor:default}
+#sc-05 .photo-gallery-paddles span{display:block;transform:translateY(-1px)}
+@media(max-width:1068px) and (min-width:701px){
+  #sc-05 .photo-gallery-subsection{--photo-gallery-height:628px;margin-top:192px}
+  #sc-05 .photo-gallery-paddles{height:80px;padding-top:44px}
+}
+@media(max-width:700px){
+  #sc-05 .photo-gallery-subsection{--photo-gallery-width:max(calc(87.5vw - 20px),280px);--photo-gallery-height:480px;margin-top:146px}
+  #sc-05 .photo-gallery-heading{width:max(87.5vw,280px);margin:0 auto}
+  #sc-05 .photo-gallery-frame{margin-top:30px}
+  #sc-05 .photo-gallery-track{padding-inline:max(6.25vw,calc((100vw - 1680px)/2))}
+  #sc-05 .photo-gallery-item.photo-width-50,#sc-05 .photo-gallery-item.photo-width-66{width:var(--photo-gallery-width)}
+  #sc-05 .photo-gallery-card{border-radius:20px}
+  #sc-05 .photo-gallery-caption{margin-top:20px}
+  #sc-05 .photo-gallery-paddles{width:max(87.5vw,280px);height:76px;padding-top:40px}
+}

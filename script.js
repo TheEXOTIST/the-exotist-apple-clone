@@ -303,5 +303,44 @@
       }), { rootMargin: '240px 0px 0px' });
       lensesObserver.observe(lensesVideo);
     }
+    const photoGallery = cameraSection.querySelector('[data-photo-gallery]');
+    if (photoGallery) {
+      const photoScroll = photoGallery.querySelector('.photo-gallery-scroll');
+      const photoItems = [...photoGallery.querySelectorAll('.photo-gallery-item')];
+      const photoPrevious = photoGallery.querySelector('.photo-gallery-previous');
+      const photoNext = photoGallery.querySelector('.photo-gallery-next');
+      let photoIndex = 0;
+      const photoInlinePadding = () => parseFloat(getComputedStyle(photoGallery.querySelector('.photo-gallery-track')).paddingInlineStart) || 0;
+      const updatePhotoControls = () => {
+        photoPrevious.disabled = photoIndex === 0;
+        photoNext.disabled = photoIndex === photoItems.length - 1;
+      };
+      const goToPhoto = (index, behavior = 'smooth') => {
+        photoIndex = Math.max(0, Math.min(photoItems.length - 1, index));
+        photoScroll.scrollTo({ left: photoItems[photoIndex].offsetLeft - photoInlinePadding(), behavior });
+        updatePhotoControls();
+      };
+      let photoScrollFrame = 0;
+      photoScroll.addEventListener('scroll', () => {
+        cancelAnimationFrame(photoScrollFrame);
+        photoScrollFrame = requestAnimationFrame(() => {
+          if (photoScroll.scrollLeft >= photoScroll.scrollWidth - photoScroll.clientWidth - 2) {
+            photoIndex = photoItems.length - 1;
+            updatePhotoControls();
+            return;
+          }
+          const position = photoScroll.scrollLeft + photoInlinePadding();
+          photoIndex = photoItems.reduce((closest, item, index) => Math.abs(item.offsetLeft - position) < Math.abs(photoItems[closest].offsetLeft - position) ? index : closest, 0);
+          updatePhotoControls();
+        });
+      }, { passive: true });
+      photoPrevious.addEventListener('click', () => goToPhoto(photoIndex - 1));
+      photoNext.addEventListener('click', () => goToPhoto(photoIndex + 1));
+      photoScroll.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft') { event.preventDefault(); goToPhoto(photoIndex - 1); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); goToPhoto(photoIndex + 1); }
+      });
+      updatePhotoControls();
+    }
   }
 })();
