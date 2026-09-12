@@ -4,14 +4,14 @@
 
 /* SC-06 Apple HardwareZoom reconstruction. Scoped to the new Pro video subsection. */
 #sc-06.scene-video{min-height:0;background:#000;color:#f5f5f7;overflow:hidden}
-#sc-06 .pro-video-subsection{position:relative;--pro-video-visible-h:calc(100vh - 102px);--pro-video-scroll-h:200vh;background:#000}
+#sc-06 .pro-video-subsection{position:relative;--pro-video-visible-h:100vh;--pro-video-scroll-h:200vh;--pro-video-final-width:1036px;--pro-video-final-height:502px;background:#000}
 #sc-06 .pro-video-copy-lockup{position:absolute;z-index:4;inset:0 0 auto;min-height:var(--pro-video-visible-h);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;padding:0 24px}
-#sc-06 .pro-video-eyebrow{margin:0 0 24px;color:#ff791b;font-size:32px;line-height:1.125;font-weight:600;letter-spacing:.004em}
-#sc-06 .pro-video-headline{max-width:840px;margin:0;font-size:clamp(56px,5.55vw,80px);line-height:1.0714;letter-spacing:-.055em;font-weight:600}
+#sc-06 .pro-video-eyebrow{margin:0 0 24px;color:#ff791b;font-size:24px;line-height:1.1666666667;font-weight:600;letter-spacing:.009em}
+#sc-06 .pro-video-headline{max-width:840px;margin:0;font-size:80px;line-height:1.05;letter-spacing:-.015em;font-weight:600}
 #sc-06 .pro-video-scroll-container{height:var(--pro-video-scroll-h);position:relative}
-#sc-06 .pro-video-sticky-stage{height:var(--pro-video-visible-h);position:sticky;top:102px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#000}
-#sc-06 .pro-video-responsive-container{position:relative;width:100%;max-width:1036px;aspect-ratio:2.0637450199;display:flex;align-items:center;justify-content:center}
-#sc-06 .pro-video-hardware-container{position:relative;width:100%;height:100%;transform-origin:center;z-index:2}
+#sc-06 .pro-video-sticky-stage{height:var(--pro-video-visible-h);position:sticky;top:0;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#000}
+#sc-06 .pro-video-responsive-container{position:relative;width:var(--pro-video-final-width);height:var(--pro-video-final-height);flex:none;display:flex;align-items:center;justify-content:center;overflow:visible}
+#sc-06 .pro-video-hardware-container{position:absolute;left:50%;top:50%;width:2072px;height:1004px;transform:translate(-50%,-50%);transform-origin:center;z-index:2}
 #sc-06 .pro-video-screen-container{position:absolute;inset:4.3824701195% 2.027027027%;width:95.9459459459%;height:91.235059761%;border-radius:5%/10%;overflow:hidden;background:#080808;z-index:1}
 #sc-06 .pro-video-inline-media,#sc-06 .pro-video-fallback{display:block;width:100%;height:100%;object-fit:cover}
 #sc-06 .pro-video-inline-media{position:absolute;inset:0;z-index:2;opacity:0}
@@ -20,9 +20,10 @@
 #sc-06 .pro-video-hardware-image{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
 #sc-06 .pro-video-stage-copy p,#sc-06 .pro-video-bridge p{margin:0}
 #sc-06 .pro-video-bridge{width:min(700px,87.5%);margin:164px auto 180px;text-align:center;color:#a1a1a6;font-size:21px;line-height:1.381}
-@media(max-width:1068px){#sc-06 .pro-video-eyebrow{font-size:24px;line-height:1.1667}#sc-06 .pro-video-headline{max-width:562px}#sc-06 .pro-video-responsive-container{max-width:768px;aspect-ratio:2.064516129}#sc-06 .pro-video-screen-container{inset:4.5698924731% 2.0833333333%;width:95.8333333333%;height:90.8602150538%}#sc-06 .pro-video-bridge{margin-top:128px}}
-@media(max-width:700px){#sc-06 .pro-video-subsection{--pro-video-visible-h:calc(100vh - 102px)}#sc-06 .pro-video-eyebrow{font-size:21px;line-height:1.1905}#sc-06 .pro-video-headline{max-width:280px;font-size:32px;line-height:1.125}#sc-06 .pro-video-responsive-container{max-width:420px;aspect-ratio:2.0588235294}#sc-06 .pro-video-screen-container{inset:4.4117647059% 2.1428571429%;width:95.7142857143%;height:91.1764705882%}#sc-06 .pro-video-bridge{margin-top:100px;font-size:17px;line-height:1.4}}
-@media(prefers-reduced-motion:reduce){#sc-06 .pro-video-fallback{transition:none}}
+#sc-06 .pro-video-bridge strong{color:#f5f5f7;font-weight:600}
+@media(max-width:1068px){#sc-06 .pro-video-subsection{--pro-video-final-width:768px;--pro-video-final-height:372px}#sc-06 .pro-video-eyebrow{font-size:21px;line-height:1.1904761905;letter-spacing:.011em}#sc-06 .pro-video-headline{max-width:562px;font-size:56px;line-height:1.0714285714;letter-spacing:-.005em}#sc-06 .pro-video-screen-container{inset:4.5698924731% 2.0833333333%;width:95.8333333333%;height:90.8602150538%}#sc-06 .pro-video-bridge{margin-top:128px;font-size:19px;line-height:1.4211026316}}
+@media(max-width:700px){#sc-06 .pro-video-subsection{--pro-video-final-width:420px;--pro-video-final-height:204px}#sc-06 .pro-video-eyebrow{font-size:17px;line-height:1.2353641176;letter-spacing:-.022em}#sc-06 .pro-video-headline{max-width:280px;font-size:40px;line-height:1.1;letter-spacing:0}#sc-06 .pro-video-screen-container{inset:4.4117647059% 2.1428571429%;width:95.7142857143%;height:91.1764705882%}#sc-06 .pro-video-bridge{margin-top:100px;font-size:17px;line-height:1.2353641176}}
+@media(prefers-reduced-motion:reduce){#sc-06 .pro-video-fallback{transition:none}#sc-06 .pro-video-scroll-container{height:auto}#sc-06 .pro-video-sticky-stage{height:auto;min-height:0;position:relative;top:auto}#sc-06 .pro-video-copy-lockup{position:relative;min-height:0;padding:80px 24px 48px}#sc-06 .pro-video-bridge{opacity:1!important}}
 
 /* SC-04 Apple product viewer reconstruction. Scoped so earlier scenes remain frozen. */
 #sc-04.scene-product-viewer{min-height:1320px;background:#000;color:#f5f5f7}

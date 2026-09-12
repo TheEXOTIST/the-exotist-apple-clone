@@ -249,27 +249,82 @@
     const lockup = proVideo.querySelector('.pro-video-copy-lockup');
     const bridge = proVideo.querySelector('.pro-video-bridge');
     let loaded = false;
-    const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
+    const mobileQuery = matchMedia('(max-width:734px)');
+    const reduced = () => reducedQuery.matches;
+    const clamp = value => Math.max(0, Math.min(1, value));
+    const easeInOutQuad = value => value < .5 ? 2 * value * value : 1 - Math.pow(-2 * value + 2, 2) / 2;
+    const resetMedia = () => {
+      media.pause();
+      try { media.currentTime = 0; } catch (error) {}
+      media.style.opacity = '0';
+      startFrame.style.opacity = '1';
+      endFrame.style.opacity = '0';
+    };
+    const setReducedFlow = () => {
+      proVideo.classList.toggle('is-reduced-motion', reduced());
+      if (!reduced()) return;
+      resetMedia();
+      startFrame.style.opacity = '0';
+      endFrame.style.opacity = '1';
+      lockup.style.opacity = '1';
+      if (bridge) bridge.style.opacity = '1';
+      const reducedWidth = parseFloat(getComputedStyle(proVideo).getPropertyValue('--pro-video-final-width')) || 1036;
+      hardware.style.transform = `translate(-50%,-50%) scale(${reducedWidth / 2072})`;
+      loaded = false;
+    };
     const updateProVideo = () => {
       if (!scrollContainer || !stage || !hardware) return;
-      const rect = scrollContainer.getBoundingClientRect();
-      const range = Math.max(1, scrollContainer.offsetHeight - stage.offsetHeight);
-      const progress = Math.max(0, Math.min(1, -rect.top / range));
-      const eased = progress < .5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-      const scale = 2 - eased;
-      hardware.style.transform = `scale(${reduced() ? 1 : scale})`;
-      lockup.style.opacity = reduced() ? '0' : String(Math.max(0, 1 - progress / .25));
-      if (bridge) bridge.style.opacity = progress > .9 ? '1' : '0';
-      const active = rect.top < innerHeight && rect.bottom > -innerHeight;
-      if (active && !loaded && !reduced() && !matchMedia('(max-width:734px)').matches) { media.load(); loaded = true; }
-      if (loaded && progress > .08 && progress < .96 && !reduced()) { media.style.opacity = '1'; startFrame.style.opacity = '0'; endFrame.style.opacity = '0'; media.play().catch(() => {}); }
-      else if (loaded) { media.pause(); media.currentTime = 0; media.style.opacity = '0'; startFrame.style.opacity = progress >= .96 ? '0' : '1'; endFrame.style.opacity = progress >= .96 ? '1' : '0'; }
-      if (!active && loaded && rect.bottom < 0) { media.pause(); media.currentTime = 0; media.removeAttribute('src'); media.load(); loaded = false; }
-      if (reduced() || matchMedia('(max-width:734px)').matches) { media.style.opacity = '0'; startFrame.style.opacity = '0'; endFrame.style.opacity = '1'; }
+      if (reduced()) { setReducedFlow(); return; }
+      const scrollRect = scrollContainer.getBoundingClientRect();
+      const subsectionRect = proVideo.getBoundingClientRect();
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const scrollTop = scrollRect.top + scrollY;
+      const scrollBottom = scrollRect.bottom + scrollY;
+      const subsectionTop = subsectionRect.top + scrollY;
+      const subsectionBottom = subsectionRect.bottom + scrollY;
+      const localNavHeight = 102;
+      const keyStart = scrollTop - localNavHeight;
+      const keyEnd = scrollBottom - viewportHeight;
+      const progress = clamp((scrollY - keyStart) / Math.max(1, keyEnd - keyStart));
+      const responsiveWidth = parseFloat(getComputedStyle(proVideo).getPropertyValue('--pro-video-final-width')) || 1036;
+      const hardwareWidth = 2072;
+      const hardwareHeight = 1004;
+      const startScale = Math.max(
+        window.innerWidth / (hardwareWidth * (1 - .22)),
+        (viewportHeight - localNavHeight) / (hardwareHeight * (1 - .15))
+      );
+      const endScale = responsiveWidth / hardwareWidth;
+      const scale = startScale + (endScale - startScale) * easeInOutQuad(progress);
+      hardware.style.transform = `translate(-50%,-50%) scale(${scale})`;
+      const copyProgress = clamp((scrollY - scrollTop) / (.25 * viewportHeight));
+      lockup.style.opacity = String(1 - copyProgress);
+      if (bridge) bridge.style.opacity = progress >= 1 ? '1' : '0';
+      const loadStart = subsectionTop - 200 * viewportHeight;
+      const loadEnd = subsectionBottom + 100 * viewportHeight;
+      const playStart = subsectionTop - 70 * viewportHeight;
+      const playEnd = scrollBottom - viewportHeight;
+      const pauseStart = scrollTop - 100 * viewportHeight;
+      const pauseEnd = scrollBottom;
+      const canUseInlineMedia = !mobileQuery.matches;
+      if (canUseInlineMedia && scrollY >= loadStart && scrollY <= loadEnd && !loaded) { media.load(); loaded = true; }
+      const shouldPlay = canUseInlineMedia && loaded && scrollY >= playStart && scrollY <= playEnd;
+      const withinPauseWindow = scrollY >= pauseStart && scrollY <= pauseEnd;
+      if (shouldPlay) {
+        media.style.opacity = '1'; startFrame.style.opacity = '0'; endFrame.style.opacity = '0';
+        media.play().catch(() => {});
+      } else if (loaded && withinPauseWindow) {
+        resetMedia();
+        if (progress >= 1) { startFrame.style.opacity = '0'; endFrame.style.opacity = '1'; }
+      }
+      if (loaded && (scrollY < loadStart || scrollY > loadEnd)) { resetMedia(); loaded = false; }
+      if (!canUseInlineMedia) { media.pause(); media.style.opacity = '0'; startFrame.style.opacity = '0'; endFrame.style.opacity = '1'; }
     };
     addEventListener('scroll', updateProVideo, { passive:true });
     addEventListener('resize', updateProVideo);
-    matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', updateProVideo);
+    reducedQuery.addEventListener?.('change', updateProVideo);
+    mobileQuery.addEventListener?.('change', updateProVideo);
     updateProVideo();
   }
 
