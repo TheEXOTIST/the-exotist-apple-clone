@@ -237,6 +237,42 @@
     setLanding();
   }
 
+  // SC-06: source-backed HardwareZoom lifecycle and 200vh scroll sequence.
+  const proVideo = document.querySelector('#sc-06 .pro-video-subsection');
+  if (proVideo) {
+    const scrollContainer = proVideo.querySelector('.pro-video-scroll-container');
+    const stage = proVideo.querySelector('.pro-video-sticky-stage');
+    const hardware = proVideo.querySelector('.pro-video-hardware-container');
+    const media = proVideo.querySelector('.pro-video-inline-media');
+    const startFrame = proVideo.querySelector('.pro-video-start-frame');
+    const endFrame = proVideo.querySelector('.pro-video-end-frame');
+    const lockup = proVideo.querySelector('.pro-video-copy-lockup');
+    const bridge = proVideo.querySelector('.pro-video-bridge');
+    let loaded = false;
+    const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const updateProVideo = () => {
+      if (!scrollContainer || !stage || !hardware) return;
+      const rect = scrollContainer.getBoundingClientRect();
+      const range = Math.max(1, scrollContainer.offsetHeight - stage.offsetHeight);
+      const progress = Math.max(0, Math.min(1, -rect.top / range));
+      const eased = progress < .5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+      const scale = 2 - eased;
+      hardware.style.transform = `scale(${reduced() ? 1 : scale})`;
+      lockup.style.opacity = reduced() ? '0' : String(Math.max(0, 1 - progress / .25));
+      if (bridge) bridge.style.opacity = progress > .9 ? '1' : '0';
+      const active = rect.top < innerHeight && rect.bottom > -innerHeight;
+      if (active && !loaded && !reduced() && !matchMedia('(max-width:734px)').matches) { media.load(); loaded = true; }
+      if (loaded && progress > .08 && progress < .96 && !reduced()) { media.style.opacity = '1'; startFrame.style.opacity = '0'; endFrame.style.opacity = '0'; media.play().catch(() => {}); }
+      else if (loaded) { media.pause(); media.currentTime = 0; media.style.opacity = '0'; startFrame.style.opacity = progress >= .96 ? '0' : '1'; endFrame.style.opacity = progress >= .96 ? '1' : '0'; }
+      if (!active && loaded && rect.bottom < 0) { media.pause(); media.currentTime = 0; media.removeAttribute('src'); media.load(); loaded = false; }
+      if (reduced() || matchMedia('(max-width:734px)').matches) { media.style.opacity = '0'; startFrame.style.opacity = '0'; endFrame.style.opacity = '1'; }
+    };
+    addEventListener('scroll', updateProVideo, { passive:true });
+    addEventListener('resize', updateProVideo);
+    matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', updateProVideo);
+    updateProVideo();
+  }
+
   // SC-05-R1: finite camera intro and eight-state Apple fade gallery.
   const cameraSection = document.querySelector('#sc-05');
   if (cameraSection) {
