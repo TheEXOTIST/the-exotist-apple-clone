@@ -269,8 +269,7 @@
       endFrame.style.opacity = '1';
       lockup.style.opacity = '1';
       if (bridge) bridge.style.opacity = '1';
-      const reducedWidth = parseFloat(getComputedStyle(proVideo).getPropertyValue('--pro-video-final-width')) || 1036;
-      hardware.style.transform = `translate(-50%,-50%) scale(${reducedWidth / 2072})`;
+      hardware.style.transform = 'none';
       loaded = false;
     };
     const updateProVideo = () => {
@@ -284,23 +283,22 @@
       const scrollBottom = scrollRect.bottom + scrollY;
       const subsectionTop = subsectionRect.top + scrollY;
       const subsectionBottom = subsectionRect.bottom + scrollY;
-      const localNavHeight = 102;
+      const localNavHeight = parseFloat(getComputedStyle(proVideo).getPropertyValue('--pro-video-local-nav-height')) || 54;
       const keyStart = scrollTop - localNavHeight;
       const keyEnd = scrollBottom - viewportHeight;
       const progress = clamp((scrollY - keyStart) / Math.max(1, keyEnd - keyStart));
       const responsiveWidth = parseFloat(getComputedStyle(proVideo).getPropertyValue('--pro-video-final-width')) || 1036;
-      const hardwareWidth = 2072;
-      const hardwareHeight = 1004;
+      const hardwareWidth = responsiveWidth;
+      const hardwareHeight = parseFloat(getComputedStyle(proVideo).getPropertyValue('--pro-video-final-height')) || 502;
       const startScale = Math.max(
         window.innerWidth / (hardwareWidth * (1 - .22)),
         (viewportHeight - localNavHeight) / (hardwareHeight * (1 - .15))
       );
-      const endScale = responsiveWidth / hardwareWidth;
+      const endScale = 1;
       const scale = startScale + (endScale - startScale) * easeInOutQuad(progress);
-      hardware.style.transform = `translate(-50%,-50%) scale(${scale})`;
+      hardware.style.transform = `scale(${scale})`;
       const copyProgress = clamp((scrollY - scrollTop) / (.25 * viewportHeight));
       lockup.style.opacity = String(1 - copyProgress);
-      if (bridge) bridge.style.opacity = progress >= 1 ? '1' : '0';
       const loadStart = subsectionTop - 200 * viewportHeight;
       const loadEnd = subsectionBottom + 100 * viewportHeight;
       const playStart = subsectionTop - 70 * viewportHeight;
