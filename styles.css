@@ -3,7 +3,7 @@
 @media(max-width:700px){.global-nav nav{display:none}.menu-control{display:block;background:none;color:var(--ink);border:0}.scene-inner{width:calc(100% - 44px)}.scene h1{font-size:64px}.scene h2{font-size:52px}.split-layout,.reverse,.viewer-layout{grid-template-columns:1fr;gap:36px}.scene-cameras{min-height:2400px}.lens-stage{min-height:1900px}.lens-media{height:440px}.tall-media,.viewer-media,.feature-media,.performance-media{height:430px}.control-stack{flex-direction:row;flex-wrap:wrap}.scene-opening,.scene-highlights,.scene-design,.scene-closer,.scene-video,.scene-performance{min-height:auto;padding-bottom:120px}}
 
 /* SC-06 Apple HardwareZoom reconstruction. Scoped to the new Pro video subsection. */
-#sc-06.scene-video{min-height:0;background:#000;color:#f5f5f7;overflow:hidden}
+#sc-06.scene-video{min-height:0;background:#000;color:#f5f5f7;overflow:visible}
 #sc-06 .pro-video-subsection{position:relative;--pro-video-visible-h:100vh;--pro-video-scroll-h:200vh;--pro-video-final-width:1036px;--pro-video-final-height:502px;--pro-video-local-nav-height:54px;background:#000}
 #sc-06 .pro-video-copy-lockup{position:absolute;z-index:4;inset:0 0 auto;min-height:var(--pro-video-visible-h);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;padding:0 24px}
 #sc-06 .pro-video-eyebrow{margin:0 0 24px;color:#ff791b;font-size:24px;line-height:1.1666666667;font-weight:600;letter-spacing:.009em}
