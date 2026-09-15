@@ -26,6 +26,26 @@
 @media(max-width:700px){#sc-06 .pro-video-subsection{--pro-video-final-width:420px;--pro-video-final-height:204px;--pro-video-local-nav-height:48px}#sc-06 .pro-video-eyebrow{font-size:17px;line-height:1.2353641176;letter-spacing:-.022em}#sc-06 .pro-video-headline{max-width:280px;font-size:40px;line-height:1.1;letter-spacing:0}#sc-06 .pro-video-screen-container{inset:4.4117647059% 2.1428571429%;width:95.7142857143%;height:91.1764705882%}}
 @media(prefers-reduced-motion:reduce){#sc-06 .pro-video-fallback{transition:none}#sc-06 .pro-video-scroll-container{height:auto}#sc-06 .pro-video-sticky-stage{height:auto;min-height:0;position:relative;top:auto}#sc-06 .pro-video-copy-lockup{position:relative;min-height:0;padding:80px 24px 48px}#sc-06 .pro-video-bridge{margin-top:162px;opacity:1!important}}
 
+/* SC-06 R2: Apple Pro Video SlideGallery. */
+#sc-06 .pro-video-gallery{--pro-video-gallery-width:min(87.5vw,1440px);--pro-video-gallery-side:max(6.25vw,env(safe-area-inset-left));margin-top:164px;padding-bottom:120px;background:#000;color:#f5f5f7}
+#sc-06 .pro-video-gallery-scroll-container{overflow-x:scroll;overflow-y:hidden;scrollbar-width:none;scroll-snap-type:x mandatory;scroll-padding-inline-start:var(--pro-video-gallery-side);overscroll-behavior-inline:contain;outline:none}
+#sc-06 .pro-video-gallery-scroll-container::-webkit-scrollbar{display:none}
+#sc-06 .pro-video-gallery-item-container{display:flex;align-items:flex-start;gap:20px;width:max-content;margin:0;padding:0 var(--pro-video-gallery-side);list-style:none}
+#sc-06 .pro-video-gallery-item{flex:none;scroll-snap-align:start;width:calc((var(--pro-video-gallery-width) - 20px) * .67)}
+#sc-06 .pro-video-gallery-item-50{width:calc((var(--pro-video-gallery-width) - 20px) * .5)}
+#sc-06 .pro-video-gallery-item-100{width:var(--pro-video-gallery-width)}
+#sc-06 .pro-video-gallery-card{display:flex;align-items:center;justify-content:center;width:100%;height:680px;overflow:hidden;border-radius:18px;background:#1d1d1f}
+#sc-06 .pro-video-gallery-card img{display:block;width:auto;height:100%;max-width:none;object-fit:initial}
+#sc-06 .pro-video-gallery-caption{margin:24px 15px 0;max-width:760px;color:#86868b;font-size:17px;line-height:1.2353641176;font-weight:600;letter-spacing:-.022em}
+#sc-06 .pro-video-gallery-caption strong{display:inline;color:#f5f5f7;font-weight:600}
+#sc-06 .pro-video-gallery-caption sup{font-size:.55em;line-height:0;vertical-align:super;color:#f5f5f7}
+#sc-06 .pro-video-gallery-paddlenav{display:flex;justify-content:flex-end;gap:12px;width:var(--pro-video-gallery-width);margin:24px auto 0}
+#sc-06 .pro-video-gallery-paddlenav button{width:44px;height:44px;border:0;border-radius:50%;background:#e8e8ed;color:#1d1d1f;font-size:30px;line-height:1;cursor:pointer}
+#sc-06 .pro-video-gallery-paddlenav button:disabled{opacity:.32;cursor:default}
+@media(max-width:1068px){#sc-06 .pro-video-gallery{--pro-video-gallery-width:min(87.5vw,1200px);margin-top:128px}#sc-06 .pro-video-gallery-card{height:628px}}
+@media(max-width:734px){#sc-06 .pro-video-gallery{--pro-video-gallery-width:max(87.5vw,280px);--pro-video-gallery-side:max(6.25vw,env(safe-area-inset-left));margin-top:100px;padding-bottom:80px}#sc-06 .pro-video-gallery-item,#sc-06 .pro-video-gallery-item-50,#sc-06 .pro-video-gallery-item-100{width:var(--pro-video-gallery-width)}#sc-06 .pro-video-gallery-card{height:480px;border-radius:18px}#sc-06 .pro-video-gallery-caption{margin-top:20px;font-size:17px;line-height:1.2353641176}#sc-06 .pro-video-gallery-paddlenav{width:var(--pro-video-gallery-width);margin-top:20px}}
+@media(prefers-reduced-motion:reduce){#sc-06 .pro-video-gallery-scroll-container{scroll-behavior:auto}}
+
 /* SC-04 Apple product viewer reconstruction. Scoped so earlier scenes remain frozen. */
 #sc-04.scene-product-viewer{min-height:1320px;background:#000;color:#f5f5f7}
 #sc-04 [hidden]{display:none!important}

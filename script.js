@@ -326,6 +326,44 @@
     updateProVideo();
   }
 
+  // SC-06-R2: native horizontal SlideGallery navigation and scroll state.
+  const proVideoGallery = document.querySelector('#pro-video-gallery');
+  if (proVideoGallery) {
+    const scroller = proVideoGallery.querySelector('.pro-video-gallery-scroll-container');
+    const track = proVideoGallery.querySelector('.pro-video-gallery-item-container');
+    const items = [...proVideoGallery.querySelectorAll('.pro-video-gallery-item')];
+    const previous = proVideoGallery.querySelector('.pro-video-gallery-previous');
+    const next = proVideoGallery.querySelector('.pro-video-gallery-next');
+    let current = 0;
+    let frame = 0;
+    const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const sidePadding = () => parseFloat(getComputedStyle(track).paddingInlineStart) || 0;
+    const targetLeft = index => Math.max(0, items[index].offsetLeft - sidePadding());
+    const update = () => {
+      const position = scroller.scrollLeft + sidePadding();
+      current = items.reduce((best, item, index) => Math.abs(item.offsetLeft - position) < Math.abs(items[best].offsetLeft - position) ? index : best, 0);
+      previous.disabled = current === 0;
+      next.disabled = current === items.length - 1;
+    };
+    const goTo = index => {
+      current = Math.max(0, Math.min(items.length - 1, index));
+      scroller.scrollTo({ left: targetLeft(current), behavior: reduced() ? 'auto' : 'smooth' });
+      update();
+    };
+    scroller.addEventListener('scroll', () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    }, { passive: true });
+    scroller.addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight') { event.preventDefault(); goTo(current + 1); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); goTo(current - 1); }
+    });
+    previous.addEventListener('click', () => goTo(current - 1));
+    next.addEventListener('click', () => goTo(current + 1));
+    addEventListener('resize', update);
+    update();
+  }
+
   // SC-05-R1: finite camera intro and eight-state Apple fade gallery.
   const cameraSection = document.querySelector('#sc-05');
   if (cameraSection) {
